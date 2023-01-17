@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/contextual_attention.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/mobile_attention.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/mobile_vit_attention.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/shuffle_attention.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/dcn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/ds_conv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/dynamic_conv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/radar/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/radar/contextcluster.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/radar/model_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/radar/pointmlp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/radar/pointnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/vision/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_down.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_iterative.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_nofold.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_withGAP.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/vision/mobilevit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deeplab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/get_miou.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/decouplehead.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image_augmentation_test/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image_augmentation_test/dark_channel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image_augmentation_test/sharpen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model_data/heatmap_vision.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model_data/voc_classes.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model_data/waterscenes.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neck/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neck/fpnt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neck/panet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nets/deeplabv3_training.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nets/maskvrdet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nets/yolo_training.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/performance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/predict_seg.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/callbacks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/dataloader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/utils_bbox.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/utils_fit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/utils_map.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils_seg/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils_seg/callbacks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils_seg/dataloader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils_seg/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils_seg/utils_fit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils_seg/utils_metrics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/voc_annotation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/voc_annotation_seg.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yolo.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Raw_Fusion$mobilevit.coverage" NAME="mobilevit Coverage Results" MODIFIED="1673255368563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/vision" />
+    <SUITE FILE_PATH="coverage/Raw_Fusion$pointnet.coverage" NAME="pointnet Coverage Results" MODIFIED="1673338201293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/radar" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2272">
+              <caret line="149" column="34" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backbone/vision/context_cluster_withGAP.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backbone/radar/model_utils.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-9799">
+              <caret selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backbone/vision/mobilevit.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/backbone/vision/mobilevit.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet2.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet2_cls_msg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet2_cls_ssg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_msg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_ssg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet2_sem_seg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet2_sem_seg_msg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet_cls.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet_part_seg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet_sem_seg.py" />
+        <option value="$PROJECT_DIR$/backbone/radar/pointnet.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="360" />
+    <option name="y" value="66" />
+    <option name="width" value="1938" />
+    <option name="height" value="2097" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
+              <item name="backbone" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
+              <item name="backbone" type="462c0819:PsiDirectoryNode" />
+              <item name="radar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
+              <item name="backbone" type="462c0819:PsiDirectoryNode" />
+              <item name="vision" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../hrnet-pytorch-main/hrnet-pytorch-main" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Normal_Workspace_Collection\Raw-Fusion\Raw-Fusion\backbone\radar" />
+      <recent name="E:\Normal_Workspace_Collection\Raw-Fusion\Raw-Fusion\backbone\vision" />
+      <recent name="E:\Normal_Workspace_Collection\Raw-Fusion\Raw-Fusion" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.pointnet">
+    <configuration name="mobilevit" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Raw-Fusion" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backbone/vision" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backbone/vision/mobilevit.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pointnet" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Raw-Fusion" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backbone/radar" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backbone/radar/pointnet.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.pointnet" />
+        <item itemvalue="Python.mobilevit" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="" />
+      <created>1673251219525</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673251219525</updated>
+      <workItem from="1673251220696" duration="7695000" />
+      <workItem from="1673338098438" duration="1470000" />
+      <workItem from="1673862708892" duration="987000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="10152000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="2575" height="1407" extended-state="7" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1462058" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Statistic" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/yolo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_cls_ssg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_msg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_ssg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_sem_seg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_sem_seg_msg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_part_seg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_sem_seg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_cls.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_utils.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_cls_msg.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_utils.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2272">
+          <caret line="149" column="34" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/vision/context_cluster_withGAP.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/vision/mobilevit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/radar/model_utils.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9799">
+          <caret selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
