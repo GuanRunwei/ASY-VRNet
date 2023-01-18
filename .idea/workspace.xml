@@ -2,66 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/contextual_attention.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/mobile_attention.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/mobile_vit_attention.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/attention_modules/shuffle_attention.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/dcn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/ds_conv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/conv_utils/dynamic_conv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/radar/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/radar/contextcluster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/radar/model_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/radar/pointmlp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/radar/pointnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/vision/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_down.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_iterative.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_nofold.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/vision/context_cluster_withGAP.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backbone/vision/mobilevit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deeplab.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/get_miou.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/head/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/head/decouplehead.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image_augmentation_test/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image_augmentation_test/dark_channel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image_augmentation_test/sharpen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_data/heatmap_vision.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_data/voc_classes.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_data/waterscenes.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/neck/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/neck/fpnt.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/neck/panet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nets/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nets/deeplabv3_training.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nets/maskvrdet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nets/yolo_training.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/performance.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/predict_seg.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/callbacks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/dataloader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/utils_bbox.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/utils_fit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/utils_map.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_seg/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_seg/callbacks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_seg/dataloader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_seg/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_seg/utils_fit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_seg/utils_metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/voc_annotation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/voc_annotation_seg.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yolo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backbone/vision/context_cluster.py" beforeDir="false" afterPath="$PROJECT_DIR$/backbone/vision/context_cluster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backbone/vision/mobilevit.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/neck/fpnt.py" beforeDir="false" afterPath="$PROJECT_DIR$/neck/fpnt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/neck/panet.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,20 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9799">
+            <state>
               <caret selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backbone/vision/mobilevit.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -148,7 +81,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="360" />
     <option name="y" value="66" />
     <option name="width" value="1938" />
@@ -163,25 +96,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
-              <item name="backbone" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
-              <item name="backbone" type="462c0819:PsiDirectoryNode" />
-              <item name="radar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Raw-Fusion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Raw-Fusion" type="462c0819:PsiDirectoryNode" />
-              <item name="backbone" type="462c0819:PsiDirectoryNode" />
-              <item name="vision" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -192,7 +108,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../hrnet-pytorch-main/hrnet-pytorch-main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -280,16 +196,17 @@
       <workItem from="1673251220696" duration="7695000" />
       <workItem from="1673338098438" duration="1470000" />
       <workItem from="1673862708892" duration="987000" />
+      <workItem from="1674018748560" duration="612000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10152000" />
+    <option name="totallyTimeSpent" value="10764000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2575" height="1407" extended-state="7" />
+    <frame x="-7" y="-7" width="2575" height="1407" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1462058" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14421931" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -336,6 +253,7 @@
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_utils.py" />
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_cls_msg.py" />
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_utils.py" />
+    <entry file="file://$PROJECT_DIR$/backbone/vision/mobilevit.py" />
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2272">
@@ -349,22 +267,12 @@
     <entry file="file://$PROJECT_DIR$/backbone/vision/context_cluster_withGAP.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/vision/mobilevit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backbone/radar/model_utils.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9799">
+        <state>
           <caret selection-end-line="1" />
         </state>
       </provider>

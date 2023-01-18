@@ -13,6 +13,8 @@ from timm.models.layers.helpers import to_2tuple
 from einops import rearrange
 import torch.nn.functional as F
 
+from torchinfo import summary
+
 
 try:
     from mmseg.models.builder import BACKBONES as seg_BACKBONES
@@ -298,7 +300,7 @@ class ContextCluster(nn.Module):
                  init_cfg=None,
                  pretrained=None,
                  # the parameters for context-cluster
-                 img_w=224,img_h=224,
+                 img_w=560,img_h=560,
                  proposal_w=[2,2,2,2], proposal_h=[2,2,2,2], fold_w=[8,4,2,1], fold_h=[8,4,2,1],
                  heads=[2,4,6,8], head_dim=[16,16,32,32],
                  **kwargs):
@@ -312,7 +314,7 @@ class ContextCluster(nn.Module):
         # register positional information buffer.
         range_w = torch.arange(0, img_w, step=1)/(img_w-1.0)
         range_h = torch.arange(0, img_h, step=1)/(img_h-1.0)
-        fea_pos = torch.stack(torch.meshgrid(range_w, range_h, indexing = 'ij'), dim = -1).float()
+        fea_pos = torch.stack(torch.meshgrid(range_w, range_h), dim = -1).float()
         fea_pos = fea_pos-0.5
         self.register_buffer('fea_pos', fea_pos)
 
@@ -569,8 +571,14 @@ def coc_medium(pretrained=False, **kwargs):
 
 
 if __name__ == '__main__':
-    input = torch.rand(32, 3, 224, 224)
-    model = coc_tiny()
+    input = torch.rand(1, 3, 560, 560)
+    model = coc_tiny2()
     out = model(input)
     # print(model)
     print(out.shape)
+    print(summary(model, input_size=(1, 3, 560, 560)))
+
+    input2 = torch.randn(1, 3, 200, 200)
+    coc_block = ClusterBlock(dim=3)
+    output2 = coc_block(input2)
+    print(summary(coc_block, input_size=(1, 3, 200, 200)))

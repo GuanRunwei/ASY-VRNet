@@ -1,11 +1,56 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from backbone.vr_graph import pvig_s_gelu, pvig_m_gelu, pvig_b_gelu, pvig_ti_gelu
-from neck.panet import get_activation, BaseConv, DWConv
 from thop import profile
 from thop import clever_format
 import math
+
+from backbone.vision.context_cluster import ClusterBlock
+from backbone.vision.context_cluster import coc_medium
+
+
+class SiLU(nn.Module):
+    @staticmethod
+    def forward(x):
+        return x * torch.sigmoid(x)
+
+
+def get_activation(name="silu", inplace=True):
+    if name == "silu":
+        module = SiLU()
+    elif name == "relu":
+        module = nn.ReLU(inplace=inplace)
+    elif name == "lrelu":
+        module = nn.LeakyReLU(0.1, inplace=inplace)
+    else:
+        raise AttributeError("Unsupported act type: {}".format(name))
+    return module
+
+
+class DWConv(nn.Module):
+    def __init__(self, in_channels, out_channels, ksize, stride=1, act="relu"):
+        super().__init__()
+        self.dconv = BaseConv(in_channels, in_channels, ksize=ksize, stride=stride, groups=in_channels, act=act,)
+        self.pconv = BaseConv(in_channels, out_channels, ksize=1, stride=1, groups=1, act=act)
+
+    def forward(self, x):
+        x = self.dconv(x)
+        return self.pconv(x)
+
+
+class BaseConv(nn.Module):
+    def __init__(self, in_channels, out_channels, ksize, stride, groups=1, bias=False, act="relu"):
+        super().__init__()
+        pad         = (ksize - 1) // 2
+        self.conv   = nn.Conv2d(in_channels, out_channels, kernel_size=ksize, stride=stride, padding=pad, groups=groups, bias=bias)
+        self.bn     = nn.BatchNorm2d(out_channels, eps=0.001, momentum=0.03)
+        self.act    = get_activation(act, inplace=True)
+
+    def forward(self, x):
+        return self.act(self.bn(self.conv(x)))
+
+    def fuseforward(self, x):
+        return self.act(self.conv(x))
 
 
 class Upsample(nn.Module):
@@ -13,6 +58,7 @@ class Upsample(nn.Module):
         super(Upsample, self).__init__()
 
         self.upsample = nn.Sequential(
+            ClusterBlock(dim=in_channels),
             BaseConv(in_channels, out_channels, 1, 1, act='relu'),
             nn.Upsample(scale_factor=scale, mode='bilinear', align_corners=True)
         )
@@ -22,19 +68,19 @@ class Upsample(nn.Module):
         return x
 
 
-class Upsample_seg_module(nn.Module):
-    def __init__(self, in_channels, out_channels):
-        super(Upsample_seg_module, self).__init__()
+class CoC_Conv(nn.Module):
+    def __init__(self, in_channels, out_channels, ksize=1, stride=1, act="relu"):
+        super(DW_CoC_Conv, self).__init__()
 
-        self.upsample = nn.Sequential(
-            nn.ConvTranspose2d(in_channels=in_channels, out_channels=out_channels, kernel_size=3, stride=2, padding=1),
-            nn.BatchNorm2d(out_channels, eps=0.001, momentum=0.03),
-            nn.ReLU(inplace=True)
-        )
+        self.coc = ClusterBlock(dim=in_channels)
+        self.conv_att = BaseConv(in_channels, out_channels, ksize=ksize, stride=stride, act=act)
 
     def forward(self, x):
-        x = self.upsample(x)
+        x = self.coc(x)
+        x = self.conv_att(x)
         return x
+
+
 
 
 # -----------------------------------------#
@@ -127,8 +173,9 @@ class FpnTiny(nn.Module):
                  depthwise=False, act="silu", is_attention=2):
         super(FpnTiny, self).__init__()
 
-        Conv = DWConv if depthwise else BaseConv
-        self.backbone = pvig_s_gelu(is_backbone=True, input_shape=[512, 512])
+        Conv = CoC_Conv
+
+        self.backbone = coc_medium(pretrained=False)
         self.in_features = in_features
         self.num_seg_class = num_seg_class
 
