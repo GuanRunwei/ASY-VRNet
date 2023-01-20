@@ -13,8 +13,6 @@ from timm.models.layers.helpers import to_2tuple
 from einops import rearrange
 import torch.nn.functional as F
 
-from torchinfo import summary
-
 
 try:
     from mmseg.models.builder import BACKBONES as seg_BACKBONES
@@ -100,7 +98,6 @@ def pairwise_cos_sim(x1: torch.Tensor, x2:torch.Tensor):
 class Cluster(nn.Module):
     def __init__(self, dim, out_dim, proposal_w=2,proposal_h=2, fold_w=2, fold_h=2, heads=4, head_dim=24, return_center=False):
         """
-
         :param dim:  channel nubmer
         :param out_dim: channel nubmer
         :param proposal_w: the sqrt(proposals) value, we can also set a different value
@@ -120,9 +117,37 @@ class Cluster(nn.Module):
         self.sim_alpha = nn.Parameter(torch.ones(1))
         self.sim_beta = nn.Parameter(torch.zeros(1))
         self.centers_proposal = nn.AdaptiveAvgPool2d((proposal_w,proposal_h))
+        self.proposal_w = proposal_w
+        self.proposal_h = proposal_h
         self.fold_w=fold_w
         self.fold_h = fold_h
         self.return_center = return_center
+        self.iteration = 2
+
+    def iter_centers_proposal(self,x):
+        # x shape should be [N, c, w, h], w,h would be 7 for tiny
+        # we directly hard-encode this for simplicity
+        # initialize proposal fixed
+        centers = self.centers_proposal(x)  # [b,c,2,2]
+        b,c,wc,hc, = centers.shape
+        x = x.reshape(b,c,-1).permute(0,2,1) # [B,N,C]
+        centers = centers.reshape(b,c,-1).permute(0,2,1) # [B,M,C]
+        # iteration update
+        for i in range(self.iteration):
+            # we use cosine similarity instead of L2 disctance.
+            sim = pairwise_cos_sim(centers, x) # [b,4,49]
+            sim_max, sim_max_idx = sim.max(dim=1,keepdim=True)
+            mask = torch.zeros_like(sim)  # binary #[B,M,N]
+            mask.scatter_(1, sim_max_idx, 1.)
+            # we still need to add previous centers to avoid 'no points assigned to a center'
+            # this is something like ema
+            centers = (
+                        ( x.unsqueeze(dim=1)*mask.unsqueeze(dim=-1) ).sum(dim=2) + centers
+                      )/ (mask.sum(dim=-1,keepdim=True)+ 1.0) # [B,M,D]
+        centers = centers.permute(0,2,1).reshape(b,c,wc,hc)
+        return centers
+
+
 
     def forward(self, x): #[b,c,w,h]
         value = self.fc_v(x)
@@ -137,7 +162,9 @@ class Cluster(nn.Module):
             x = rearrange(x, "b c (f1 w) (f2 h) -> (b f1 f2) c w h", f1=self.fold_w, f2=self.fold_h) #[bs*blocks,c,ks[0],ks[1]]
             value = rearrange(value, "b c (f1 w) (f2 h) -> (b f1 f2) c w h", f1=self.fold_w, f2=self.fold_h)
         b,c,w,h = x.shape
-        centers = self.centers_proposal(x)  # [b,c,C_W,C_H], we set M = C_W*C_H and N = w*h
+        # centers = self.centers_proposal(x)  # [b,c,C_W,C_H], we set M = C_W*C_H and N = w*h
+        # iteratively update the centers
+        centers = self.iter_centers_proposal(x)
         value_centers = rearrange(self.centers_proposal(value) , 'b c w h -> b (w h) c') # [b,C_W,C_H,c]
         b,c,ww,hh = centers.shape
         sim = torch.sigmoid(self.sim_beta + self.sim_alpha * pairwise_cos_sim(centers.reshape(b,c,-1).permute(0,2,1), x.reshape(b,c,-1).permute(0,2,1))) #[B,M,N]
@@ -174,24 +201,26 @@ class Mlp(nn.Module):
         super().__init__()
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
-        self.fc1 = nn.Conv2d(in_features, hidden_features, 1)
+        self.fc1 = nn.Linear(in_features, hidden_features)
         self.act = act_layer()
-        self.fc2 = nn.Conv2d(hidden_features, out_features, 1)
+        self.fc2 = nn.Linear(hidden_features, out_features)
         self.drop = nn.Dropout(drop)
         self.apply(self._init_weights)
 
     def _init_weights(self, m):
-        if isinstance(m, nn.Conv2d):
+        if isinstance(m, nn.Linear):
             trunc_normal_(m.weight, std=.02)
             if m.bias is not None:
                 nn.init.constant_(m.bias, 0)
 
     def forward(self, x):
+        x = x.permute(0,2,3,1)  # b,c,w,h ->b,w,h,c
         x = self.fc1(x)
         x = self.act(x)
         x = self.drop(x)
         x = self.fc2(x)
         x = self.drop(x)
+        x = x.permute(0,3,1,2) # b,w,h,c -> b,c,w,h
         return x
 
 
@@ -296,11 +325,11 @@ class ContextCluster(nn.Module):
                  down_patch_size=2, down_stride=2, down_pad=0,
                  drop_rate=0., drop_path_rate=0.,
                  use_layer_scale=True, layer_scale_init_value=1e-5,
-                 fork_feat=True,
+                 fork_feat=False,
                  init_cfg=None,
                  pretrained=None,
                  # the parameters for context-cluster
-                 img_w=560,img_h=560,
+                 img_w=224,img_h=224,
                  proposal_w=[2,2,2,2], proposal_h=[2,2,2,2], fold_w=[8,4,2,1], fold_h=[8,4,2,1],
                  heads=[2,4,6,8], head_dim=[16,16,32,32],
                  **kwargs):
@@ -314,7 +343,7 @@ class ContextCluster(nn.Module):
         # register positional information buffer.
         range_w = torch.arange(0, img_w, step=1)/(img_w-1.0)
         range_h = torch.arange(0, img_h, step=1)/(img_h-1.0)
-        fea_pos = torch.stack(torch.meshgrid(range_w, range_h), dim = -1).float()
+        fea_pos = torch.stack(torch.meshgrid(range_w, range_h, indexing = 'ij'), dim = -1).float()
         fea_pos = fea_pos-0.5
         self.register_buffer('fea_pos', fea_pos)
 
@@ -465,7 +494,7 @@ class ContextCluster(nn.Module):
 
 
 @register_model
-def coc_tiny(pretrained=False, **kwargs):
+def coc_tiny_rebuttal_iterative(pretrained=False, **kwargs):
     layers = [3, 4, 5, 2]
     norm_layer=GroupNorm
     embed_dims = [32, 64, 196, 320]
@@ -488,101 +517,12 @@ def coc_tiny(pretrained=False, **kwargs):
         **kwargs)
     model.default_cfg = default_cfgs['model_small']
     return model
-
-
-@register_model
-def coc_tiny2(pretrained=False, **kwargs):
-    layers = [3, 4, 5, 2]
-    norm_layer=GroupNorm
-    embed_dims = [32, 64, 196, 320]
-    mlp_ratios = [8, 8, 4, 4]
-    downsamples = [True, True, True, True]
-    proposal_w=[4,2,7,4]
-    proposal_h=[4,2,7,4]
-    fold_w=[7,7,1,1]
-    fold_h=[7,7,1,1]
-    heads=[4,4,8,8]
-    head_dim=[24,24,24,24]
-    down_patch_size=3
-    down_pad = 1
-    model = ContextCluster(
-        layers, embed_dims=embed_dims, norm_layer=norm_layer,
-        mlp_ratios=mlp_ratios, downsamples=downsamples,
-        down_patch_size = down_patch_size, down_pad=down_pad,
-        proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim,
-        **kwargs)
-    model.default_cfg = default_cfgs['model_small']
-    return model
-
-
-@register_model
-def coc_small(pretrained=False, **kwargs):
-    layers = [2, 2, 6, 2]
-    norm_layer=GroupNorm
-    embed_dims = [64, 128, 320, 512]
-    mlp_ratios = [8, 8, 4, 4]
-    downsamples = [True, True, True, True]
-    proposal_w=[2,2,2,2]
-    proposal_h=[2,2,2,2]
-    fold_w=[8,4,2,1]
-    fold_h=[8,4,2,1]
-    heads=[4,4,8,8]
-    head_dim=[32,32,32,32]
-    down_patch_size=3
-    down_pad = 1
-    model = ContextCluster(
-        layers, embed_dims=embed_dims, norm_layer=norm_layer,
-        mlp_ratios=mlp_ratios, downsamples=downsamples,
-        down_patch_size = down_patch_size, down_pad=down_pad,
-        proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim,
-        **kwargs)
-    model.default_cfg = default_cfgs['model_small']
-    return model
-
-
-@register_model
-def coc_medium(pretrained=False, **kwargs):
-    layers = [4, 4, 12, 4]
-    norm_layer=GroupNorm
-    embed_dims = [64, 128, 320, 512]
-    mlp_ratios = [8, 8, 4, 4]
-    downsamples = [True, True, True, True]
-    proposal_w=[2,2,2,2]
-    proposal_h=[2,2,2,2]
-    fold_w=[8,4,2,1]
-    fold_h=[8,4,2,1]
-    heads=[6,6,12,12]
-    head_dim=[32,32,32,32]
-    down_patch_size=3
-    down_pad = 1
-    model = ContextCluster(
-        layers, embed_dims=embed_dims, norm_layer=norm_layer,
-        mlp_ratios=mlp_ratios, downsamples=downsamples,
-        down_patch_size = down_patch_size, down_pad=down_pad,
-        proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim,
-        **kwargs)
-    model.default_cfg = default_cfgs['model_small']
-    return model
-
 
 
 
 if __name__ == '__main__':
-    input = torch.rand(1, 3, 560, 560)
-    model = coc_tiny2()
+    input = torch.rand(32, 3, 224, 224)
+    model = coc_tiny_rebuttal_iterative()
     out = model(input)
     # print(model)
-    print(len(out))
-    print(out[0].shape)
-    print(out[1].shape)
-    print(out[2].shape)
-    print(out[3].shape)
-    print(summary(model, input_size=(1, 3, 560, 560)))
-
-    input2 = torch.randn(1, 3, 200, 200)
-    coc_block = ClusterBlock(dim=3)
-    output2 = coc_block(input2)
-    print(summary(coc_block, input_size=(1, 3, 200, 200)))
+    print(out.shape)

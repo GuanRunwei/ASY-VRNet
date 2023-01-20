@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from neck.panet import PAFPN
-from neck.fpnt import FpnTiny
+from neck.fpnt_segmentation import FpnTiny
 from head.decouplehead import DecoupleHead
 from torchinfo import summary
 from thop import profile

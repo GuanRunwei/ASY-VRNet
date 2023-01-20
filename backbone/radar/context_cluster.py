@@ -38,7 +38,7 @@ except ImportError:
 def _cfg(url='', **kwargs):
     return {
         'url': url,
-        'num_classes': 1000, 'input_size': (3, 224, 224),
+        'num_classes': 1000, 'input_size': (7, 224, 224),
         'crop_pct': .95, 'interpolation': 'bicubic',
         'mean': IMAGENET_DEFAULT_MEAN, 'std': IMAGENET_DEFAULT_STD,
         'classifier': 'head',
@@ -59,7 +59,7 @@ class PointRecuder(nn.Module):
     Output: tensor in shape [B, C, H/stride, W/stride]
     """
     def __init__(self, patch_size=16, stride=16, padding=0,
-                 in_chans=3, embed_dim=768, norm_layer=None):
+                 in_chans=5, embed_dim=768, norm_layer=None):
         super().__init__()
         patch_size = to_2tuple(patch_size)
         stride = to_2tuple(stride)
@@ -320,7 +320,7 @@ class ContextCluster(nn.Module):
 
         self.patch_embed = PointRecuder(
             patch_size=in_patch_size, stride=in_stride, padding=in_pad,
-            in_chans=5, embed_dim=embed_dims[0])
+            in_chans=9, embed_dim=embed_dims[0])
 
         # set the main block in network
         network = []
@@ -571,18 +571,14 @@ def coc_medium(pretrained=False, **kwargs):
 
 
 if __name__ == '__main__':
-    input = torch.rand(1, 3, 560, 560)
+    input = torch.rand(1, 7, 560, 560)
     model = coc_tiny2()
     out = model(input)
     # print(model)
     print(len(out))
-    print(out[0].shape)
-    print(out[1].shape)
-    print(out[2].shape)
-    print(out[3].shape)
-    print(summary(model, input_size=(1, 3, 560, 560)))
+    print(summary(model, input_size=(1, 7, 560, 560)))
 
-    input2 = torch.randn(1, 3, 200, 200)
-    coc_block = ClusterBlock(dim=3)
+    input2 = torch.randn(1, 7, 200, 200)
+    coc_block = ClusterBlock(dim=7)
     output2 = coc_block(input2)
-    print(summary(coc_block, input_size=(1, 3, 200, 200)))
+    print(summary(coc_block, input_size=(1, 7, 200, 200)))

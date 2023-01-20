@@ -13,8 +13,6 @@ from timm.models.layers.helpers import to_2tuple
 from einops import rearrange
 import torch.nn.functional as F
 
-from torchinfo import summary
-
 
 try:
     from mmseg.models.builder import BACKBONES as seg_BACKBONES
@@ -52,9 +50,9 @@ default_cfgs = {
 }
 
 
-class PointRecuder(nn.Module):
+class PointReducer(nn.Module):
     """
-    Point Reducer is implemented by a layer of conv since it is mathmatically equal.
+    Patch Embedding that is implemented by a layer of conv.
     Input: tensor in shape [B, C, H, W]
     Output: tensor in shape [B, C, H/stride, W/stride]
     """
@@ -296,11 +294,11 @@ class ContextCluster(nn.Module):
                  down_patch_size=2, down_stride=2, down_pad=0,
                  drop_rate=0., drop_path_rate=0.,
                  use_layer_scale=True, layer_scale_init_value=1e-5,
-                 fork_feat=True,
+                 fork_feat=False,
                  init_cfg=None,
                  pretrained=None,
                  # the parameters for context-cluster
-                 img_w=560,img_h=560,
+                 img_w=224,img_h=224,
                  proposal_w=[2,2,2,2], proposal_h=[2,2,2,2], fold_w=[8,4,2,1], fold_h=[8,4,2,1],
                  heads=[2,4,6,8], head_dim=[16,16,32,32],
                  **kwargs):
@@ -311,14 +309,9 @@ class ContextCluster(nn.Module):
             self.num_classes = num_classes
         self.fork_feat = fork_feat
 
-        # register positional information buffer.
-        range_w = torch.arange(0, img_w, step=1)/(img_w-1.0)
-        range_h = torch.arange(0, img_h, step=1)/(img_h-1.0)
-        fea_pos = torch.stack(torch.meshgrid(range_w, range_h), dim = -1).float()
-        fea_pos = fea_pos-0.5
-        self.register_buffer('fea_pos', fea_pos)
 
-        self.patch_embed = PointRecuder(
+
+        self.patch_embed = PointReducer(
             patch_size=in_patch_size, stride=in_stride, padding=in_pad,
             in_chans=5, embed_dim=embed_dims[0])
 
@@ -342,7 +335,7 @@ class ContextCluster(nn.Module):
             if downsamples[i] or embed_dims[i] != embed_dims[i+1]:
                 # downsampling between two stages
                 network.append(
-                    PointRecuder(
+                    PointReducer(
                         patch_size=down_patch_size, stride=down_stride,
                         padding=down_pad,
                         in_chans=embed_dims[i], embed_dim=embed_dims[i+1]
@@ -432,7 +425,15 @@ class ContextCluster(nn.Module):
             self.embed_dim, num_classes) if num_classes > 0 else nn.Identity()
 
     def forward_embeddings(self, x):
-        pos = self.fea_pos.permute(2,0,1).unsqueeze(dim=0).expand(x.shape[0],-1,-1,-1)
+        _,c,img_w,img_h = x.shape
+        # print(f"det img size is {img_w} * {img_h}")
+        # register positional information buffer.
+        range_w = torch.arange(0, img_w, step=1)/(img_w-1.0)
+        range_h = torch.arange(0, img_h, step=1)/(img_h-1.0)
+        fea_pos = torch.stack(torch.meshgrid(range_w, range_h, indexing = 'ij'), dim = -1).float()
+        fea_pos = fea_pos.to(x.device)
+        fea_pos = fea_pos-0.5
+        pos = fea_pos.permute(2,0,1).unsqueeze(dim=0).expand(x.shape[0],-1,-1,-1)
         x = self.patch_embed(torch.cat([x,pos], dim=1))
         return x
 
@@ -463,88 +464,9 @@ class ContextCluster(nn.Module):
         # for image classification
         return cls_out
 
-
 @register_model
-def coc_tiny(pretrained=False, **kwargs):
-    layers = [3, 4, 5, 2]
-    norm_layer=GroupNorm
-    embed_dims = [32, 64, 196, 320]
-    mlp_ratios = [8, 8, 4, 4]
-    downsamples = [True, True, True, True]
-    proposal_w=[2,2,2,2]
-    proposal_h=[2,2,2,2]
-    fold_w=[8,4,2,1]
-    fold_h=[8,4,2,1]
-    heads=[4,4,8,8]
-    head_dim=[24,24,24,24]
-    down_patch_size=3
-    down_pad = 1
-    model = ContextCluster(
-        layers, embed_dims=embed_dims, norm_layer=norm_layer,
-        mlp_ratios=mlp_ratios, downsamples=downsamples,
-        down_patch_size = down_patch_size, down_pad=down_pad,
-        proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim,
-        **kwargs)
-    model.default_cfg = default_cfgs['model_small']
-    return model
-
-
-@register_model
-def coc_tiny2(pretrained=False, **kwargs):
-    layers = [3, 4, 5, 2]
-    norm_layer=GroupNorm
-    embed_dims = [32, 64, 196, 320]
-    mlp_ratios = [8, 8, 4, 4]
-    downsamples = [True, True, True, True]
-    proposal_w=[4,2,7,4]
-    proposal_h=[4,2,7,4]
-    fold_w=[7,7,1,1]
-    fold_h=[7,7,1,1]
-    heads=[4,4,8,8]
-    head_dim=[24,24,24,24]
-    down_patch_size=3
-    down_pad = 1
-    model = ContextCluster(
-        layers, embed_dims=embed_dims, norm_layer=norm_layer,
-        mlp_ratios=mlp_ratios, downsamples=downsamples,
-        down_patch_size = down_patch_size, down_pad=down_pad,
-        proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim,
-        **kwargs)
-    model.default_cfg = default_cfgs['model_small']
-    return model
-
-
-@register_model
-def coc_small(pretrained=False, **kwargs):
-    layers = [2, 2, 6, 2]
-    norm_layer=GroupNorm
-    embed_dims = [64, 128, 320, 512]
-    mlp_ratios = [8, 8, 4, 4]
-    downsamples = [True, True, True, True]
-    proposal_w=[2,2,2,2]
-    proposal_h=[2,2,2,2]
-    fold_w=[8,4,2,1]
-    fold_h=[8,4,2,1]
-    heads=[4,4,8,8]
-    head_dim=[32,32,32,32]
-    down_patch_size=3
-    down_pad = 1
-    model = ContextCluster(
-        layers, embed_dims=embed_dims, norm_layer=norm_layer,
-        mlp_ratios=mlp_ratios, downsamples=downsamples,
-        down_patch_size = down_patch_size, down_pad=down_pad,
-        proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim,
-        **kwargs)
-    model.default_cfg = default_cfgs['model_small']
-    return model
-
-
-@register_model
-def coc_medium(pretrained=False, **kwargs):
-    layers = [4, 4, 12, 4]
+def coc_big(pretrained=False, **kwargs):
+    layers = [6, 6, 18, 6]
     norm_layer=GroupNorm
     embed_dims = [64, 128, 320, 512]
     mlp_ratios = [8, 8, 4, 4]
@@ -568,21 +490,198 @@ def coc_medium(pretrained=False, **kwargs):
     return model
 
 
+@register_model
+def coc_large(pretrained=False, **kwargs):
+    layers = [8, 8, 24, 8]
+    norm_layer=GroupNorm
+    embed_dims = [64, 128, 320, 512]
+    mlp_ratios = [8, 8, 4, 4]
+    downsamples = [True, True, True, True]
+    proposal_w=[2,2,2,2]
+    proposal_h=[2,2,2,2]
+    fold_w=[8,4,2,1]
+    fold_h=[8,4,2,1]
+    heads=[8,8,16,16]
+    head_dim=[32,32,32,32]
+    down_patch_size=3
+    down_pad = 1
+    model = ContextCluster(
+        layers, embed_dims=embed_dims, norm_layer=norm_layer,
+        mlp_ratios=mlp_ratios, downsamples=downsamples,
+        down_patch_size = down_patch_size, down_pad=down_pad,
+        proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
+        heads=heads, head_dim=head_dim,
+        **kwargs)
+    model.default_cfg = default_cfgs['model_small']
+    return model
 
+
+if has_mmdet:
+    @seg_BACKBONES.register_module()
+    @det_BACKBONES.register_module()
+    class context_cluster_small_feat2(ContextCluster):
+        def __init__(self, **kwargs):
+                layers = [2, 2, 6, 2]
+                norm_layer=GroupNorm
+                embed_dims = [64, 128, 320, 512]
+                mlp_ratios = [8, 8, 4, 4]
+                downsamples = [True, True, True, True]
+                proposal_w=[2,2,2,2]
+                proposal_h=[2,2,2,2]
+                fold_w=[8,4,2,1]
+                fold_h=[8,4,2,1]
+                heads=[4,4,8,8]
+                head_dim=[32,32,32,32]
+                down_patch_size=3
+                down_pad = 1
+                super().__init__(
+                    layers, embed_dims=embed_dims, norm_layer=norm_layer,
+                    mlp_ratios=mlp_ratios, downsamples=downsamples,
+                    down_patch_size = down_patch_size, down_pad=down_pad,
+                    proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
+                    heads=heads, head_dim=head_dim,
+                    fork_feat=True,
+                    **kwargs)
+
+
+
+    @seg_BACKBONES.register_module()
+    @det_BACKBONES.register_module()
+    class context_cluster_small_feat5(ContextCluster):
+        def __init__(self, **kwargs):
+                layers = [2, 2, 6, 2]
+                norm_layer=GroupNorm
+                embed_dims = [64, 128, 320, 512]
+                mlp_ratios = [8, 8, 4, 4]
+                downsamples = [True, True, True, True]
+                proposal_w=[5,5,5,5]
+                proposal_h=[5,5,5,5]
+                fold_w=[8,4,2,1]
+                fold_h=[8,4,2,1]
+                heads=[4,4,8,8]
+                head_dim=[32,32,32,32]
+                down_patch_size=3
+                down_pad = 1
+                super().__init__(
+                    layers, embed_dims=embed_dims, norm_layer=norm_layer,
+                    mlp_ratios=mlp_ratios, downsamples=downsamples,
+                    down_patch_size = down_patch_size, down_pad=down_pad,
+                    proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
+                    heads=heads, head_dim=head_dim,
+                    fork_feat=True,
+                    **kwargs)
+
+
+    @seg_BACKBONES.register_module()
+    @det_BACKBONES.register_module()
+    class context_cluster_small_feat7(ContextCluster):
+        def __init__(self, **kwargs):
+                layers = [2, 2, 6, 2]
+                norm_layer=GroupNorm
+                embed_dims = [64, 128, 320, 512]
+                mlp_ratios = [8, 8, 4, 4]
+                downsamples = [True, True, True, True]
+                proposal_w=[7,7,7,7]
+                proposal_h=[7,7,7,7]
+                fold_w=[8,4,2,1]
+                fold_h=[8,4,2,1]
+                heads=[4,4,8,8]
+                head_dim=[32,32,32,32]
+                down_patch_size=3
+                down_pad = 1
+                super().__init__(
+                    layers, embed_dims=embed_dims, norm_layer=norm_layer,
+                    mlp_ratios=mlp_ratios, downsamples=downsamples,
+                    down_patch_size = down_patch_size, down_pad=down_pad,
+                    proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
+                    heads=heads, head_dim=head_dim,
+                    fork_feat=True,
+                    **kwargs)
+
+
+    @seg_BACKBONES.register_module()
+    @det_BACKBONES.register_module()
+    class context_cluster_medium_feat2(ContextCluster):
+        def __init__(self, **kwargs):
+                layers = [4, 4, 12, 4]
+                norm_layer=GroupNorm
+                embed_dims = [64, 128, 320, 512]
+                mlp_ratios = [8, 8, 4, 4]
+                downsamples = [True, True, True, True]
+                proposal_w=[2,2,2,2]
+                proposal_h=[2,2,2,2]
+                fold_w=[8,4,2,1]
+                fold_h=[8,4,2,1]
+                heads=[6,6,12,12]
+                head_dim=[32,32,32,32]
+                down_patch_size=3
+                down_pad = 1
+                super().__init__(
+                    layers, embed_dims=embed_dims, norm_layer=norm_layer,
+                    mlp_ratios=mlp_ratios, downsamples=downsamples,
+                    down_patch_size = down_patch_size, down_pad=down_pad,
+                    proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
+                    heads=heads, head_dim=head_dim,
+                    fork_feat=True,
+                    **kwargs)
+
+
+    @seg_BACKBONES.register_module()
+    @det_BACKBONES.register_module()
+    class context_cluster_medium_feat5(ContextCluster):
+        def __init__(self, **kwargs):
+                layers = [4, 4, 12, 4]
+                norm_layer=GroupNorm
+                embed_dims = [64, 128, 320, 512]
+                mlp_ratios = [8, 8, 4, 4]
+                downsamples = [True, True, True, True]
+                proposal_w=[5, 5, 5, 5]
+                proposal_h=[5, 5, 5, 5]
+                fold_w=[8,4,2,1]
+                fold_h=[8,4,2,1]
+                heads=[6,6,12,12]
+                head_dim=[32,32,32,32]
+                down_patch_size=3
+                down_pad = 1
+                super().__init__(
+                    layers, embed_dims=embed_dims, norm_layer=norm_layer,
+                    mlp_ratios=mlp_ratios, downsamples=downsamples,
+                    down_patch_size = down_patch_size, down_pad=down_pad,
+                    proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
+                    heads=heads, head_dim=head_dim,
+                    fork_feat=True,
+                    **kwargs)
+
+
+    @seg_BACKBONES.register_module()
+    @det_BACKBONES.register_module()
+    class context_cluster_medium_feat7(ContextCluster):
+        def __init__(self, **kwargs):
+                layers = [4, 4, 12, 4]
+                norm_layer=GroupNorm
+                embed_dims = [64, 128, 320, 512]
+                mlp_ratios = [8, 8, 4, 4]
+                downsamples = [True, True, True, True]
+                proposal_w=[7,7,7,7]
+                proposal_h=[7,7,7,7]
+                fold_w=[8,4,2,1]
+                fold_h=[8,4,2,1]
+                heads=[6,6,12,12]
+                head_dim=[32,32,32,32]
+                down_patch_size=3
+                down_pad = 1
+                super().__init__(
+                    layers, embed_dims=embed_dims, norm_layer=norm_layer,
+                    mlp_ratios=mlp_ratios, downsamples=downsamples,
+                    down_patch_size = down_patch_size, down_pad=down_pad,
+                    proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
+                    heads=heads, head_dim=head_dim,
+                    fork_feat=True,
+                    **kwargs)
 
 if __name__ == '__main__':
-    input = torch.rand(1, 3, 560, 560)
-    model = coc_tiny2()
+    input = torch.rand(32, 3, 224, 224)
+    model = coc_big()
     out = model(input)
     # print(model)
-    print(len(out))
-    print(out[0].shape)
-    print(out[1].shape)
-    print(out[2].shape)
-    print(out[3].shape)
-    print(summary(model, input_size=(1, 3, 560, 560)))
-
-    input2 = torch.randn(1, 3, 200, 200)
-    coc_block = ClusterBlock(dim=3)
-    output2 = coc_block(input2)
-    print(summary(coc_block, input_size=(1, 3, 200, 200)))
+    print(out.shape)
