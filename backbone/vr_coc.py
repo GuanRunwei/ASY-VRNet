@@ -4,7 +4,6 @@ from backbone.vision.context_cluster import ClusterBlock
 from backbone.attention_modules.shuffle_attention import ShuffleAttention
 from neck.fpnt_segmentation import BaseConv, DWConv
 from neck.fpnt_segmentation import eca_block
-
 import numpy as np
 import torch
 from torch import nn
