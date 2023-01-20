@@ -4,6 +4,7 @@ from backbone.vision.context_cluster import ClusterBlock
 from backbone.attention_modules.shuffle_attention import ShuffleAttention
 from neck.fpnt_segmentation import BaseConv, DWConv
 from neck.fpnt_segmentation import eca_block
+
 import numpy as np
 import torch
 from torch import nn
@@ -230,4 +231,5 @@ if __name__ == '__main__':
     model = VRCoC()
     out = model(input, input_radar)
     # print(model)
+
     print(summary(model, input_size=[(1, 3, 640, 640), (1, 4, 640, 640)]))
