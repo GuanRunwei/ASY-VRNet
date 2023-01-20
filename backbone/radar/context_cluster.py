@@ -300,7 +300,7 @@ class ContextCluster(nn.Module):
                  init_cfg=None,
                  pretrained=None,
                  # the parameters for context-cluster
-                 img_w=560,img_h=560,
+                 img_w=640,img_h=640,
                  proposal_w=[2,2,2,2], proposal_h=[2,2,2,2], fold_w=[8,4,2,1], fold_h=[8,4,2,1],
                  heads=[2,4,6,8], head_dim=[16,16,32,32],
                  **kwargs):
