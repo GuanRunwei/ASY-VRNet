@@ -218,6 +218,7 @@ class ClusterBlock(nn.Module):
         super().__init__()
 
         self.norm1 = norm_layer(dim)
+
         # dim, out_dim, proposal_w=2,proposal_h=2, fold_w=2, fold_h=2, heads=4, head_dim=24, return_center=False
         self.token_mixer = Cluster(dim=dim, out_dim=dim, proposal_w=proposal_w, proposal_h=proposal_h,
                                    fold_w=fold_w, fold_h=fold_h, heads=heads, head_dim=head_dim, return_center=False)
