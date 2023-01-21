@@ -582,7 +582,6 @@ if __name__ == '__main__':
     print(out[2].shape)
     print(out[3].shape)
     print(summary(model, input_size=(1, 3, 560, 560)))
-
     input2 = torch.randn(1, 3, 200, 200)
     coc_block = ClusterBlock(dim=3)
     output2 = coc_block(input2)
