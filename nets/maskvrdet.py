@@ -44,9 +44,7 @@ if __name__ == '__main__':
         output_map, output_seg = model(input_map1, input_map2)
     t2 = time.time()
     print("fps:", (1 / ((t2 - t1) / test_times)))
-    # print(output_map[0].shape)
-    # print(output_map[1].shape)
-    # print(output_map[2].shape)
+
     output_map, output_seg = model(input_map1, input_map2)
     # print(output_map[0].shape)
     # print(output_map[1].shape)
