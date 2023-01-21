@@ -568,8 +568,6 @@ def coc_medium(pretrained=False, **kwargs):
     return model
 
 
-
-
 if __name__ == '__main__':
     input = torch.rand(1, 3, 560, 560)
     model = coc_tiny2()
