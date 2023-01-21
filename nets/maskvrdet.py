@@ -14,8 +14,8 @@ import time
 class MaskVRDet(nn.Module):
     def __init__(self, num_classes, num_seg_classes,  phi, is_attention=2, neck=1):
         super().__init__()
-        depth_dict = {'nano': 0.33, 'tiny': 0.33, 's' : 0.33, 'm' : 0.67, 'l' : 1.00, 'x' : 1.33,}
-        width_dict = {'nano': 0.25, 'tiny': 0.375, 's' : 0.50, 'm' : 0.75, 'l' : 1.00, 'x' : 1.25,}
+        depth_dict = {'nano': 0.33, 'tiny': 0.33, 's' : 0.33, 'm' : 0.67, 'l' : 1.00}
+        width_dict = {'nano': 0.25, 'tiny': 0.375, 's' : 0.50, 'm' : 0.75, 'l' : 1.00}
         depth, width    = depth_dict[phi], width_dict[phi]
         depthwise       = True if phi == 'nano' else False
 

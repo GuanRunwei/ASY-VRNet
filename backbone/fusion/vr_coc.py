@@ -782,10 +782,10 @@ def coc_small(pretrained=False, **kwargs):
 
 
 @register_model
-def coc_medium(pretrained=False, **kwargs):
+def coc_medium(pretrained=False, width=1.0, **kwargs):
     layers = [4, 4, 12, 4]
     norm_layer=GroupNorm
-    embed_dims = [64, 128, 320, 512]
+    embed_dims = [int(64*width), int(128*width), int(320*width), int(512*width)]
     mlp_ratios = [8, 8, 4, 4]
     downsamples = [True, True, True, True]
     proposal_w=[2,2,2,2]
@@ -817,7 +817,7 @@ if __name__ == '__main__':
     # print(output.shape)
     input = torch.rand(1, 3, 640, 640).cuda()
     input_radar = torch.rand(1, 4, 640, 640).cuda()
-    model = coc_small().cuda()
+    model = coc_medium(width=0.25).cuda()
     out = model(input, input_radar)
     # print(model)
     print(len(out))
