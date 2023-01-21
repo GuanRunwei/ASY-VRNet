@@ -419,7 +419,6 @@ class ContextCluster(nn.Module):
             state_dict = _state_dict
             missing_keys, unexpected_keys = \
                 self.load_state_dict(state_dict, False)
-
             # show for debug
             # print('missing_keys: ', missing_keys)
             # print('unexpected_keys: ', unexpected_keys)
