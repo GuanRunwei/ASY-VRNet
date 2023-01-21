@@ -103,8 +103,7 @@ class eca_block(nn.Module):
 
 class FpnTiny(nn.Module):
     def __init__(self, num_seg_class, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"), in_channels=[128, 320, 512],
-                 stage2_channel=80, stage1_channel=64,
-                 depthwise=False, act="silu", is_attention=2):
+                 stage2_channel=64):
         super(FpnTiny, self).__init__()
 
         Conv = CoC_Conv

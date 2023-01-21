@@ -16,6 +16,8 @@ from backbone.attention_modules.shuffle_attention import ShuffleAttention
 from neck.fpnt_segmentation import eca_block
 from neck.fpnt_segmentation import BaseConv
 from torchinfo import summary
+from thop import profile
+from thop import clever_format
 
 
 try:
@@ -813,9 +815,9 @@ if __name__ == '__main__':
     # model = RadarEnhanceByImage(channels=64)
     # output = model(input, input_radar)
     # print(output.shape)
-    input = torch.rand(1, 3, 640, 640)
-    input_radar = torch.rand(1, 4, 640, 640)
-    model = coc_small()
+    input = torch.rand(1, 3, 640, 640).cuda()
+    input_radar = torch.rand(1, 4, 640, 640).cuda()
+    model = coc_small().cuda()
     out = model(input, input_radar)
     # print(model)
     print(len(out))
@@ -824,6 +826,11 @@ if __name__ == '__main__':
     print(out[0][2].shape)
     print(out[0][3].shape)
     print(summary(model, input_size=[(1, 3, 640, 640), (1, 4, 640, 640)]))
+
+    macs, params = profile(model, inputs=(input, input_radar))
+    macs, params = clever_format([macs, params], "%.3f")
+    print("params:", params)
+    print("macs:", macs)
 
     # input2 = torch.randn(1, 3, 672, 672)
     # coc_block = ClusterBlock(dim=3)

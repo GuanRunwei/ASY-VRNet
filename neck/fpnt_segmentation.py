@@ -28,10 +28,12 @@ def get_activation(name="silu", inplace=True):
 
 
 class DWConv(nn.Module):
-    def __init__(self, in_channels, out_channels, ksize, stride=1, act="relu"):
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, bias=True):
         super().__init__()
-        self.dconv = BaseConv(in_channels, in_channels, ksize=ksize, stride=stride, groups=in_channels, act=act,)
-        self.pconv = BaseConv(in_channels, out_channels, ksize=1, stride=1, groups=1, act=act)
+        self.dconv = nn.Conv2d(in_channels=in_channels, out_channels=in_channels, kernel_size=kernel_size,
+                               stride=stride, groups=in_channels, padding=padding, dilation=dilation, bias=bias)
+        self.pconv = nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=1, stride=1, groups=1,
+                               bias=bias)
 
     def forward(self, x):
         x = self.dconv(x)
@@ -70,7 +72,7 @@ class Upsample(nn.Module):
 
 class CoC_Conv(nn.Module):
     def __init__(self, in_channels, out_channels, ksize=1, stride=1, act="relu"):
-        super(DW_CoC_Conv, self).__init__()
+        super(CoC_Conv, self).__init__()
 
         self.coc = ClusterBlock(dim=in_channels)
         self.conv_att = BaseConv(in_channels, out_channels, ksize=ksize, stride=stride, act=act)
@@ -79,8 +81,6 @@ class CoC_Conv(nn.Module):
         x = self.coc(x)
         x = self.conv_att(x)
         return x
-
-
 
 
 # -----------------------------------------#
@@ -96,17 +96,17 @@ class ASPP(nn.Module):
             nn.ReLU(inplace=True),
         )
         self.branch2 = nn.Sequential(
-            nn.Conv2d(dim_in, dim_out, 3, 1, padding=6 * rate, dilation=6 * rate, bias=True),
+            DWConv(dim_in, dim_out, 3, 1, padding=6 * rate, dilation=6 * rate, bias=True),
             nn.BatchNorm2d(dim_out, momentum=bn_mom),
             nn.ReLU(inplace=True),
         )
         self.branch3 = nn.Sequential(
-            nn.Conv2d(dim_in, dim_out, 3, 1, padding=12 * rate, dilation=12 * rate, bias=True),
+            DWConv(dim_in, dim_out, 3, 1, padding=12 * rate, dilation=12 * rate, bias=True),
             nn.BatchNorm2d(dim_out, momentum=bn_mom),
             nn.ReLU(inplace=True),
         )
         self.branch4 = nn.Sequential(
-            nn.Conv2d(dim_in, dim_out, 3, 1, padding=18 * rate, dilation=18 * rate, bias=True),
+            DWConv(dim_in, dim_out, 3, 1, padding=18 * rate, dilation=18 * rate, bias=True),
             nn.BatchNorm2d(dim_out, momentum=bn_mom),
             nn.ReLU(inplace=True),
         )
@@ -168,9 +168,8 @@ class eca_block(nn.Module):
 
 
 class FpnTiny(nn.Module):
-    def __init__(self, num_seg_class, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"), in_channels=[160, 400, 640],
-                 stage2_channel=80, stage1_channel=64,
-                 depthwise=False, act="silu", is_attention=2):
+    def __init__(self, num_seg_class, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"), in_channels=[128, 320, 512],
+                 stage2_channel=64):
         super(FpnTiny, self).__init__()
 
         Conv = CoC_Conv
@@ -259,17 +258,22 @@ class FpnTiny(nn.Module):
 
 
 if __name__ == '__main__':
-    input_map = torch.randn((1, 3, 512, 512)).cuda()
-    yoloneck = FpnTiny(num_seg_class=21).cuda()
-    output, seghead = yoloneck(input_map)
-    print(output[0].shape)
-    print(output[1].shape)
-    print(output[2].shape)
-    print(seghead.shape)
-    macs, params = profile(yoloneck, inputs=(input_map,))
+    input_map = torch.randn((1, 512, 20, 20)).cuda()
+    aspp = ASPP(dim_in=512, dim_out=1024).cuda()
+    macs, params = profile(aspp, inputs=(input_map,))
     macs, params = clever_format([macs, params], "%.3f")
     print("params:", params)
     print("macs:", macs)
+    # yoloneck = FpnTiny(num_seg_class=21).cuda()
+    # output, seghead = yoloneck(input_map)
+    # print(output[0].shape)
+    # print(output[1].shape)
+    # print(output[2].shape)
+    # print(seghead.shape)
+    # macs, params = profile(yoloneck, inputs=(input_map,))
+    # macs, params = clever_format([macs, params], "%.3f")
+    # print("params:", params)
+    # print("macs:", macs)
 
 
 
