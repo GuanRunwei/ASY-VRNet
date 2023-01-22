@@ -41,10 +41,15 @@ class DWConv(nn.Module):
 
 
 class BaseConv(nn.Module):
-    def __init__(self, in_channels, out_channels, ksize, stride, groups=1, bias=False, act="relu"):
+    def __init__(self, in_channels, out_channels, ksize, stride, groups=1, bias=False, act="relu", ds_conv=False):
         super().__init__()
         pad         = (ksize - 1) // 2
-        self.conv   = nn.Conv2d(in_channels, out_channels, kernel_size=ksize, stride=stride, padding=pad, groups=groups, bias=bias)
+        if ds_conv is False:
+            self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=ksize, stride=stride, padding=pad,
+                                  groups=groups, bias=bias)
+        else:
+            self.conv = DWConv(in_channels, out_channels, kernel_size=ksize, stride=stride, padding=pad,
+                                  groups=groups, bias=bias)
         self.bn     = nn.BatchNorm2d(out_channels, eps=0.001, momentum=0.03)
         self.act    = get_activation(act, inplace=True)
 
@@ -168,93 +173,21 @@ class eca_block(nn.Module):
 
 
 class FpnTiny(nn.Module):
-    def __init__(self, num_seg_class, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"), in_channels=[128, 320, 512],
-                 stage2_channel=64):
+    def __init__(self, num_seg_class, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"),
+                 in_channels=[128, 320, 512], stage2_channel=64, aspp_channel=1024):
         super(FpnTiny, self).__init__()
 
         Conv = CoC_Conv
 
         self.backbone = coc_medium(pretrained=False)
+        self.aspp = ASPP(dim_in=in_channels[-1], dim_out=in_channels[-1]*2)
         self.in_features = in_features
         self.num_seg_class = num_seg_class
 
-        # p5 out
-        self.conv_p5 = Conv(in_channels=int(in_channels[2]*width), out_channels=int(in_channels[2]*width),
-                            ksize=1, stride=1)
 
-        # c4 -> p4
-        self.conv_p4 = Conv(in_channels=int(in_channels[1]*width), out_channels=int(in_channels[1]*width),
-                            ksize=1, stride=1)
+    def forward(self, x):
 
-        # c3 -> p3
-        self.conv_p3 = Conv(in_channels=int(in_channels[0] * width), out_channels=int(in_channels[0] * width),
-                            ksize=1, stride=1)
 
-        # c2 -> p2
-        self.conv_p2 = Conv(in_channels=int(stage2_channel * width), out_channels=int(stage2_channel * width),
-                            ksize=1, stride=1)
-
-        # 20 * 20 * 1024 -> 40 * 40 * 512
-        self.upsampling_p5 = Upsample(in_channels=int(in_channels[2]*width), out_channels=int(in_channels[1]*width))
-
-        # 40 * 40 * 512 -> 80 * 80 * 256
-        self.upsampling_p4 = Upsample(in_channels=int(in_channels[1]*width), out_channels=int(in_channels[0]*width))
-
-        # 80 * 80 * 256 -> 160, 160, 128
-        self.upsampling_p3 = Upsample(in_channels=int(in_channels[0]*width), out_channels=int(stage2_channel*width))
-
-        # 120, 120, 80 -> 240. 240. 40
-        self.upsampling_seg2 = Upsample(in_channels=int(in_channels[0] * width),
-                                        out_channels=int(stage2_channel * width), scale=4)
-
-        self.conv_seg = nn.Sequential(
-            Conv(in_channels=int(stage2_channel * width), out_channels=int(stage2_channel * width), ksize=3, stride=1,
-                 act='relu'),
-            Conv(in_channels=int(stage2_channel * width), out_channels=int(stage2_channel * width), ksize=1, stride=1,
-                 act='relu'),
-            Conv(in_channels=int(stage2_channel * width), out_channels=num_seg_class, ksize=1, stride=1, act='relu'),
-        )
-
-        self.eca_seg1 = eca_block(channel=int(in_channels[0] * width))
-        self.eca_seg2 = eca_block(channel=int(stage2_channel * width))
-
-    def forward(self, input):
-        out_features = self.backbone.forward(input)
-        [feat0, feat1, feat2, feat3] = [out_features[f] for f in range(len(out_features))]
-
-        # ========================================  检测  ============================================= #
-        #  P5 输出 20*20
-        P5_out = self.conv_p5(feat3)
-
-        #  P4 输出 40*40
-        P4 = self.conv_p4(feat2)
-        P5_4 = self.upsampling_p5(feat3)
-        P4_out = P4 + P5_4
-
-        #  P3 输出 80*80
-        P3 = self.conv_p3(feat1)
-        P4_3 = self.upsampling_p4(feat2)
-        P3_out = P3 + P4_3
-        P3_seg = P3_out
-
-        # ========================================  分割  ============================================= #
-
-        #  P2 输出 -> 160, 160, 256
-        P2 = self.conv_p2(feat0)
-        P3_2 = self.upsampling_p3(P3_seg)
-        P2_out = torch.cat([P2, P3_2], dim=1)
-        P2_out = self.eca_seg1(P2_out)
-
-        #  P2 -> P1 320, 320, 64
-        P1 = self.upsampling_seg2(P2_out)
-        # x1 = F.interpolate(P1, size=(out_stage1.size(2), out_stage1.size(3)), mode='bilinear',
-        #                   align_corners=True)
-        P1_out = self.eca_seg2(P1)
-
-        seg_head = self.conv_seg(P1_out)
-        detect_p_out = (P3_out, P4_out, P5_out)
-
-        return detect_p_out, seg_head
 
 
 if __name__ == '__main__':
