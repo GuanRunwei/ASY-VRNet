@@ -12,7 +12,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 
-from nets.efficient_vrnet import MaskVRDet
+from nets.efficient_vrnet import EfficientVRNet
 from nets.yolo_training import (ModelEMA, YOLOLoss, get_lr_scheduler,
                                 set_optimizer_lr, weights_init)
 from utils.callbacks import LossHistory, EvalCallback
@@ -95,19 +95,13 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     #   input_shape     输入的shape大小，一定要是32的倍数
     # ------------------------------------------------------#
-    input_shape = [512, 512]
+    input_shape = [640, 640]
     # ------------------------------------------------------#
     #   所使用的YoloX的版本。nano、tiny、s、m、l
     # ------------------------------------------------------#
     phi = 'l'
     # ------------------------------------------------------#
-    #   所使用的attention版本，0为不使用，1为使用基于卷积的shuffle attention, 2为使用shuffle attention + context attention
-    # ------------------------------------------------------#
-    attention_v = 2
-    # ------------------------------------------------------#
-    #   所使用的用于特征融合的neck，2为使用fpn，1为使用panet
-    # ------------------------------------------------------#
-    neck_v = 1
+
     # ------------------------------------------------------------------#
     #   mosaic              马赛克数据增强。
     #   mosaic_prob         每个step有多少概率使用mosaic数据增强，默认50%。
@@ -312,7 +306,7 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     #   创建yolo模型
     # ------------------------------------------------------#
-    model = MaskVRDet(num_classes=num_classes, num_seg_classes=num_classes_seg, phi=phi, is_attention=2, neck=1)
+    model = EfficientVRNet(num_classes=num_classes, num_seg_classes=num_classes_seg, phi=phi)
     weights_init(model)
     if model_path != '':
         # ------------------------------------------------------#

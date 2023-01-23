@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 from PIL import ImageDraw, ImageFont
 
-from nets.efficient_vrnet import MaskVRDet
+from nets.efficient_vrnet import EfficientVRNet
 from utils.utils import (cvtColor, get_classes, preprocess_input, resize_image,
                          show_config)
 from utils.utils_bbox import decode_outputs, non_max_suppression
@@ -33,7 +33,7 @@ class YOLO(object):
         # ---------------------------------------------------------------------#
         #   输入图片的大小，必须为32的倍数。
         # ---------------------------------------------------------------------#
-        "input_shape": [512, 512],
+        "input_shape": [640, 640],
         # ---------------------------------------------------------------------#
         #   所使用的YoloX的版本。nano、tiny、s、m、l、x
         # ---------------------------------------------------------------------#
@@ -93,7 +93,7 @@ class YOLO(object):
     #   生成模型
     # ---------------------------------------------------#
     def generate(self, onnx=False):
-        self.net = MaskVRDet(num_classes=self.num_classes, num_seg_classes=21, phi=self.phi, is_attention=2, neck=1)
+        self.net = EfficientVRNet(num_classes=self.num_classes, num_seg_classes=5, phi=self.phi)
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.net.load_state_dict(torch.load(self.model_path, map_location=device))
         self.net = self.net.eval()

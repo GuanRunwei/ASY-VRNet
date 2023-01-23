@@ -9,7 +9,7 @@ import torch.nn.functional as F
 from PIL import Image
 from torch import nn
 
-from nets.efficient_vrnet import MaskVRDet
+from nets.efficient_vrnet import EfficientVRNet
 from utils_seg.utils import cvtColor, preprocess_input, resize_image, show_config
 
 
@@ -29,7 +29,7 @@ class DeeplabV3(object):
         #----------------------------------------#
         #   所需要区分的类的个数+1
         #----------------------------------------#
-        "num_classes"       : 21,
+        "num_classes"       : 5,
         #----------------------------------------#
         #   所使用的的主干网络：
         #   mobilenet
@@ -94,7 +94,7 @@ class DeeplabV3(object):
         #-------------------------------#
         #   载入模型与权值
         #-------------------------------#
-        self.net = MaskVRDet(num_classes=20, num_seg_classes=self.num_classes, phi=self.phi, is_attention=2, neck=2)
+        self.net = EfficientVRNet(num_classes=4, num_seg_classes=self.num_classes, phi=self.phi)
 
         device      = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.net.load_state_dict(torch.load(self.model_path, map_location=device))
