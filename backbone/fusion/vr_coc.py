@@ -807,8 +807,6 @@ def coc_medium(pretrained=False, width=1.0, **kwargs):
     return model
 
 
-
-
 if __name__ == '__main__':
     # input = torch.rand(1, 64, 168, 168)
     # input_radar = torch.rand(1, 64, 168, 168)
