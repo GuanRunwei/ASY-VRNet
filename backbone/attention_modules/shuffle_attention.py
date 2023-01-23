@@ -19,7 +19,6 @@ class ShuffleAttention(nn.Module):
         self.sbias = Parameter(torch.ones(1, channel // (2 * G), 1, 1))
         self.sigmoid=nn.Sigmoid()
 
-
     def init_weights(self):
         for m in self.modules():
             if isinstance(m, nn.Conv2d):

@@ -20,3 +20,5 @@ class eca_block(nn.Module):
         output = self.sigmoid(output)
 
         return x * output.expand_as(x)
+
+
