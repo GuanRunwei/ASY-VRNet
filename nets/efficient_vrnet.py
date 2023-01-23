@@ -30,8 +30,8 @@ class EfficientVRNet(nn.Module):
 if __name__ == '__main__':
     model = EfficientVRNet(num_classes=4, phi='nano', num_seg_classes=5).cuda()
     model.eval()
-    input_map1 = torch.randn((1, 3, 640, 640)).cuda()
-    input_map2 = torch.randn((1, 4, 640, 640)).cuda()
+    input_map1 = torch.randn((1, 3, 512, 512)).cuda()
+    input_map2 = torch.randn((1, 4, 512, 512)).cuda()
     t1 = time.time()
     test_times = 300
     for i in range(test_times):
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # print(output_map[1].shape)
     # print(output_map[2].shape)
     # print(output_seg.shape)
-    print(summary(model, input_size=((1, 3, 640, 640), (1, 4, 640, 640))))
+    print(summary(model, input_size=((1, 3, 512, 512), (1, 4, 512, 512))))
 
     macs, params = profile(model, inputs=([input_map1, input_map2]))
     macs, params = clever_format([macs, params], "%.3f")

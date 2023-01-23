@@ -386,7 +386,7 @@ class VRCoC(nn.Module):
                  init_cfg=None,
                  pretrained=None,
                  # the parameters for context-cluster
-                 img_w=640,img_h=640,
+                 img_w=512,img_h=512,
                  proposal_w=[2,2,2,2], proposal_h=[2,2,2,2], fold_w=[8,4,2,1], fold_h=[8,4,2,1],
                  heads=[2,4,6,8], head_dim=[16,16,32,32],
                  **kwargs):
@@ -815,8 +815,8 @@ if __name__ == '__main__':
     # model = RadarEnhanceByImage(channels=64)
     # output = model(input, input_radar)
     # print(output.shape)
-    input = torch.rand(1, 3, 640, 640).cuda()
-    input_radar = torch.rand(1, 4, 640, 640).cuda()
+    input = torch.rand(1, 3, 512, 512).cuda()
+    input_radar = torch.rand(1, 4, 512, 512).cuda()
     model = coc_medium(width=0.25).cuda()
     out = model(input, input_radar)
     # print(model)
@@ -825,7 +825,7 @@ if __name__ == '__main__':
     print(out[0][1].shape)
     print(out[0][2].shape)
     print(out[0][3].shape)
-    print(summary(model, input_size=[(1, 3, 640, 640), (1, 4, 640, 640)]))
+    print(summary(model, input_size=[(1, 3, 512, 512), (1, 4, 512, 512)]))
 
     macs, params = profile(model, inputs=(input, input_radar))
     macs, params = clever_format([macs, params], "%.3f")
