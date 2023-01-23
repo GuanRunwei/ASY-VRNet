@@ -13,8 +13,8 @@ from timm.models.layers.helpers import to_2tuple
 from einops import rearrange
 import torch.nn.functional as F
 from backbone.attention_modules.shuffle_attention import ShuffleAttention
-from neck.fpnt_segmentation import eca_block
-from neck.fpnt_segmentation import BaseConv
+from backbone.attention_modules.eca import eca_block
+from backbone.conv_utils.normal_conv import BaseConv
 from torchinfo import summary
 from thop import profile
 from thop import clever_format

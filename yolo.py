@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 from PIL import ImageDraw, ImageFont
 
-from nets.maskvrdet import MaskVRDet
+from nets.efficient_vrnet import MaskVRDet
 from utils.utils import (cvtColor, get_classes, preprocess_input, resize_image,
                          show_config)
 from utils.utils_bbox import decode_outputs, non_max_suppression

@@ -1,14 +1,13 @@
 import torch
 import torch.nn as nn
 
-from neck.panet import BaseConv, CSPLayer, DWConv
-from backbone.vr_graph import pvig_ti_gelu, pvig_b_gelu, pvig_m_gelu, pvig_s_gelu
+from backbone.conv_utils.normal_conv import BaseConv
 
 
 class DecoupleHead(nn.Module):
-    def __init__(self, num_classes, width=1.0, in_channels=[96, 240, 384], act="relu", depthwise=False):
+    def __init__(self, num_classes, width=1.0, in_channels=[128, 320, 512], act="relu", depthwise=False):
         super().__init__()
-        Conv = DWConv if depthwise else BaseConv
+        Conv = BaseConv
 
         self.cls_convs = nn.ModuleList()
         self.reg_convs = nn.ModuleList()

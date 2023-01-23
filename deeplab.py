@@ -9,7 +9,7 @@ import torch.nn.functional as F
 from PIL import Image
 from torch import nn
 
-from nets.maskvrdet import MaskVRDet
+from nets.efficient_vrnet import MaskVRDet
 from utils_seg.utils import cvtColor, preprocess_input, resize_image, show_config
 
 
