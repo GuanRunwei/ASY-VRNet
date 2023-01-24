@@ -14,7 +14,7 @@ from einops import rearrange
 import torch.nn.functional as F
 from backbone.attention_modules.shuffle_attention import ShuffleAttention
 from backbone.attention_modules.eca import eca_block
-from backbone.conv_utils.normal_conv import BaseConv
+from backbone.conv_utils.normal_conv import BaseConv, DWConv
 from torchinfo import summary
 from thop import profile
 from thop import clever_format
@@ -756,10 +756,10 @@ def coc_tiny2(pretrained=False, **kwargs):
 
 
 @register_model
-def coc_small(pretrained=False, **kwargs):
+def coc_small(pretrained=False, width=1.0, **kwargs):
     layers = [2, 2, 6, 2]
     norm_layer=GroupNorm
-    embed_dims = [64, 128, 320, 512]
+    embed_dims = [int(64*width), int(128*width), int(320*width), int(512*width)]
     mlp_ratios = [8, 8, 4, 4]
     downsamples = [True, True, True, True]
     proposal_w=[2,2,2,2]
@@ -815,7 +815,7 @@ if __name__ == '__main__':
     # print(output.shape)
     input = torch.rand(1, 3, 512, 512).cuda()
     input_radar = torch.rand(1, 4, 512, 512).cuda()
-    model = coc_medium(width=0.25).cuda()
+    model = coc_small(width=1).cuda()
     out = model(input, input_radar)
     # print(model)
     print(len(out))

@@ -18,19 +18,19 @@ class DecoupleHead(nn.Module):
 
         for i in range(len(in_channels)):
             self.stems.append(
-                BaseConv(in_channels=int(in_channels[i] * width), out_channels=int(256 * width), ksize=1, stride=1,
+                Conv(in_channels=int(in_channels[i] * width), out_channels=int(256 * width), ksize=1, stride=1,
                          act=act))
             self.cls_convs.append(nn.Sequential(*[
-                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act),
-                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act),
+                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act, ds_conv=True),
+                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act, ds_conv=True),
             ]))
             self.cls_preds.append(
                 nn.Conv2d(in_channels=int(256 * width), out_channels=num_classes, kernel_size=1, stride=1, padding=0)
             )
 
             self.reg_convs.append(nn.Sequential(*[
-                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act),
-                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act)
+                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act, ds_conv=True),
+                Conv(in_channels=int(256 * width), out_channels=int(256 * width), ksize=3, stride=1, act=act, ds_conv=True)
             ]))
             self.reg_preds.append(
                 nn.Conv2d(in_channels=int(256 * width), out_channels=4, kernel_size=1, stride=1, padding=0)

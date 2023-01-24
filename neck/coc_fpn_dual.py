@@ -8,7 +8,7 @@ from backbone.attention_modules.eca import eca_block
 from backbone.attention_modules.shuffle_attention import ShuffleAttention
 from backbone.conv_utils.normal_conv import DWConv, BaseConv
 from backbone.vision.context_cluster import ClusterBlock
-from backbone.fusion.vr_coc import coc_medium
+from backbone.fusion.vr_coc import coc_medium, coc_small
 
 
 class CoCUpsample(nn.Module):
@@ -136,7 +136,7 @@ class CoCFpnDual(nn.Module):
 
         Conv = CoC_Conv
 
-        self.backbone = coc_medium(pretrained=False, width=width)
+        self.backbone = coc_small(pretrained=False, width=width)
         self.in_features = in_features
         self.num_seg_class = num_seg_class
         in_channels = [int(item*width) for item in in_channels]
