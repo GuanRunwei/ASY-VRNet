@@ -48,23 +48,8 @@ def preprocess_input(image):
 
 
 def preprocess_input_radar(data):
-    _range_0 = np.max(data[0]) - np.min(data[0])
-    data_0 = (data[0] - np.min(data[0])) / (_range_0+0.01)
-    data_0 = np.expand_dims(data_0, axis=0)
-
-    _range_1 = np.max(data[1]) - np.min(data[1])
-    data_1 = (data[1] - np.min(data[1])) / (_range_1+0.01)
-    data_1 = np.expand_dims(data_1, axis=0)
-
-    _range_2 = np.max(data[2]) - np.min(data[2])
-    data_2 = (data[2] - np.min(data[2])) / (_range_2+0.01)
-    data_2 = np.expand_dims(data_2, axis=0)
-
-    _range_3 = np.max(data[3]) - np.min(data[3])
-    data_3 = (data[3] - np.min(data[3])) / (_range_3+0.01)
-    data_3 = np.expand_dims(data_3, axis=0)
-
-    data = np.concatenate((data_0, data_1, data_2, data_3))
+    _range = np.max(data) - np.min(data)
+    data = (data - np.min(data)) / _range + 0.0000000000001
     return data
 
 #---------------------------------------------------#
