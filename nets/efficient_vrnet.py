@@ -22,7 +22,7 @@ class EfficientVRNet(nn.Module):
         self.head = DecoupleHead(num_classes, width, depthwise=True)
 
     def forward(self, x, x_radar):
-        seg_outputs, fpn_outs = self.backbone.forward(x, x_radar)
+        fpn_outs, seg_outputs = self.backbone.forward(x, x_radar)
         det_outputs = self.head.forward(fpn_outs)
         return det_outputs, seg_outputs
 

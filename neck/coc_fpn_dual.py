@@ -220,7 +220,7 @@ class CoCFpnDual(nn.Module):
         p3_out = self.p3_out_det(p3_concat_4)
         # ------------------------------------------------------------------------ #
 
-        return x_segmentation_out, (p3_out, p4_out, p5_out)
+        return (p3_out, p4_out, p5_out), x_segmentation_out
 
 
 if __name__ == '__main__':
