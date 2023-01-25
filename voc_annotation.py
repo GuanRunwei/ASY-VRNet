@@ -30,7 +30,7 @@ train_percent = 0.8
 #   指向VOC数据集所在的文件夹
 #   默认指向根目录下的VOC数据集
 # -------------------------------------------------------#
-VOCdevkit_path = "E:/Big_Datasets/water_surface/all-1114/all/VOCdevkit"
+VOCdevkit_path = "E:/dataset_collection/WaterScenes/all-1114-voc/all-1114/all/VOCdevkit"
 
 VOCdevkit_sets = [('2007', 'train'), ('2007', 'val')]
 classes, _ = get_classes(classes_path)

@@ -28,7 +28,7 @@ class EfficientVRNet(nn.Module):
 
 
 if __name__ == '__main__':
-    model = EfficientVRNet(num_classes=4, phi='nano', num_seg_classes=5).cuda()
+    model = EfficientVRNet(num_classes=4, phi='l', num_seg_classes=5).cuda()
     model.eval()
     input_map1 = torch.randn((1, 3, 512, 512)).cuda()
     input_map2 = torch.randn((1, 4, 512, 512)).cuda()

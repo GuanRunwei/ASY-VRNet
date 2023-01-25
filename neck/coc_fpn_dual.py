@@ -12,11 +12,11 @@ from backbone.fusion.vr_coc import coc_medium, coc_small
 
 
 class CoCUpsample(nn.Module):
-    def __init__(self, in_channels, out_channels, scale=2):
+    def __init__(self, in_channels, out_channels, scale=2, ds_conv=False):
         super().__init__()
 
         self.upsample = nn.Sequential(
-            BaseConv(in_channels, out_channels, 1, 1, act='relu', ds_conv=True),
+            BaseConv(in_channels, out_channels, 1, 1, act='relu', ds_conv=ds_conv),
             nn.Upsample(scale_factor=scale, mode='bilinear', align_corners=True)
         )
 
@@ -159,24 +159,24 @@ class CoCFpnDual(nn.Module):
         self.sc_attn_seg2 = ShuffleAttention(channel=in_channels[0] * 2)
         # ------------------------------------------------------------------------------------ #
 
-        # ----------------------- 80*80*256 -> 160*160*64 -> 160*160*128 ------------------------ #
-        self.upsample2_0 = CoCUpsample(in_channels=in_channels[0] * 2, out_channels=1, scale=4)
+        # ----------------------- 80*80*256 -> 160*160*64 -> 640*640*5 ------------------------ #
+        self.upsample2_0 = CoCUpsample(in_channels=in_channels[0] * 2, out_channels=num_seg_class, scale=4)
         # ------------------------------------------------------------------------------------ #
         # ========================================================================================== #
 
         # ================================= detection modules ====================================== #
         # ----------------------- 20*20*512 -> 20*20*512 ----------------------- #
-        self.p5_out_det = CoC_Conv(in_channels=in_channels[-1], out_channels=in_channels[-1])
+        self.p5_out_det = Conv(in_channels=in_channels[-1], out_channels=in_channels[-1])
         # ----------------------------------------------------------------------- #
 
         # ----------------------- 20*20*512 -> 40*40*320 -> 40*40*640 -> 40*40*320 ------------------------ #
         self.p5_4_det = CoCUpsample(in_channels=in_channels[-1], out_channels=in_channels[-2])
-        self.p4_out_det = CoC_Conv(in_channels=in_channels[-2]*2, out_channels=in_channels[-2])
+        self.p4_out_det = Conv(in_channels=in_channels[-2]*2, out_channels=in_channels[-2])
         # ------------------------------------------------------------------------------------------------- #
 
         # ----------------------- 40*40*320 -> 80*80*128 -> 80*80*256 -> 80*80*128 ------------------------ #
         self.p4_3_det = CoCUpsample(in_channels=in_channels[-2], out_channels=in_channels[-3])
-        self.p3_out_det = CoC_Conv(in_channels=in_channels[-3]*2, out_channels=in_channels[-3])
+        self.p3_out_det = Conv(in_channels=in_channels[-3]*2, out_channels=in_channels[-3])
         # ------------------------------------------------------------------------------------------------- #
         # ========================================================================================== #
 
@@ -220,7 +220,7 @@ class CoCFpnDual(nn.Module):
         p3_out = self.p3_out_det(p3_concat_4)
         # ------------------------------------------------------------------------ #
 
-        return x_segmentation_out, [p3_out, p4_out, p5_out]
+        return x_segmentation_out, (p3_out, p4_out, p5_out)
 
 
 if __name__ == '__main__':

@@ -99,7 +99,7 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     #   所使用的YoloX的版本。nano、tiny、s、m、l
     # ------------------------------------------------------#
-    phi = 'l'
+    phi = 'nano'
     # ------------------------------------------------------#
 
     # ------------------------------------------------------------------#
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     #   Unfreeze_batch_size     模型在解冻后的batch_size
     # ------------------------------------------------------------------#
     UnFreeze_Epoch = 100
-    Unfreeze_batch_size = 8
+    Unfreeze_batch_size = 2
     # ------------------------------------------------------------------#
     #   Freeze_Train    是否进行冻结训练
     #                   默认先冻结主干训练后解冻训练。
@@ -230,7 +230,7 @@ if __name__ == "__main__":
     # ----------------------------------------------------#
     # 雷达feature map路径
     # ----------------------------------------------------#
-    radar_file_path = "E:/Big_Datasets/water_surface/all-1114/all/VOCradar"
+    radar_file_path = "E:/dataset_collection/WaterScenes/all-1114-voc/all-1114/all/VOCradar/VOCradar"
 
     # ----------------------------------------------------#
     #   获得目标检测图片路径和标签
@@ -404,12 +404,12 @@ if __name__ == "__main__":
     # ---------------------------#
     #   读取分割数据集对应的txt
     # ---------------------------#
-    with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/train.txt"), "r") as f:
-        train_lines_seg = f.readlines()
-    with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/val.txt"), "r") as f:
-        val_lines_seg = f.readlines()
-    num_train_seg = len(train_lines_seg)
-    num_val_seg = len(val_lines_seg)
+    # with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/train.txt"), "r") as f:
+    #     train_lines_seg = f.readlines()
+    # with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/val.txt"), "r") as f:
+    #     val_lines_seg = f.readlines()
+    # num_train_seg = len(train_lines_seg)
+    # num_val_seg = len(val_lines_seg)
 
     if local_rank == 0:
         show_config(
@@ -498,8 +498,8 @@ if __name__ == "__main__":
         epoch_step = num_train // batch_size
         epoch_step_val = num_val // batch_size
 
-        epoch_step_seg = num_train_seg // batch_size
-        epoch_step_val_seg = num_val_seg // batch_size
+        # epoch_step_seg = num_train_seg // batch_size
+        # epoch_step_val_seg = num_val_seg // batch_size
 
         if epoch_step == 0 or epoch_step_val == 0:
             raise ValueError("数据集过小，无法继续进行训练，请扩充数据集。")
@@ -520,22 +520,22 @@ if __name__ == "__main__":
         # ---------------------------------------#
         #   构建分割数据集加载器。
         # ---------------------------------------#
-        train_dataset_seg = DeeplabDataset(train_lines_seg, input_shape, num_classes_seg, True, VOCdevkit_path)
-        val_dataset_seg = DeeplabDataset(val_lines_seg, input_shape, num_classes_seg, False, VOCdevkit_path)
+        # train_dataset_seg = DeeplabDataset(train_lines_seg, input_shape, num_classes_seg, True, VOCdevkit_path)
+        # val_dataset_seg = DeeplabDataset(val_lines_seg, input_shape, num_classes_seg, False, VOCdevkit_path)
 
 
         if distributed:
             train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, shuffle=True, )
-            train_sampler_seg = torch.utils.data.distributed.DistributedSampler(train_dataset_seg, shuffle=True, )
+            # train_sampler_seg = torch.utils.data.distributed.DistributedSampler(train_dataset_seg, shuffle=True, )
             val_sampler = torch.utils.data.distributed.DistributedSampler(val_dataset, shuffle=False, )
-            val_sampler_seg = torch.utils.data.distributed.DistributedSampler(val_dataset_seg, shuffle=False, )
+            # val_sampler_seg = torch.utils.data.distributed.DistributedSampler(val_dataset_seg, shuffle=False, )
             batch_size = batch_size // ngpus_per_node
             shuffle = False
         else:
             train_sampler = None
-            train_sampler_seg = None
+            # train_sampler_seg = None
             val_sampler = None
-            val_sampler_seg = None
+            # val_sampler_seg = None
             shuffle = True
 
         # ---------------------------------------#
