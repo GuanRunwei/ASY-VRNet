@@ -6,7 +6,7 @@ import torch
 from PIL import Image
 from torch.utils.data.dataset import Dataset
 import albumentations as A
-from utils.utils import cvtColor, preprocess_input
+from utils.utils import cvtColor, preprocess_input, preprocess_input_radar
 import random as rd
 import matplotlib.pyplot as plt
 import os
@@ -76,7 +76,7 @@ class YoloDataset(Dataset):
 
         image = np.transpose(preprocess_input(np.array(image, dtype=np.float32)), (2, 0, 1))
         box = np.array(box, dtype=np.float32)
-        radar = np.array(radar, dtype=np.float32)
+        radar = np.array(preprocess_input_radar(radar), dtype=np.float32)
         if len(box) != 0:
             box[:, 2:4] = box[:, 2:4] - box[:, 0:2]
             box[:, 0:2] = box[:, 0:2] + box[:, 2:4] / 2

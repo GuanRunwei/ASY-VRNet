@@ -46,6 +46,27 @@ def preprocess_input(image):
     image /= np.array([0.229, 0.224, 0.225])
     return image
 
+
+def preprocess_input_radar(data):
+    _range_0 = np.max(data[0]) - np.min(data[0])
+    data_0 = (data[0] - np.min(data[0])) / _range_0
+    data_0 = np.expand_dims(data_0, axis=0)
+
+    _range_1 = np.max(data[1]) - np.min(data[1])
+    data_1 = (data[1] - np.min(data[1])) / _range_1
+    data_1 = np.expand_dims(data_1, axis=0)
+
+    _range_2 = np.max(data[2]) - np.min(data[2])
+    data_2 = (data[2] - np.min(data[2])) / _range_2
+    data_2 = np.expand_dims(data_2, axis=0)
+
+    _range_3 = np.max(data[3]) - np.min(data[3])
+    data_3 = (data[3] - np.min(data[3])) / _range_3
+    data_3 = np.expand_dims(data_3, axis=0)
+
+    data = np.concatenate((data_0, data_1, data_2, data_3))
+    return data
+
 #---------------------------------------------------#
 #   获得学习率
 #---------------------------------------------------#

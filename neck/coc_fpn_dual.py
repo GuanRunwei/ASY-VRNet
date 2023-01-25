@@ -9,6 +9,7 @@ from backbone.attention_modules.shuffle_attention import ShuffleAttention
 from backbone.conv_utils.normal_conv import DWConv, BaseConv
 from backbone.vision.context_cluster import ClusterBlock
 from backbone.fusion.vr_coc import coc_medium, coc_small
+from torchinfo import summary
 
 
 class CoCUpsample(nn.Module):
@@ -226,19 +227,20 @@ class CoCFpnDual(nn.Module):
 if __name__ == '__main__':
     # input_map = torch.randn((1, 512, 20, 20)).cuda()
     # aspp = ASPP(dim_in=512, dim_out=1024).cuda()
-    model = CoCFpnDual(width=1.0)
+    model = CoCFpnDual(width=1.0).cuda()
     model.eval()
-    input = torch.rand(1, 3, 512, 512)
-    input_radar = torch.rand(1, 4, 512, 512)
+    input = torch.rand(1, 3, 512, 512).cuda()
+    input_radar = torch.rand(1, 4, 512, 512).cuda()
     output = model(input, input_radar)
+    print(summary(model, input_size=[(1, 3, 512, 512), (1, 4, 512, 512)]))
     macs, params = profile(model, inputs=(input, input_radar))
     macs, params = clever_format([macs, params], "%.3f")
     print("params:", params)
     print("macs:", macs)
-    print(output[0].shape)
-    print(output[1][0].shape)
-    print(output[1][1].shape)
-    print(output[1][2].shape)
+    print(output[1].shape)
+    print(output[0][0].shape)
+    print(output[0][1].shape)
+    print(output[0][2].shape)
     # model = SpatialPyramidPooling()
     # input = torch.rand(1, 512, 20, 20)
     # output = model(input)

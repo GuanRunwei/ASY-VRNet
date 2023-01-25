@@ -9,7 +9,7 @@ from PIL import ImageDraw, ImageFont
 
 from nets.efficient_vrnet import EfficientVRNet
 from utils.utils import (cvtColor, get_classes, preprocess_input, resize_image,
-                         show_config)
+                         show_config, preprocess_input_radar)
 from utils.utils_bbox import decode_outputs, non_max_suppression
 
 '''
@@ -131,7 +131,7 @@ class YOLO(object):
         # ------------------------------#
         radar_path = os.path.join(self.radar_root, image_id + '.npz')
         radar_data = np.load(radar_path)['arr_0']
-        radar_data = torch.from_numpy(radar_data).type(torch.FloatTensor).unsqueeze(0)
+        radar_data = torch.from_numpy(preprocess_input_radar(radar_data)).type(torch.FloatTensor).unsqueeze(0)
 
         with torch.no_grad():
             images = torch.from_numpy(image_data)

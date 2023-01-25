@@ -3,7 +3,7 @@
 # -------------------------------------#
 import datetime
 import os
-
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     #                   开启后会加快数据读取速度，但是会占用更多内存
     #                   内存较小的电脑可以设置为2或者0
     # ------------------------------------------------------------------#
-    num_workers = 4
+    num_workers = 2
 
     # ----------------------------------------------------#
     # 雷达feature map路径
