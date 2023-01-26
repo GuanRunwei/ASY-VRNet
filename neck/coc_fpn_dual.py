@@ -27,7 +27,7 @@ class CoCUpsample(nn.Module):
 
 
 class CoC_Conv(nn.Module):
-    def __init__(self, in_channels, out_channels, ksize=1, stride=1, act="relu", ds_conv=True):
+    def __init__(self, in_channels, out_channels, ksize=1, stride=1, act="relu", ds_conv=False):
         super(CoC_Conv, self).__init__()
 
         self.coc = ClusterBlock(dim=in_channels)
