@@ -305,7 +305,8 @@ class ImageEnhanceByRadar(nn.Module):
         super(ImageEnhanceByRadar, self).__init__()
         self.radar_in_channels = radar_in_channels
         self.image_in_channels = image_in_channels
-        self.radar_projection = BaseConv(in_channels=self.radar_in_channels, out_channels=1, ksize=1, stride=1)
+        self.radar_projection = BaseConv(in_channels=self.radar_in_channels, out_channels=self.image_in_channels,
+                                         ksize=3, stride=1)
         self.norm = nn.BatchNorm2d(self.image_in_channels)
 
     def forward(self, image_map, radar_map):
@@ -321,7 +322,7 @@ class RadarEnhanceByImage(nn.Module):
         self.initial = initial
         self.radar_in_channels = radar_in_channels
         self.image_in_channels = image_in_channels
-        self.image_attn = ShuffleAttention(channel=self.image_in_channels, G=2)
+        self.image_attn = ShuffleAttention(channel=self.image_in_channels, G=4)
         self.channel_attn = eca_block(channel=self.radar_in_channels + self.image_in_channels)
         self.inverse_projection = BaseConv(in_channels=self.radar_in_channels + self.image_in_channels,
                                            out_channels=radar_in_channels, ksize=1, stride=1)
