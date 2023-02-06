@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backbone/fusion/vr_coc.py" beforeDir="false" afterPath="$PROJECT_DIR$/backbone/fusion/vr_coc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/dataloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/dataloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/utils_fit.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils_fit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils_seg/callbacks.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils_seg/callbacks.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,30 +23,18 @@
     <SUITE FILE_PATH="coverage/Efficient_VRNet$vr_coc__1_.coverage" NAME="vr_coc (1) Coverage Results" MODIFIED="1675500261531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/fusion" />
     <SUITE FILE_PATH="coverage/Efficient_VRNet$fpnt_segmentation.coverage" NAME="fpnt_segmentation Coverage Results" MODIFIED="1674307954124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/neck" />
     <SUITE FILE_PATH="coverage/Raw_Fusion$mobilevit.coverage" NAME="mobilevit Coverage Results" MODIFIED="1673255368563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/vision" />
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$train.coverage" NAME="train Coverage Results" MODIFIED="1674616389369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Efficient_VRNet$coc_fpn_dual.coverage" NAME="coc_fpn_dual Coverage Results" MODIFIED="1674650209434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/neck" />
     <SUITE FILE_PATH="coverage/Raw_Fusion$pointnet.coverage" NAME="pointnet Coverage Results" MODIFIED="1673338201293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/radar" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$train.coverage" NAME="train Coverage Results" MODIFIED="1675668576797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Efficient_VRNet$context_cluster__1_.coverage" NAME="context_cluster (1) Coverage Results" MODIFIED="1674218379511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/radar" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neck/coc_fpn_dual.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="308" column="41" selection-start-line="308" selection-start-column="41" selection-end-line="308" selection-end-column="41" />
+            <state relative-caret-position="161">
+              <caret line="306" column="50" selection-start-line="306" selection-start-column="50" selection-end-line="306" selection-end-column="50" />
               <folding>
                 <element signature="e#38#47#0" expanded="true" />
               </folding>
@@ -52,22 +43,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nets/efficient_vrnet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="41" column="3" lean-forward="true" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
+            <state relative-caret-position="193">
+              <caret line="650" selection-start-line="650" selection-end-line="650" />
               <folding>
                 <element signature="e#99#114#0" expanded="true" />
               </folding>
@@ -75,22 +54,48 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nets/yolo_training.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3552">
-              <caret line="228" selection-start-line="228" selection-end-line="228" />
+            <state relative-caret-position="261">
+              <caret line="188" column="63" selection-start-line="188" selection-start-column="63" selection-end-line="188" selection-end-column="63" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/head/decouplehead.py">
+        <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+            <state relative-caret-position="969">
+              <caret line="156" column="55" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils_seg/dataloader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3737">
+              <caret line="564" selection-start-line="564" selection-end-line="564" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,13 +125,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
+            <state relative-caret-position="592">
               <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2007_val.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -186,12 +196,14 @@
         <option value="$PROJECT_DIR$/voc_annotation.py" />
         <option value="$PROJECT_DIR$/utils/callbacks.py" />
         <option value="$PROJECT_DIR$/nets/efficient_vrnet.py" />
-        <option value="$PROJECT_DIR$/utils/dataloader.py" />
         <option value="$PROJECT_DIR$/yolo.py" />
-        <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/utils/utils.py" />
         <option value="$PROJECT_DIR$/neck/coc_fpn_dual.py" />
         <option value="$PROJECT_DIR$/backbone/fusion/vr_coc.py" />
+        <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/utils/dataloader.py" />
+        <option value="$PROJECT_DIR$/utils_seg/callbacks.py" />
+        <option value="$PROJECT_DIR$/utils/utils_fit.py" />
       </list>
     </option>
   </component>
@@ -206,6 +218,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,7 +266,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -265,11 +277,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Normal_Workspace_Collection\Efficient-VRNet\Efficient-VRNet" />
       <recent name="E:\code_workspace\Efficient-VRNet\Efficient-VRNet\backbone\fusion" />
       <recent name="E:\code_workspace\Efficient-VRNet\Efficient-VRNet\neck" />
       <recent name="E:\code_workspace\Efficient-VRNet\Efficient-VRNet\backbone\radar" />
       <recent name="E:\Normal_Workspace_Collection\Raw-Fusion\Raw-Fusion\backbone\radar" />
-      <recent name="E:\Normal_Workspace_Collection\Raw-Fusion\Raw-Fusion\backbone\vision" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -284,7 +296,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.efficient_vrnet">
+  <component name="RunManager" selected="Python.train">
     <configuration name="coc_fpn_dual" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Efficient-VRNet" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -397,10 +409,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train" />
         <item itemvalue="Python.efficient_vrnet" />
         <item itemvalue="Python.vr_coc (1)" />
         <item itemvalue="Python.coc_fpn_dual" />
-        <item itemvalue="Python.train" />
         <item itemvalue="Python.voc_annotation" />
       </list>
     </recent_temporary>
@@ -432,7 +444,9 @@
       <workItem from="1674634562264" duration="2630000" />
       <workItem from="1674717224094" duration="1132000" />
       <workItem from="1674989265709" duration="644000" />
-      <workItem from="1675499951639" duration="308000" />
+      <workItem from="1675499951639" duration="466000" />
+      <workItem from="1675646718315" duration="7000" />
+      <workItem from="1675668363043" duration="212000" />
     </task>
     <task id="LOCAL-00001" summary="complete the basic structure of VRCoC">
       <created>1674203093310</created>
@@ -609,22 +623,29 @@
       <option name="project" value="LOCAL" />
       <updated>1674634649699</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="change the RIM">
+      <created>1675500316734</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1675500316734</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92712000" />
+    <option name="totallyTimeSpent" value="93089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2575" height="1407" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19825189" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20143028" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.50509804" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.50509804" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -659,11 +680,10 @@
     <MESSAGE value="modify the output of FPN" />
     <MESSAGE value="add the normalization function for radar feature maps" />
     <MESSAGE value="change the normalization function for radar feature maps" />
-    <option name="LAST_COMMIT_MESSAGE" value="change the normalization function for radar feature maps" />
+    <MESSAGE value="change the RIM" />
+    <option name="LAST_COMMIT_MESSAGE" value="change the RIM" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_cls_ssg.py" />
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_msg.py" />
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_ssg.py" />
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_sem_seg.py" />
@@ -841,28 +861,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-522">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/2007_train.txt" />
-    <entry file="file://$PROJECT_DIR$/2007_val.txt" />
-    <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1072">
-          <caret line="78" column="47" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backbone/conv_utils/normal_conv.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -873,10 +872,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/vr_coc2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="185" column="97" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="97" />
+          <folding>
+            <element signature="e#0#133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/neck/coc_fpn_dual.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nets/efficient_vrnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="24" column="65" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
@@ -917,9 +936,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="306" column="50" selection-start-line="306" selection-start-column="50" selection-end-line="306" selection-end-column="50" />
+          <folding>
+            <element signature="e#38#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3737">
+          <caret line="564" selection-start-line="564" selection-end-line="564" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
+        <state relative-caret-position="592">
           <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -927,42 +975,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/vr_coc2.py">
+    <entry file="file://$PROJECT_DIR$/2007_val.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="185" column="97" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="97" />
+        <state relative-caret-position="969">
+          <caret line="156" column="55" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
           <folding>
-            <element signature="e#0#133#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="41" column="3" lean-forward="true" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
+        <state relative-caret-position="193">
+          <caret line="650" selection-start-line="650" selection-end-line="650" />
           <folding>
             <element signature="e#99#114#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nets/efficient_vrnet.py">
+    <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="261">
+          <caret line="188" column="63" selection-start-line="188" selection-start-column="63" selection-end-line="188" selection-end-column="63" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="308" column="41" selection-start-line="308" selection-start-column="41" selection-end-line="308" selection-end-column="41" />
-          <folding>
-            <element signature="e#38#47#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -16,6 +16,8 @@ from nets.efficient_vrnet import EfficientVRNet
 from nets.yolo_training import (ModelEMA, YOLOLoss, get_lr_scheduler,
                                 set_optimizer_lr, weights_init)
 from utils.callbacks import LossHistory, EvalCallback
+from utils_seg.callbacks import LossHistory as LossHistory_seg
+from utils_seg.callbacks import EvalCallback as EvalCallback_seg
 from utils.dataloader import YoloDataset, yolo_dataset_collate
 from utils.utils import get_classes, show_config
 from utils.utils_fit import fit_one_epoch
@@ -170,7 +172,7 @@ if __name__ == "__main__":
     #   Unfreeze_batch_size     模型在解冻后的batch_size
     # ------------------------------------------------------------------#
     UnFreeze_Epoch = 100
-    Unfreeze_batch_size = 4
+    Unfreeze_batch_size = 16
     # ------------------------------------------------------------------#
     #   Freeze_Train    是否进行冻结训练
     #                   默认先冻结主干训练后解冻训练。
@@ -184,7 +186,7 @@ if __name__ == "__main__":
     #   Init_lr         模型的最大学习率
     #   Min_lr          模型的最小学习率，默认为最大学习率的0.01
     # ------------------------------------------------------------------#
-    Init_lr = 5e-3
+    Init_lr = 1e-2
     Min_lr = Init_lr * 0.01
     # ------------------------------------------------------------------#
     #   optimizer_type  使用到的优化器种类，可选的有adam、sgd
@@ -225,12 +227,12 @@ if __name__ == "__main__":
     #                   开启后会加快数据读取速度，但是会占用更多内存
     #                   内存较小的电脑可以设置为2或者0
     # ------------------------------------------------------------------#
-    num_workers = 2
+    num_workers = 4
 
     # ----------------------------------------------------#
     # 雷达feature map路径
     # ----------------------------------------------------#
-    radar_file_path = "E:/dataset_collection/WaterScenes/all-1114-voc/all-1114/all/VOCradar/VOCradar"
+    radar_file_path = "E:/Big_Datasets/water_surface/all-1114/all/VOCradar"
 
     # ----------------------------------------------------#
     #   获得目标检测图片路径和标签
@@ -243,7 +245,7 @@ if __name__ == "__main__":
     # ------------------------------------------------------------------#
     #   VOCdevkit_path  分割数据集路径
     # ------------------------------------------------------------------#
-    VOCdevkit_path = 'E:/Big_Datasets/voc_seg/VOCdevkit/VOCdevkit'
+    VOCdevkit_path = 'E:/Normal_Workspace_Collection/hrnet-pytorch-main/hrnet-pytorch-main/VOCdevkit'
 
     # -----------------------------------------------------#
     #   num_classes     训练自己的数据集必须要修改的
@@ -294,7 +296,7 @@ if __name__ == "__main__":
             print(f"[{os.getpid()}] (rank = {rank}, local_rank = {local_rank}) training...")
             print("Gpu Device Count : ", ngpus_per_node)
     else:
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         local_rank = 0
         rank = 0
 
@@ -347,8 +349,9 @@ if __name__ == "__main__":
     if local_rank == 0:
         time_str = datetime.datetime.strftime(datetime.datetime.now(), '%Y_%m_%d_%H_%M_%S')
         log_dir = os.path.join(save_dir, "loss_" + str(time_str))
+        log_dir_seg = os.path.join(save_dir_seg, "loss_" + str(time_str))
         loss_history = LossHistory(log_dir, model, input_shape=input_shape)
-        loss_history_seg = LossHistory_seg(save_dir_seg, model, input_shape=input_shape)
+        loss_history_seg = LossHistory_seg(log_dir_seg, model, input_shape=input_shape)
     else:
         loss_history = None
         loss_history_seg = None
@@ -382,7 +385,7 @@ if __name__ == "__main__":
             model_train = torch.nn.parallel.DistributedDataParallel(model_train, device_ids=[local_rank],
                                                                     find_unused_parameters=True)
         else:
-            model_train = torch.nn.DataParallel(model)
+            # model_train = torch.nn.DataParallel(model)
             cudnn.benchmark = True
             model_train = model_train.cuda()
 
@@ -510,12 +513,17 @@ if __name__ == "__main__":
         # ---------------------------------------#
         #   构建数据集加载器。
         # ---------------------------------------#
-        train_dataset = YoloDataset(train_lines, input_shape, num_classes, epoch_length=UnFreeze_Epoch, \
-                                    mosaic=mosaic, mixup=mixup, mosaic_prob=mosaic_prob, mixup_prob=mixup_prob,
-                                    train=False, special_aug_ratio=special_aug_ratio, radar_root=radar_file_path)
-        val_dataset = YoloDataset(val_lines, input_shape, num_classes, epoch_length=UnFreeze_Epoch, \
+        train_dataset = YoloDataset(annotation_lines=train_lines, input_shape=input_shape, num_classes=num_classes,
+                                    epoch_length=UnFreeze_Epoch, \
+                                    mosaic=False, mixup=False, mosaic_prob=0, mixup_prob=0,
+                                    train=False, special_aug_ratio=0, radar_root=radar_file_path,
+                                    num_classes_seg=num_classes_seg, seg_dataset_path=VOCdevkit_path)
+
+        val_dataset = YoloDataset(annotation_lines=val_lines, input_shape=input_shape, num_classes=num_classes,
+                                  epoch_length=UnFreeze_Epoch, \
                                   mosaic=False, mixup=False, mosaic_prob=0, mixup_prob=0, train=False,
-                                  special_aug_ratio=0, radar_root=radar_file_path)
+                                  special_aug_ratio=0, radar_root=radar_file_path,
+                                  num_classes_seg=num_classes_seg, seg_dataset_path=VOCdevkit_path)
 
         # ---------------------------------------#
         #   构建分割数据集加载器。
@@ -563,6 +571,8 @@ if __name__ == "__main__":
         if local_rank == 0:
             eval_callback = EvalCallback(model, input_shape, class_names, num_classes, val_lines, log_dir, Cuda, \
                                          eval_flag=eval_flag, period=eval_period, radar_path=radar_file_path)
+            eval_callback_seg = EvalCallback_seg(model, input_shape, num_classes_seg, val_lines[72:88], VOCdevkit_path, log_dir_seg, Cuda, \
+                                         eval_flag=eval_flag, period=eval_period)
         else:
             eval_callback = None
 
@@ -638,10 +648,9 @@ if __name__ == "__main__":
             # =========== detection unfreeze backbone ========== #
             # if train_index % 4 == 0 and train_index * 10 <= epoch < (train_index + 1) * 10:
             print("-----start object detection training (unfreeze backbone)-----")
-            fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, eval_callback, optimizer, epoch,
-                              epoch_step,
-                              epoch_step_val, gen, gen_val, UnFreeze_Epoch, Cuda, fp16, scaler, save_period, save_dir,
-                              local_rank)
+            fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback, optimizer, epoch,
+                              epoch_step, epoch_step_val, gen, gen_val, UnFreeze_Epoch, Cuda, fp16, scaler, save_period, save_dir,
+                          dice_loss, focal_loss, cls_weights, num_classes_seg, local_rank)
             print("-----end object detection training (unfreeze backbone)-----")
 
             # ================================================== #
