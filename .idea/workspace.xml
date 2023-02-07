@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/dataloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/dataloader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/utils_fit.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils_fit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils_seg/callbacks.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils_seg/callbacks.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +30,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
+            <state relative-caret-position="4640">
               <caret line="306" column="50" selection-start-line="306" selection-start-column="50" selection-end-line="306" selection-end-column="50" />
               <folding>
                 <element signature="e#38#47#0" expanded="true" />
@@ -45,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="650" selection-start-line="650" selection-end-line="650" />
+            <state relative-caret-position="282">
+              <caret line="648" column="38" selection-start-line="648" selection-start-column="38" selection-end-line="648" selection-end-column="38" />
               <folding>
                 <element signature="e#99#114#0" expanded="true" />
               </folding>
@@ -57,11 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="188" column="63" selection-start-line="188" selection-start-column="63" selection-end-line="188" selection-end-column="63" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="144">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -69,7 +63,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
+            <state relative-caret-position="2432">
               <caret line="156" column="55" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -92,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3737">
+            <state relative-caret-position="8832">
               <caret line="564" selection-start-line="564" selection-end-line="564" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
@@ -125,7 +119,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="592">
+            <state relative-caret-position="576">
               <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -208,10 +202,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+    <option name="x" value="315" />
+    <option name="y" value="87" />
     <option name="width" value="1938" />
-    <option name="height" value="1050" />
+    <option name="height" value="2097" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -270,7 +264,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Mask-VRDet-beta" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -446,7 +440,8 @@
       <workItem from="1674989265709" duration="644000" />
       <workItem from="1675499951639" duration="466000" />
       <workItem from="1675646718315" duration="7000" />
-      <workItem from="1675668363043" duration="212000" />
+      <workItem from="1675668363043" duration="863000" />
+      <workItem from="1675670375546" duration="1235000" />
     </task>
     <task id="LOCAL-00001" summary="complete the basic structure of VRCoC">
       <created>1674203093310</created>
@@ -630,22 +625,29 @@
       <option name="project" value="LOCAL" />
       <updated>1675500316734</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="complete the multi-task training framework">
+      <created>1675668625037</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1675668625037</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93089000" />
+    <option name="totallyTimeSpent" value="94975000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2575" height="1407" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20143028" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20301947" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.50509804" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.50509804" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -681,7 +683,8 @@
     <MESSAGE value="add the normalization function for radar feature maps" />
     <MESSAGE value="change the normalization function for radar feature maps" />
     <MESSAGE value="change the RIM" />
-    <option name="LAST_COMMIT_MESSAGE" value="change the RIM" />
+    <MESSAGE value="complete the multi-task training framework" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete the multi-task training framework" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_msg.py" />
@@ -919,6 +922,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4640">
+          <caret line="306" column="50" selection-start-line="306" selection-start-column="50" selection-end-line="306" selection-end-column="50" />
+          <folding>
+            <element signature="e#38#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2432">
+          <caret line="156" column="55" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8832">
+          <caret line="564" selection-start-line="564" selection-end-line="564" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/predict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1200">
@@ -936,38 +978,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="306" column="50" selection-start-line="306" selection-start-column="50" selection-end-line="306" selection-end-column="50" />
-          <folding>
-            <element signature="e#38#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils_seg/dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3737">
-          <caret line="564" selection-start-line="564" selection-end-line="564" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
+        <state relative-caret-position="576">
           <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -978,20 +991,10 @@
     <entry file="file://$PROJECT_DIR$/2007_val.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="156" column="55" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="650" selection-start-line="650" selection-end-line="650" />
+        <state relative-caret-position="282">
+          <caret line="648" column="38" selection-start-line="648" selection-start-column="38" selection-end-line="648" selection-end-column="38" />
           <folding>
             <element signature="e#99#114#0" expanded="true" />
           </folding>
@@ -1000,11 +1003,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="188" column="63" selection-start-line="188" selection-start-column="63" selection-end-line="188" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>

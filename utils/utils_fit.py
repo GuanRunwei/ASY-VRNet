@@ -66,6 +66,9 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
 
             total_loss = loss_value + loss_value_seg
 
+            with torch.no_grad():
+                _f_score = f_score(outputs_seg, seg_labels)
+
             # ----------------------#
             #   反向传播
             # ----------------------#
@@ -91,7 +94,9 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
                 loss_value_seg = loss_seg
 
                 total_loss = 0. * loss_value + loss_value_seg
-                _f_score = f_score(outputs_seg, seg_labels)
+
+                with torch.no_grad():
+                    _f_score = f_score(outputs_seg, seg_labels)
 
             # ----------------------#
             #   反向传播
@@ -108,7 +113,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
 
         if local_rank == 0:
             pbar.set_postfix(**{'detection loss': loss / (iteration + 1),
-                                'segmentation loss': loss_seg / (iteration + 1),
+                                'segmentation loss': loss_seg.item() / (iteration + 1),
                                 'f score': total_f_score / (iteration + 1),
                                 'lr': get_lr(optimizer)})
             pbar.update(1)
@@ -168,7 +173,6 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
 
         val_loss += loss_value.item()
         val_loss_seg += loss_value_seg.item()
-        val_f_score += _f_score.item()
 
         if local_rank == 0:
             pbar.set_postfix(**{'detection val_loss': val_loss / (iteration + 1),
@@ -181,7 +185,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
         pbar.close()
         print('Finish Validation')
         loss_history.append_loss(epoch + 1, loss / epoch_step, val_loss / epoch_step_val)
-        loss_history_seg.append_loss(epoch + 1, loss_seg / epoch_step, val_loss_seg / epoch_step_val)
+        loss_history_seg.append_loss(epoch + 1, loss_seg.item() / epoch_step, val_loss_seg / epoch_step_val)
         eval_callback.on_epoch_end(epoch + 1, model_train_eval)
         print('Epoch:' + str(epoch + 1) + '/' + str(Epoch))
         print('Total Loss: %.3f || Val Loss Det: %.3f  || Val Loss Seg: %.3f' % (loss + loss_seg / epoch_step,
