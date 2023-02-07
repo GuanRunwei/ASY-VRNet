@@ -187,7 +187,7 @@ class EvalCallback():
                 # ------------------------------#
                 #   读取雷达特征map
                 # ------------------------------#
-                radar_path = os.path.join(self.radar_path, annotation_line[88:105] + '.npz')
+                radar_path = os.path.join(self.radar_path, annotation_line[72:88] + '.npz')
                 radar_data = np.load(radar_path)['arr_0']
                 radar_data = torch.from_numpy(radar_data).type(torch.cuda.FloatTensor).unsqueeze(0)
 
