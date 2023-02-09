@@ -101,7 +101,7 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     #   所使用的YoloX的版本。nano、tiny、s、m、l
     # ------------------------------------------------------#
-    phi = 'nano'
+    phi = 'm'
     # ------------------------------------------------------#
 
     # ------------------------------------------------------------------#
@@ -572,7 +572,7 @@ if __name__ == "__main__":
             eval_callback = EvalCallback(model, input_shape, class_names, num_classes, val_lines, log_dir, Cuda, \
                                          eval_flag=eval_flag, period=eval_period, radar_path=radar_file_path)
             eval_callback_seg = EvalCallback_seg(model, input_shape, num_classes_seg, val_lines[72:88], VOCdevkit_path, log_dir_seg, Cuda, \
-                                         eval_flag=eval_flag, period=eval_period)
+                                         eval_flag=eval_flag, period=eval_period, radar_path=radar_file_path)
         else:
             eval_callback = None
 
@@ -648,7 +648,7 @@ if __name__ == "__main__":
             # =========== detection unfreeze backbone ========== #
             # if train_index % 4 == 0 and train_index * 10 <= epoch < (train_index + 1) * 10:
             print("-----start object detection training (unfreeze backbone)-----")
-            fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback, optimizer, epoch,
+            fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback, eval_callback_seg, optimizer, epoch,
                               epoch_step, epoch_step_val, gen, gen_val, UnFreeze_Epoch, Cuda, fp16, scaler, save_period, save_dir,
                           dice_loss, focal_loss, cls_weights, num_classes_seg, local_rank)
             print("-----end object detection training (unfreeze backbone)-----")

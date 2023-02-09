@@ -82,7 +82,7 @@ class LossHistory():
 
 
 class EvalCallback():
-    def __init__(self, net, input_shape, num_classes, image_ids, dataset_path, log_dir, cuda, \
+    def __init__(self, net, input_shape, num_classes, image_ids, dataset_path, log_dir, cuda, radar_path, \
                  miou_out_path=".temp_miou_out", eval_flag=True, period=1):
         super(EvalCallback, self).__init__()
 
@@ -96,6 +96,7 @@ class EvalCallback():
         self.miou_out_path = miou_out_path
         self.eval_flag = eval_flag
         self.period = period
+        self.radar_path = radar_path
 
         self.image_ids = [image_id.split()[0] for image_id in image_ids]
         self.mious = [0]
@@ -105,7 +106,7 @@ class EvalCallback():
                 f.write(str(0))
                 f.write("\n")
 
-    def get_miou_png(self, image):
+    def get_miou_png(self, image, radar_data):
         # ---------------------------------------------------------#
         #   在这里将图像转换成RGB图像，防止灰度图在预测时报错。
         #   代码仅仅支持RGB图像的预测，所有其它类型的图像都会转化成RGB
@@ -131,7 +132,7 @@ class EvalCallback():
             # ---------------------------------------------------#
             #   图片传入网络进行预测
             # ---------------------------------------------------#
-            pr = self.net(images)[0]
+            pr = self.net(images, radar_data)[1]
             # ---------------------------------------------------#
             #   取出每一个像素点的种类
             # ---------------------------------------------------#
@@ -164,15 +165,22 @@ class EvalCallback():
                 os.makedirs(pred_dir)
             print("Get miou.")
             for image_id in tqdm(self.image_ids):
+                # ------------------------------#
+                #   读取雷达特征map
+                # ------------------------------#
+                radar_path = os.path.join(self.radar_path, image_id[67:83] + '.npz')
+                radar_data = np.load(radar_path)['arr_0']
+                radar_data = torch.from_numpy(radar_data).type(torch.cuda.FloatTensor).unsqueeze(0)
+
                 # -------------------------------#
                 #   从文件中读取图像
                 # -------------------------------#
-                image_path = os.path.join(self.dataset_path, "VOC2007/JPEGImages/" + image_id + ".jpg")
+                image_path = os.path.join(self.dataset_path, "VOC2007/JPEGImages/" + image_id[67:83] + ".jpg")
                 image = Image.open(image_path)
                 # ------------------------------#
                 #   获得预测txt
                 # ------------------------------#
-                image = self.get_miou_png(image)
+                image = self.get_miou_png(image, radar_data)
                 image.save(os.path.join(pred_dir, image_id + ".png"))
 
             print("Calculate miou.")

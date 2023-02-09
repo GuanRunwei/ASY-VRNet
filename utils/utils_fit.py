@@ -12,7 +12,7 @@ from utils_seg.utils import get_lr
 from utils_seg.utils_metrics import f_score
 
 
-def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback, optimizer, epoch, epoch_step,
+def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback, eval_callback_seg, optimizer, epoch, epoch_step,
                   epoch_step_val, gen, gen_val, Epoch, cuda, fp16, scaler, save_period, save_dir, dice_loss, focal_loss, cls_weights, num_class_seg, local_rank=0):
     loss = 0
     loss_seg = 0
@@ -187,6 +187,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
         loss_history.append_loss(epoch + 1, loss / epoch_step, val_loss / epoch_step_val)
         loss_history_seg.append_loss(epoch + 1, loss_seg.item() / epoch_step, val_loss_seg / epoch_step_val)
         eval_callback.on_epoch_end(epoch + 1, model_train_eval)
+        eval_callback_seg.on_epoch_end(epoch + 1, model_train_eval)
         print('Epoch:' + str(epoch + 1) + '/' + str(Epoch))
         print('Total Loss: %.3f || Val Loss Det: %.3f  || Val Loss Seg: %.3f' % (loss + loss_seg / epoch_step,
                                                                                  val_loss / epoch_step_val,
