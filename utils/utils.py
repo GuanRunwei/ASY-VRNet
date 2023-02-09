@@ -13,6 +13,7 @@ def cvtColor(image):
         image = image.convert('RGB')
         return image 
 
+
 #---------------------------------------------------#
 #   对输入图像进行resize
 #---------------------------------------------------#
@@ -30,6 +31,7 @@ def resize_image(image, size, letterbox_image):
     else:
         new_image = image.resize((w, h), Image.BICUBIC)
     return new_image
+
 
 #---------------------------------------------------#
 #   获得类
