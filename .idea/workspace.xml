@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="" />
+    <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+            <state relative-caret-position="176">
+              <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
               <folding>
                 <element signature="e#99#114#0" expanded="true" />
               </folding>
@@ -53,26 +56,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nets/yolo_training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
+            <state relative-caret-position="1952">
               <caret line="128" column="50" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_val_loss.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_miou.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/callbacks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
+            <state relative-caret-position="2976">
               <caret line="189" column="80" selection-start-line="189" selection-start-column="80" selection-end-line="189" selection-end-column="80" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -84,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="184" column="58" selection-start-line="184" selection-start-column="58" selection-end-line="184" selection-end-column="58" />
+            <state relative-caret-position="2880">
+              <caret line="185" selection-start-line="185" selection-end-line="185" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -96,7 +89,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/multitaskloss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
+            <state relative-caret-position="288">
               <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -108,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+            <state relative-caret-position="1424">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -120,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils_seg/utils_metrics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+            <state relative-caret-position="960">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -222,53 +215,27 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
-              <item name="backbone" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
-              <item name="head" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
-              <item name="neck" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
-              <item name="nets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
-              <item name="utils_seg" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../view-of-delft-dataset-main/view-of-delft-dataset-main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -472,6 +439,7 @@
       <workItem from="1678002322904" duration="7007000" />
       <workItem from="1678065806981" duration="3773000" />
       <workItem from="1678071430825" duration="38693000" />
+      <workItem from="1678342470977" duration="312000" />
     </task>
     <task id="LOCAL-00001" summary="complete the basic structure of VRCoC">
       <created>1674203093310</created>
@@ -662,11 +630,25 @@
       <option name="project" value="LOCAL" />
       <updated>1675668625037</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="modify the annotation of the code">
+      <created>1678342690350</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1678342690350</updated>
+    </task>
+    <task id="LOCAL-00029" summary="modify the annotation of the code">
+      <created>1678342717927</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1678342717927</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240581000" />
+    <option name="totallyTimeSpent" value="240893000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -681,7 +663,7 @@
     <frame x="-7" y="-7" width="2575" height="1407" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15454906" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15574096" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -747,7 +729,8 @@
     <MESSAGE value="change the normalization function for radar feature maps" />
     <MESSAGE value="change the RIM" />
     <MESSAGE value="complete the multi-task training framework" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete the multi-task training framework" />
+    <MESSAGE value="modify the annotation of the code" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify the annotation of the code" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/performance.py" />
@@ -850,24 +833,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_map.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_val_loss.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_map.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_05_21_07_25/epoch_map.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_05_21_07_25/epoch_loss.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_loss.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_map.png" />
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_val_loss.txt" />
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_map.txt" />
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_05_21_07_25/epoch_map.png" />
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_05_21_07_25/epoch_loss.png" />
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_loss.png" />
     <entry file="file://$PROJECT_DIR$/2007_train-1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -892,9 +863,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_06_10_58_58/epoch_miou.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_06_10_58_58/epoch_miou.png" />
     <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-656">
@@ -985,15 +954,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091276.65180.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091364.26373.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1665128316.34865.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091276.65180.png" />
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091364.26373.png" />
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1665128316.34865.png" />
     <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1004,61 +967,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/multitaskloss.py">
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091274.85923.png" />
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091814.34181.png" />
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_loss.txt" />
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_miou.png" />
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_07_13_19_50/epoch_loss.png" />
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_loss.png" />
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_val_loss.txt" />
+    <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="176">
+          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#99#114#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091274.85923.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091814.34181.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils_seg/utils_metrics.py">
+    <entry file="file://$PROJECT_DIR$/nets/yolo_training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_loss.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_miou.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_07_13_19_50/epoch_loss.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_loss.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="184" column="58" selection-start-line="184" selection-start-column="58" selection-end-line="184" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1952">
+          <caret line="128" column="50" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/callbacks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
+        <state relative-caret-position="2976">
           <caret line="189" column="80" selection-start-line="189" selection-start-column="80" selection-end-line="189" selection-end-column="80" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -1066,32 +1001,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_val_loss.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nets/yolo_training.py">
+    <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="128" column="50" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
+        <state relative-caret-position="2880">
+          <caret line="185" selection-start-line="185" selection-end-line="185" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/multitaskloss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+        <state relative-caret-position="1424">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$PROJECT_DIR$/utils_seg/utils_metrics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+        <state relative-caret-position="960">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
           <folding>
-            <element signature="e#99#114#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
