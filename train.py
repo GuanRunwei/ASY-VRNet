@@ -3,7 +3,7 @@
 # ----------------------------------------------#
 import datetime
 import os
-os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+# os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
