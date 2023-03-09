@@ -16,14 +16,10 @@ from nets.efficient_vrnet import EfficientVRNet
 from nets.yolo_training import (ModelEMA, YOLOLoss, get_lr_scheduler,
                                 set_optimizer_lr, weights_init)
 from utils.callbacks import LossHistory, EvalCallback
-from utils_seg.callbacks import LossHistory as LossHistory_seg
 from utils_seg.callbacks import EvalCallback as EvalCallback_seg
 from utils.dataloader import YoloDataset, yolo_dataset_collate
 from utils.utils import get_classes, show_config
 from utils.utils_fit import fit_one_epoch
-from utils_seg.utils import show_config as show_config_seg
-from utils_seg.dataloader import DeeplabDataset, deeplab_dataset_collate
-from utils_seg.utils_fit import fit_one_epoch as fit_one_epoch_seg
 from utils_seg.callbacks import LossHistory as LossHistory_seg
 
 
