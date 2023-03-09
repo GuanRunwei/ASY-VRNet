@@ -72,31 +72,15 @@ class YoloDataset(Dataset):
         name = self.annotation_lines[index][72:88]
 
         # ---------------------- 分割数据 ------------------- #
-        jpg = Image.open(os.path.join(os.path.join(self.seg_dataset_path, "VOC2007/JPEGImages"), name + ".jpg"))
+        # jpg = Image.open(os.path.join(os.path.join(self.seg_dataset_path, "VOC2007/JPEGImages"), name + ".jpg"))
         png = Image.open(os.path.join(os.path.join(self.seg_dataset_path, "VOC2007/SegmentationClass"), name + ".png"))
         # -------------------------------------------------- #
 
-        # ---------------------------------------------------#
-        #   训练时进行数据的随机增强
-        #   验证时不进行数据的随机增强
-        # ---------------------------------------------------#
-        if self.mosaic and self.rand() < self.mosaic_prob and self.epoch_now < self.epoch_length * self.special_aug_ratio:
-            lines = sample(self.annotation_lines, 3)
-            lines.append(self.annotation_lines[index])
-            shuffle(lines)
-            image, box = self.get_random_data_with_Mosaic(lines, self.input_shape)
+        image, box, radar, png = self.get_random_data(self.annotation_lines[index], self.input_shape, png, random=self.train)
 
-            if self.mixup and self.rand() < self.mixup_prob:
-                lines = sample(self.annotation_lines, 1)
-                image_2, box_2 = self.get_random_data(lines[0], self.input_shape, random=self.train)
-                image, box = self.get_random_data_with_MixUp(image, box, image_2, box_2)
-        else:
-            image, box, radar = self.get_random_data(self.annotation_lines[index], self.input_shape, random=self.train)
-            jpg, png = self.get_random_data_seg(jpg, png, self.input_shape, random=self.train)
-
-        image = np.transpose(preprocess_input_seg(np.array(image, dtype=np.float64)), (2, 0, 1))
+        image = np.transpose(preprocess_input_seg(np.array(image, dtype=np.float64)), [2, 0, 1])
         box = np.array(box, dtype=np.float64)
-        radar = np.array(preprocess_input_radar(radar), dtype=np.float64)
+        radar = np.array(radar, dtype=np.float64)
         if len(box) != 0:
             box[:, 2:4] = box[:, 2:4] - box[:, 0:2]
             box[:, 0:2] = box[:, 0:2] + box[:, 2:4] / 2
@@ -116,108 +100,7 @@ class YoloDataset(Dataset):
     def rand(self, a=0, b=1):
         return np.random.rand() * (b - a) + a
 
-    def get_random_data_seg(self, image, label, input_shape, jitter=.3, hue=.1, sat=0.7, val=0.3, random=False):
-        image = cvtColor(image)
-        label = Image.fromarray(np.array(label))
-        # ------------------------------#
-        #   获得图像的高宽与目标高宽
-        # ------------------------------#
-        iw, ih = image.size
-        h, w = input_shape
-
-        if not random:
-            iw, ih = image.size
-            scale = min(w / iw, h / ih)
-            nw = int(iw * scale)
-            nh = int(ih * scale)
-
-            image = image.resize((nw, nh), Image.BICUBIC)
-            new_image = Image.new('RGB', [w, h], (128, 128, 128))
-            new_image.paste(image, ((w - nw) // 2, (h - nh) // 2))
-
-            label = label.resize((nw, nh), Image.NEAREST)
-            new_label = Image.new('L', [w, h], (0))
-            new_label.paste(label, ((w - nw) // 2, (h - nh) // 2))
-            return new_image, new_label
-
-        # ------------------------------------------#
-        #   对图像进行缩放并且进行长和宽的扭曲
-        # ------------------------------------------#
-        new_ar = iw / ih * self.rand(1 - jitter, 1 + jitter) / self.rand(1 - jitter, 1 + jitter)
-        scale = self.rand(0.25, 2)
-        if new_ar < 1:
-            nh = int(scale * h)
-            nw = int(nh * new_ar)
-        else:
-            nw = int(scale * w)
-            nh = int(nw / new_ar)
-        image = image.resize((nw, nh), Image.BICUBIC)
-        label = label.resize((nw, nh), Image.NEAREST)
-
-        # ------------------------------------------#
-        #   翻转图像
-        # ------------------------------------------#
-        flip = self.rand() < .5
-        if flip:
-            image = image.transpose(Image.FLIP_LEFT_RIGHT)
-            label = label.transpose(Image.FLIP_LEFT_RIGHT)
-
-        # ------------------------------------------#
-        #   将图像多余的部分加上灰条
-        # ------------------------------------------#
-        dx = int(self.rand(0, w - nw))
-        dy = int(self.rand(0, h - nh))
-        new_image = Image.new('RGB', (w, h), (128, 128, 128))
-        new_label = Image.new('L', (w, h), (0))
-        new_image.paste(image, (dx, dy))
-        new_label.paste(label, (dx, dy))
-        image = new_image
-        label = new_label
-
-        image_data = np.array(image, np.uint8)
-
-        # ------------------------------------------#
-        #   高斯模糊
-        # ------------------------------------------#
-        blur = self.rand() < 0.25
-        if blur:
-            image_data = cv2.GaussianBlur(image_data, (5, 5), 0)
-
-        # ------------------------------------------#
-        #   旋转
-        # ------------------------------------------#
-        rotate = self.rand() < 0.25
-        if rotate:
-            center = (w // 2, h // 2)
-            rotation = np.random.randint(-10, 11)
-            M = cv2.getRotationMatrix2D(center, -rotation, scale=1)
-            image_data = cv2.warpAffine(image_data, M, (w, h), flags=cv2.INTER_CUBIC, borderValue=(128, 128, 128))
-            label = cv2.warpAffine(np.array(label, np.uint8), M, (w, h), flags=cv2.INTER_NEAREST, borderValue=(0))
-
-        # ---------------------------------#
-        #   对图像进行色域变换
-        #   计算色域变换的参数
-        # ---------------------------------#
-        r = np.random.uniform(-1, 1, 3) * [hue, sat, val] + 1
-        # ---------------------------------#
-        #   将图像转到HSV上
-        # ---------------------------------#
-        hue, sat, val = cv2.split(cv2.cvtColor(image_data, cv2.COLOR_RGB2HSV))
-        dtype = image_data.dtype
-        # ---------------------------------#
-        #   应用变换
-        # ---------------------------------#
-        x = np.arange(0, 256, dtype=r.dtype)
-        lut_hue = ((x * r[0]) % 180).astype(dtype)
-        lut_sat = np.clip(x * r[1], 0, 255).astype(dtype)
-        lut_val = np.clip(x * r[2], 0, 255).astype(dtype)
-
-        image_data = cv2.merge((cv2.LUT(hue, lut_hue), cv2.LUT(sat, lut_sat), cv2.LUT(val, lut_val)))
-        image_data = cv2.cvtColor(image_data, cv2.COLOR_HSV2RGB)
-
-        return image_data, label
-
-    def get_random_data(self, annotation_line, input_shape, jitter=.3, hue=.1, sat=0.7, val=0.4, random=False):
+    def get_random_data(self, annotation_line, input_shape, seg_label, jitter=.3, hue=.1, sat=0.7, val=0.4, random=False):
         # ------------------------------#
         #   雷达特征读取
         # ------------------------------#
@@ -230,6 +113,7 @@ class YoloDataset(Dataset):
         # ------------------------------#
         image = Image.open(line[0])
         image = cvtColor(image)
+        seg_label = Image.fromarray(np.array(seg_label))
         # ------------------------------#
         #   获得图像的高宽与目标高宽
         # ------------------------------#
@@ -240,51 +124,58 @@ class YoloDataset(Dataset):
         # ------------------------------#
         box = np.array([np.array(list(map(int, box.split(',')))) for box in line[1:]])
 
-        if not random:
-            scale = min(w / iw, h / ih)
-            nw = int(iw * scale)
-            nh = int(ih * scale)
-            dx = (w - nw) // 2
-            dy = (h - nh) // 2
+        scale = min(w / iw, h / ih)
+        nw = int(iw * scale)
+        nh = int(ih * scale)
+        dx = (w - nw) // 2
+        dy = (h - nh) // 2
 
-            # ---------------------------------#
-            #   将图像多余的部分加上灰条
-            # ---------------------------------#
-            image = image.resize((nw, nh), Image.BICUBIC)
-            new_image = Image.new('RGB', (w, h), (128, 128, 128))
-            new_image.paste(image, (dx, dy))
+        # ---------------------------------#
+        #   将图像多余的部分加上灰条
+        # ---------------------------------#
+        image = image.resize((nw, nh), Image.BICUBIC)
+        new_image = Image.new('RGB', [w, h], (128, 128, 128))
+        new_image.paste(image, (dx, dy))
 
-            # ---------------------------------#
-            #   自然天气数据增强
-            # ---------------------------------#
+        segment_label = seg_label.resize((nw, nh), Image.NEAREST)
+        new_label = Image.new('L', [w, h], (0))
+        new_label.paste(segment_label, (dx, dy))
+
+        # ---------------------------------#
+        #   自然天气数据增强
+        # ---------------------------------#
+        if random:
             weather_random_number = rd.randint(0, 100)
 
-            image_data = np.array(new_image, np.float32)
-            # if 0 <= weather_random_number < 15:
-            #     image_data = transform_rain(image=image_data)
-            #     image_data = image_data['image']
-            # if 15 <= weather_random_number < 30:
-            #     image_data = transform_flare(image=image_data)
-            #     image_data = image_data['image']
-            # if 30 <= weather_random_number < 65:
-            #     image_data = transform_fog(image=image_data)
-            #     image_data = image_data['image']
+            new_image = np.array(new_image, np.float32)
+            if 0 <= weather_random_number < 15:
+                new_image = transform_rain(image=new_image)
+                new_image = new_image['image']
+            if 15 <= weather_random_number < 30:
+                new_image = transform_flare(image=new_image)
+                new_image = new_image['image']
+            if 30 <= weather_random_number < 65:
+                new_image = transform_fog(image=new_image)
+                new_image = new_image['image']
 
-            # ---------------------------------#
-            #   对真实框进行调整
-            # ---------------------------------#
-            if len(box) > 0:
-                np.random.shuffle(box)
-                box[:, [0, 2]] = box[:, [0, 2]] * nw / iw + dx
-                box[:, [1, 3]] = box[:, [1, 3]] * nh / ih + dy
-                box[:, 0:2][box[:, 0:2] < 0] = 0
-                box[:, 2][box[:, 2] > w] = w
-                box[:, 3][box[:, 3] > h] = h
-                box_w = box[:, 2] - box[:, 0]
-                box_h = box[:, 3] - box[:, 1]
-                box = box[np.logical_and(box_w > 1, box_h > 1)]  # discard invalid box
+        # ---------------------------------#
+        #   对真实框进行调整
+        # ---------------------------------#
+        if len(box) > 0:
+            np.random.shuffle(box)
+            box[:, [0, 2]] = box[:, [0, 2]] * nw / iw + dx
+            box[:, [1, 3]] = box[:, [1, 3]] * nh / ih + dy
+            box[:, 0:2][box[:, 0:2] < 0] = 0
+            box[:, 2][box[:, 2] > w] = w
+            box[:, 3][box[:, 3] > h] = h
+            box_w = box[:, 2] - box[:, 0]
+            box_h = box[:, 3] - box[:, 1]
+            box = box[np.logical_and(box_w > 1, box_h > 1)]  # discard invalid box
 
-            return image_data, box, radar_data
+        # new_image.save("train.png")
+        # new_label.save('train-label.png')
+
+        return new_image, box, radar_data, new_label
 
         # ------------------------------------------#
         #   对图像进行缩放并且进行长和宽的扭曲

@@ -22,7 +22,7 @@ try:
     from mmcv.runner import _load_checkpoint
     has_mmseg = True
 except ImportError:
-    print("If for semantic segmentation, please install mmsegmentation first")
+    # print("If for semantic segmentation, please install mmsegmentation first")
     has_mmseg = False
 
 try:
@@ -31,7 +31,7 @@ try:
     from mmcv.runner import _load_checkpoint
     has_mmdet = True
 except ImportError:
-    print("If for detection, please install mmdetection first")
+    # print("If for detection, please install mmdetection first")
     has_mmdet = False
 
 

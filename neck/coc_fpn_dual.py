@@ -52,17 +52,17 @@ class ASPP(nn.Module):
             nn.ReLU(inplace=True),
         )
         self.branch2 = nn.Sequential(
-            DWConv(dim_in, dim_out, 3, 1, padding=6 * rate, dilation=6 * rate, bias=True),
+            nn.Conv2d(dim_in, dim_out, 3, 1, padding=6 * rate, dilation=6 * rate, bias=True),
             nn.BatchNorm2d(dim_out, momentum=bn_mom),
             nn.ReLU(inplace=True),
         )
         self.branch3 = nn.Sequential(
-            DWConv(dim_in, dim_out, 3, 1, padding=12 * rate, dilation=12 * rate, bias=True),
+            nn.Conv2d(dim_in, dim_out, 3, 1, padding=12 * rate, dilation=12 * rate, bias=True),
             nn.BatchNorm2d(dim_out, momentum=bn_mom),
             nn.ReLU(inplace=True),
         )
         self.branch4 = nn.Sequential(
-            DWConv(dim_in, dim_out, 3, 1, padding=18 * rate, dilation=18 * rate, bias=True),
+            nn.Conv2d(dim_in, dim_out, 3, 1, padding=18 * rate, dilation=18 * rate, bias=True),
             nn.BatchNorm2d(dim_out, momentum=bn_mom),
             nn.ReLU(inplace=True),
         )
@@ -131,7 +131,7 @@ def shuffle_channels(x, groups=2):
 
 
 class CoCFpnDual(nn.Module):
-    def __init__(self, num_seg_class=5, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"),
+    def __init__(self, num_seg_class=9, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"),
                  in_channels=[64, 128, 320, 512], aspp_channel=1024):
         super().__init__()
 
@@ -160,8 +160,8 @@ class CoCFpnDual(nn.Module):
         self.sc_attn_seg2 = ShuffleAttention(channel=in_channels[0] * 2)
         # ------------------------------------------------------------------------------------ #
 
-        # ----------------------- 80*80*256 -> 160*160*64 -> 640*640*5 ------------------------ #
-        self.upsample2_0 = CoCUpsample(in_channels=in_channels[0] * 2, out_channels=num_seg_class, scale=4)
+        # ----------------------- 80*80*256 -> 160*160*64 -> 640*640*9 ------------------------ #
+        self.upsample2_0 = CoCUpsample(in_channels=in_channels[0] * 2, out_channels=self.num_seg_class, scale=4)
         # ------------------------------------------------------------------------------------ #
         # ========================================================================================== #
 

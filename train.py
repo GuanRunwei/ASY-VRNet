@@ -26,22 +26,7 @@ from utils_seg.dataloader import DeeplabDataset, deeplab_dataset_collate
 from utils_seg.utils_fit import fit_one_epoch as fit_one_epoch_seg
 from utils_seg.callbacks import LossHistory as LossHistory_seg
 
-'''
-训练自己的目标检测模型一定需要注意以下几点：
-1、训练前仔细检查自己的格式是否满足要求，该库要求数据集格式为VOC格式，需要准备好的内容有输入图片和标签
-   输入图片为.jpg图片，无需固定大小，传入训练前会自动进行resize。
-   灰度图会自动转成RGB图片进行训练，无需自己修改。
-   输入图片如果后缀非jpg，需要自己批量转成jpg后再开始训练。
 
-   标签为.xml格式，文件中会有需要检测的目标信息，标签文件和输入图片文件相对应。
-
-2、损失值的大小用于判断是否收敛，比较重要的是有收敛的趋势，即验证集损失不断下降，如果验证集损失基本上不改变的话，模型基本上就收敛了。
-   损失值的具体大小并没有什么意义，大和小只在于损失的计算方式，并不是接近于0才好。如果想要让损失好看点，可以直接到对应的损失函数里面除上10000。
-   训练过程中的损失值会保存在logs文件夹下的loss_%Y_%m_%d_%H_%M_%S文件夹中
-
-3、训练好的权值文件保存在logs文件夹中，每个训练世代（Epoch）包含若干训练步长（Step），每个训练步长（Step）进行一次梯度下降。
-   如果只是训练了几个Step是不会保存的，Epoch和Step的概念要捋清楚一下。
-'''
 if __name__ == "__main__":
     # ---------------------------------#
     #   Cuda    是否使用Cuda
@@ -101,7 +86,7 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     #   所使用的YoloX的版本。nano、tiny、s、m、l
     # ------------------------------------------------------#
-    phi = 'm'
+    phi = 'tiny'
     # ------------------------------------------------------#
 
     # ------------------------------------------------------------------#
@@ -221,13 +206,13 @@ if __name__ == "__main__":
     #   （二）此处设置评估参数较为保守，目的是加快评估速度。
     # ------------------------------------------------------------------#
     eval_flag = True
-    eval_period = 10
+    eval_period = 5
     # ------------------------------------------------------------------#
     #   num_workers     用于设置是否使用多线程读取数据
     #                   开启后会加快数据读取速度，但是会占用更多内存
     #                   内存较小的电脑可以设置为2或者0
     # ------------------------------------------------------------------#
-    num_workers = 4
+    num_workers = 2
 
     # ----------------------------------------------------#
     # 雷达feature map路径
@@ -245,13 +230,13 @@ if __name__ == "__main__":
     # ------------------------------------------------------------------#
     #   VOCdevkit_path  分割数据集路径
     # ------------------------------------------------------------------#
-    VOCdevkit_path = 'E:/Normal_Workspace_Collection/hrnet-pytorch-main/hrnet-pytorch-main/VOCdevkit'
+    VOCdevkit_path = 'E:/Normal_Workspace_Collection/hrnet-pytorch-main/hrnet-pytorch-main/VOCdevkit/VOC2007'
 
     # -----------------------------------------------------#
     #   num_classes     训练自己的数据集必须要修改的
     #                   自己需要的分类个数+1，如2+1
     # -----------------------------------------------------#
-    num_classes_seg = 5
+    num_classes_seg = 9
 
     #   建议选项：
     #   种类少（几类）时，设置为True
@@ -547,7 +532,7 @@ if __name__ == "__main__":
             shuffle = True
 
         # ---------------------------------------#
-        #   构建检测Dataloader。
+        #   构建Dataloader。
         # ---------------------------------------#
         gen = DataLoader(train_dataset, shuffle=shuffle, batch_size=batch_size, num_workers=num_workers,
                          pin_memory=True,
@@ -571,8 +556,9 @@ if __name__ == "__main__":
         if local_rank == 0:
             eval_callback = EvalCallback(model, input_shape, class_names, num_classes, val_lines, log_dir, Cuda, \
                                          eval_flag=eval_flag, period=eval_period, radar_path=radar_file_path)
-            eval_callback_seg = EvalCallback_seg(model, input_shape, num_classes_seg, val_lines[72:88], VOCdevkit_path, log_dir_seg, Cuda, \
-                                         eval_flag=eval_flag, period=eval_period, radar_path=radar_file_path)
+            eval_callback_seg = EvalCallback_seg(model, input_shape, num_classes_seg, val_lines, VOCdevkit_path,
+                                                 log_dir_seg, Cuda, eval_flag=eval_flag, period=eval_period,
+                                                 radar_path=radar_file_path)
         else:
             eval_callback = None
 
@@ -622,23 +608,11 @@ if __name__ == "__main__":
                 gen_val = DataLoader(val_dataset, shuffle=shuffle, batch_size=batch_size, num_workers=num_workers,
                                      pin_memory=True,
                                      drop_last=True, collate_fn=yolo_dataset_collate, sampler=val_sampler)
-                # gen_seg = DataLoader(train_dataset_seg, shuffle=shuffle, batch_size=batch_size, num_workers=num_workers,
-                #                      pin_memory=True,
-                #                      drop_last=True, collate_fn=deeplab_dataset_collate, sampler=train_sampler_seg)
-                #
-                # gen_val_seg = DataLoader(val_dataset_seg, shuffle=shuffle, batch_size=batch_size,
-                #                          num_workers=num_workers,
-                #                          pin_memory=True, drop_last=True, collate_fn=deeplab_dataset_collate,
-                #                          sampler=val_sampler_seg)
 
                 UnFreeze_flag = True
 
             gen.dataset.epoch_now = epoch
             gen_val.dataset.epoch_now = epoch
-            # gen_seg.dataset.epoch_now = epoch
-            # gen_seg.dataset.epoch_now = epoch
-
-
             if distributed:
                 train_sampler.set_epoch(epoch)
 
@@ -647,11 +621,10 @@ if __name__ == "__main__":
 
             # =========== detection unfreeze backbone ========== #
             # if train_index % 4 == 0 and train_index * 10 <= epoch < (train_index + 1) * 10:
-            print("-----start object detection training (unfreeze backbone)-----")
-            fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback, eval_callback_seg, optimizer, epoch,
-                              epoch_step, epoch_step_val, gen, gen_val, UnFreeze_Epoch, Cuda, fp16, scaler, save_period, save_dir,
+            fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback,
+                          eval_callback_seg, optimizer, epoch, epoch_step, epoch_step_val, gen, gen_val, UnFreeze_Epoch,
+                          Cuda, fp16, scaler, save_period, save_dir,
                           dice_loss, focal_loss, cls_weights, num_classes_seg, local_rank)
-            print("-----end object detection training (unfreeze backbone)-----")
 
             # ================================================== #
 

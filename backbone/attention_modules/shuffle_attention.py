@@ -73,7 +73,7 @@ class ShuffleAttention(nn.Module):
 
 
 if __name__ == '__main__':
-    input=torch.randn(50,512,7,7)
-    se = ShuffleAttention(channel=512,G=8)
+    input=torch.randn(50,32,224,224)
+    se = ShuffleAttention(channel=32,G=4)
     output=se(input)
     print(output.shape)

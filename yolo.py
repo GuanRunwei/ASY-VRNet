@@ -27,17 +27,17 @@ class YOLO(object):
         #   验证集损失较低不代表mAP较高，仅代表该权值在验证集上泛化性能较好。
         #   如果出现shape不匹配，同时要注意训练时的model_path和classes_path参数的修改
         # --------------------------------------------------------------------------#
-        "model_path": 'model_data/best_epoch_weights.pth',
-        "classes_path": 'model_data/waterscenes.txt',
+        "model_path"        : 'logs/best_epoch_weights.pth',
         "radar_root": "E:/Big_Datasets/water_surface/all-1114/all/VOCradar",
+        "classes_path": 'model_data/waterscenes.txt',
         # ---------------------------------------------------------------------#
         #   输入图片的大小，必须为32的倍数。
         # ---------------------------------------------------------------------#
-        "input_shape": [640, 640],
+        "input_shape": [512, 512],
         # ---------------------------------------------------------------------#
         #   所使用的YoloX的版本。nano、tiny、s、m、l、x
         # ---------------------------------------------------------------------#
-        "phi": 's',
+        "phi": 'nano',
         # ---------------------------------------------------------------------#
         #   只有得分大于置信度的预测框会被保留下来
         # ---------------------------------------------------------------------#
@@ -93,7 +93,7 @@ class YOLO(object):
     #   生成模型
     # ---------------------------------------------------#
     def generate(self, onnx=False):
-        self.net = EfficientVRNet(num_classes=self.num_classes, num_seg_classes=5, phi=self.phi)
+        self.net = EfficientVRNet(num_classes=self.num_classes, num_seg_classes=9, phi=self.phi)
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.net.load_state_dict(torch.load(self.model_path, map_location=device))
         self.net = self.net.eval()

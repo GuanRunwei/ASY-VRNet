@@ -1,7 +1,7 @@
 import colorsys
 import copy
 import time
-
+import os
 import cv2
 import numpy as np
 import torch
@@ -25,11 +25,12 @@ class DeeplabV3(object):
         #   训练好后logs文件夹下存在多个权值文件，选择验证集损失较低的即可。
         #   验证集损失较低不代表miou较高，仅代表该权值在验证集上泛化性能较好。
         #-------------------------------------------------------------------#
-        "model_path"        : 'logs_seg/best_epoch_weights.pth',
+        "model_path"        : 'logs/best_epoch_weights.pth',
+        "radar_root": "E:/Big_Datasets/water_surface/all-1114/all/VOCradar",
         #----------------------------------------#
         #   所需要区分的类的个数+1
         #----------------------------------------#
-        "num_classes"       : 5,
+        "num_classes"       : 9,
         #----------------------------------------#
         #   所使用的的主干网络：
         #   mobilenet
@@ -39,7 +40,7 @@ class DeeplabV3(object):
         #----------------------------------------#
         #   输入图片的大小
         #----------------------------------------#
-        "input_shape"       : [640, 640],
+        "input_shape"       : [512, 512],
         #----------------------------------------#
         #   下采样的倍数，一般可选的为8和16
         #   与训练时设置的一样即可
@@ -58,7 +59,7 @@ class DeeplabV3(object):
         #   没有GPU可以设置成False
         #-------------------------------#
         "cuda"              : True,
-        "phi": 'l',
+        "phi": 'nano',
     }
 
     #---------------------------------------------------#
@@ -108,7 +109,7 @@ class DeeplabV3(object):
     #---------------------------------------------------#
     #   检测图片
     #---------------------------------------------------#
-    def detect_image(self, image, count=False, name_classes=None):
+    def detect_image(self, image, image_id, count=False, name_classes=None):
         #---------------------------------------------------------#
         #   在这里将图像转换成RGB图像，防止灰度图在预测时报错。
         #   代码仅仅支持RGB图像的预测，所有其它类型的图像都会转化成RGB
@@ -130,6 +131,13 @@ class DeeplabV3(object):
         #---------------------------------------------------------#
         image_data  = np.expand_dims(np.transpose(preprocess_input(np.array(image_data, np.float32)), (2, 0, 1)), 0)
 
+        # ------------------------------#
+        #   读取雷达特征map
+        # ------------------------------#
+        radar_path = os.path.join(self.radar_root, image_id + '.npz')
+        radar_data = np.load(radar_path)['arr_0']
+        radar_data = torch.from_numpy(radar_data).type(torch.FloatTensor).unsqueeze(0)
+
         with torch.no_grad():
             images = torch.from_numpy(image_data)
             if self.cuda:
@@ -138,8 +146,7 @@ class DeeplabV3(object):
             #---------------------------------------------------#
             #   图片传入网络进行预测
             #---------------------------------------------------#
-            pr_initial = self.net(images)
-            _, pr = self.net(images)
+            _, pr = self.net(images, radar_data)
             pr = pr[0]
             #---------------------------------------------------#
             #   取出每一个像素点的种类

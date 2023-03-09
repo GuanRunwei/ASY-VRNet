@@ -44,7 +44,7 @@ class DeeplabDataset(Dataset):
         #   在这里需要+1是因为voc数据集有些标签具有白边部分
         #   我们需要将白边部分进行忽略，+1的目的是方便忽略。
         #-------------------------------------------------------#
-        seg_labels  = np.eye(self.num_classes + 1)[png.reshape([-1])]
+        seg_labels  = np.eye(self.num_classes+1)[png.reshape([-1])]
         seg_labels  = seg_labels.reshape((int(self.input_shape[0]), int(self.input_shape[1]), self.num_classes + 1))
 
         return jpg, png, seg_labels

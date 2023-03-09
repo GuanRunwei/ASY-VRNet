@@ -13,7 +13,6 @@ def cvtColor(image):
         image = image.convert('RGB')
         return image 
 
-
 #---------------------------------------------------#
 #   对输入图像进行resize
 #---------------------------------------------------#
@@ -31,7 +30,6 @@ def resize_image(image, size, letterbox_image):
     else:
         new_image = image.resize((w, h), Image.BICUBIC)
     return new_image
-
 
 #---------------------------------------------------#
 #   获得类
@@ -53,7 +51,6 @@ def preprocess_input_radar(data):
     _range = np.max(data) - np.min(data)
     data = (data - np.min(data)) / _range + 0.0000000000001
     return data
-
 
 #---------------------------------------------------#
 #   获得学习率

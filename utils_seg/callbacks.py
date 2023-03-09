@@ -98,7 +98,7 @@ class EvalCallback():
         self.period = period
         self.radar_path = radar_path
 
-        self.image_ids = [image_id.split()[0] for image_id in image_ids]
+        self.image_ids = [image_id[72:88] for image_id in image_ids]
         self.mious = [0]
         self.epoches = [0]
         if self.eval_flag:
@@ -128,11 +128,12 @@ class EvalCallback():
             images = torch.from_numpy(image_data)
             if self.cuda:
                 images = images.cuda()
+                radar_data = radar_data.cuda()
 
             # ---------------------------------------------------#
             #   图片传入网络进行预测
             # ---------------------------------------------------#
-            pr = self.net(images, radar_data)[1]
+            pr = self.net(images, radar_data)[1][0]
             # ---------------------------------------------------#
             #   取出每一个像素点的种类
             # ---------------------------------------------------#
@@ -168,14 +169,14 @@ class EvalCallback():
                 # ------------------------------#
                 #   读取雷达特征map
                 # ------------------------------#
-                radar_path = os.path.join(self.radar_path, image_id[67:83] + '.npz')
+                radar_path = os.path.join(self.radar_path, image_id + '.npz')
                 radar_data = np.load(radar_path)['arr_0']
                 radar_data = torch.from_numpy(radar_data).type(torch.cuda.FloatTensor).unsqueeze(0)
 
                 # -------------------------------#
                 #   从文件中读取图像
                 # -------------------------------#
-                image_path = os.path.join(self.dataset_path, "VOC2007/JPEGImages/" + image_id[67:83] + ".jpg")
+                image_path = os.path.join(self.dataset_path, "VOC2007/JPEGImages/" + image_id + ".jpg")
                 image = Image.open(image_path)
                 # ------------------------------#
                 #   获得预测txt

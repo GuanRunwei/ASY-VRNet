@@ -28,7 +28,7 @@ class EfficientVRNet(nn.Module):
 
 
 if __name__ == '__main__':
-    model = EfficientVRNet(num_classes=4, phi='l', num_seg_classes=5).cuda()
+    model = EfficientVRNet(num_classes=4, phi='nano', num_seg_classes=9).cuda()
     model.eval()
     input_map1 = torch.randn((1, 3, 512, 512)).cuda()
     input_map2 = torch.randn((1, 4, 512, 512)).cuda()
@@ -40,10 +40,10 @@ if __name__ == '__main__':
     print("fps:", (1 / ((t2 - t1) / test_times)))
 
     output_map, output_seg = model(input_map1, input_map2)
-    # print(output_map[0].shape)
-    # print(output_map[1].shape)
-    # print(output_map[2].shape)
-    # print(output_seg.shape)
+    print(output_map[0].shape)
+    print(output_map[1].shape)
+    print(output_map[2].shape)
+    print(output_seg.shape)
     print(summary(model, input_size=((1, 3, 512, 512), (1, 4, 512, 512))))
 
     macs, params = profile(model, inputs=([input_map1, input_map2]))

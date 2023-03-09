@@ -21,7 +21,7 @@ if __name__ == "__main__":
     #   'heatmap'           表示进行预测结果的热力图可视化，详情查看下方注释。
     #   'export_onnx'       表示将模型导出为onnx，需要pytorch1.7.1以上。
     # ----------------------------------------------------------------------------------------------------------#
-    mode = "heatmap"
+    mode = "predict"
     # -------------------------------------------------------------------------#
     #   crop                指定了是否在单张图片预测后对目标进行截取
     #   count               指定了是否进行目标的计数
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # ----------------------------------------------------------------------------------------------------------#
     #   test_interval       用于指定测量fps的时候，图片检测的次数。理论上test_interval越大，fps越准确。
     #   fps_image_path      用于指定测试的fps图片
-    #   
+    #
     #   test_interval和fps_image_path仅在mode='fps'有效
     # ----------------------------------------------------------------------------------------------------------#
     test_interval = 100
@@ -53,14 +53,14 @@ if __name__ == "__main__":
     # -------------------------------------------------------------------------#
     #   dir_origin_path     指定了用于检测的图片的文件夹路径
     #   dir_save_path       指定了检测完图片的保存路径
-    #   
+    #
     #   dir_origin_path和dir_save_path仅在mode='dir_predict'时有效
     # -------------------------------------------------------------------------#
     dir_origin_path = "img/"
     dir_save_path = "img_out/"
     # -------------------------------------------------------------------------#
     #   heatmap_save_path   热力图的保存路径，默认保存在model_data下
-    #   
+    #
     #   heatmap_save_path仅在mode='heatmap'有效
     # -------------------------------------------------------------------------#
     heatmap_save_path = "model_data/heatmap_vision.png"
@@ -84,11 +84,12 @@ if __name__ == "__main__":
             img = input('Input image filename:')
             try:
                 image = Image.open(img)
+                image_id = img[-20:-4]
             except:
                 print('Open Error! Try again!')
                 continue
             else:
-                r_image = yolo.detect_image(image, crop=crop, count=count)
+                r_image = yolo.detect_image(image, image_id, crop=crop, count=count)
                 r_image.show()
 
     elif mode == "video":
@@ -164,11 +165,12 @@ if __name__ == "__main__":
             img = input('Input image filename:')
             try:
                 image = Image.open(img)
+                image_id = img[-20:-4]
             except:
                 print('Open Error! Try again!')
                 continue
             else:
-                yolo.detect_heatmap(image, heatmap_save_path)
+                yolo.detect_heatmap(image, image_id, heatmap_save_path)
 
     elif mode == "export_onnx":
         yolo.convert_to_onnx(simplify, onnx_save_path)

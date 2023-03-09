@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils_fit.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils_fit.py" afterDir="false" />
-    </list>
+    <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,38 +9,40 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$voc_annotation.coverage" NAME="voc_annotation Coverage Results" MODIFIED="1674559986044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$efficient_vrnet.coverage" NAME="efficient_vrnet Coverage Results" MODIFIED="1675500269911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/nets" />
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$context_cluster.coverage" NAME="context_cluster Coverage Results" MODIFIED="1674218428298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/vision" />
     <SUITE FILE_PATH="coverage/Efficient_VRNet$context_cluster__2_.coverage" NAME="context_cluster (2) Coverage Results" MODIFIED="1674298077594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/fusion" />
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$vr_coc.coverage" NAME="vr_coc Coverage Results" MODIFIED="1674220383612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone" />
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$vr_coc__1_.coverage" NAME="vr_coc (1) Coverage Results" MODIFIED="1675500261531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/fusion" />
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$fpnt_segmentation.coverage" NAME="fpnt_segmentation Coverage Results" MODIFIED="1674307954124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/neck" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_beta$vr_coc__1_.coverage" NAME="vr_coc (1) Coverage Results" MODIFIED="1677742202841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/fusion" />
     <SUITE FILE_PATH="coverage/Raw_Fusion$mobilevit.coverage" NAME="mobilevit Coverage Results" MODIFIED="1673255368563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/vision" />
-    <SUITE FILE_PATH="coverage/Efficient_VRNet$coc_fpn_dual.coverage" NAME="coc_fpn_dual Coverage Results" MODIFIED="1674650209434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/neck" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_main$utils_fit.coverage" NAME="utils_fit Coverage Results" MODIFIED="1676599445217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_beta$deeplab.coverage" NAME="deeplab Coverage Results" MODIFIED="1678087181794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$voc_annotation.coverage" NAME="voc_annotation Coverage Results" MODIFIED="1674559986044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_beta$predict.coverage" NAME="predict Coverage Results" MODIFIED="1678089356913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_beta$predict_seg.coverage" NAME="predict_seg Coverage Results" MODIFIED="1678089647660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$vr_coc.coverage" NAME="vr_coc Coverage Results" MODIFIED="1674220383612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$fpnt_segmentation.coverage" NAME="fpnt_segmentation Coverage Results" MODIFIED="1674307954124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/neck" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$efficient_vrnet.coverage" NAME="efficient_vrnet Coverage Results" MODIFIED="1675500269911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/nets" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$vr_coc__1_.coverage" NAME="vr_coc (1) Coverage Results" MODIFIED="1675500261531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/fusion" />
     <SUITE FILE_PATH="coverage/Raw_Fusion$pointnet.coverage" NAME="pointnet Coverage Results" MODIFIED="1673338201293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/radar" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_beta$train__1_.coverage" NAME="train (1) Coverage Results" MODIFIED="1678331260033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_main$callbacks.coverage" NAME="callbacks Coverage Results" MODIFIED="1675991508969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils_seg" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_main$vr_coc__1_.coverage" NAME="vr_coc (1) Coverage Results" MODIFIED="1676029262539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/fusion" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_main$predict_seg.coverage" NAME="predict_seg Coverage Results" MODIFIED="1676530431199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_beta$efficient_vrnet.coverage" NAME="efficient_vrnet Coverage Results" MODIFIED="1678103956594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/nets" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_main$efficient_vrnet.coverage" NAME="efficient_vrnet Coverage Results" MODIFIED="1676028092649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/nets" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$context_cluster.coverage" NAME="context_cluster Coverage Results" MODIFIED="1674218428298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/vision" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_beta$shuffle_attention.coverage" NAME="shuffle_attention Coverage Results" MODIFIED="1677918304729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/attention_modules" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_main$coc_fpn_dual.coverage" NAME="coc_fpn_dual Coverage Results" MODIFIED="1676029447802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/neck" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet_main$train.coverage" NAME="train Coverage Results" MODIFIED="1676708797183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Efficient_VRNet$coc_fpn_dual.coverage" NAME="coc_fpn_dual Coverage Results" MODIFIED="1674650209434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/neck" />
     <SUITE FILE_PATH="coverage/Efficient_VRNet$train.coverage" NAME="train Coverage Results" MODIFIED="1675668576797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Efficient_VRNet$context_cluster__1_.coverage" NAME="context_cluster (1) Coverage Results" MODIFIED="1674218379511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backbone/radar" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4640">
-              <caret line="306" column="50" selection-start-line="306" selection-start-column="50" selection-end-line="306" selection-end-column="50" />
-              <folding>
-                <element signature="e#38#47#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="648" column="38" selection-start-line="648" selection-start-column="38" selection-end-line="648" selection-end-column="38" />
+            <state relative-caret-position="14">
+              <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
               <folding>
                 <element signature="e#99#114#0" expanded="true" />
               </folding>
@@ -51,20 +50,30 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nets/yolo_training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="21">
+              <caret line="128" column="50" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
+        <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_val_loss.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_miou.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/callbacks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2432">
-              <caret line="156" column="55" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
+            <state relative-caret-position="409">
+              <caret line="189" column="80" selection-start-line="189" selection-start-column="80" selection-end-line="189" selection-end-column="80" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -73,11 +82,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils_seg/dataloader.py">
+        <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="969">
+              <caret line="184" column="58" selection-start-line="184" selection-start-column="58" selection-end-line="184" selection-end-column="58" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/multitaskloss.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8832">
-              <caret line="564" selection-start-line="564" selection-end-line="564" />
+            <state relative-caret-position="496">
+              <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -96,41 +118,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predict.py">
+        <entry file="file://$PROJECT_DIR$/utils_seg/utils_metrics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1200">
-              <caret line="81" column="11" selection-start-line="81" selection-start-column="11" selection-end-line="81" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yolo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1856">
-              <caret line="128" column="41" selection-start-line="128" selection-start-column="41" selection-end-line="128" selection-end-column="41" />
+            <state relative-caret-position="408">
+              <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/2007_val.txt">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -148,6 +144,11 @@
       <find>672</find>
       <find>7</find>
       <find>&quot;E:/Big_Datasets/water_surface/all-1114/all/VOCradar&quot;</find>
+      <find>x_stage4_concat_5 = shuffle_channels(x_stage4_concat_5)</find>
+      <find>67</find>
+      <find>72</find>
+      <find>print</find>
+      <find>65</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,35 +179,44 @@
         <option value="$PROJECT_DIR$/backbone/vr_coc.py" />
         <option value="$PROJECT_DIR$/backbone/fusion/context_cluster.py" />
         <option value="$PROJECT_DIR$/neck/fpnt_detection.py" />
-        <option value="$PROJECT_DIR$/backbone/vision/context_cluster.py" />
         <option value="$PROJECT_DIR$/nets/maskvrdet.py" />
         <option value="$PROJECT_DIR$/neck/fpnt_segmentation.py" />
         <option value="$PROJECT_DIR$/neck/fpn_dual.py" />
         <option value="$PROJECT_DIR$/backbone/conv_utils/normal_conv.py" />
         <option value="$PROJECT_DIR$/backbone/attention_modules/eca.py" />
-        <option value="$PROJECT_DIR$/backbone/attention_modules/shuffle_attention.py" />
-        <option value="$PROJECT_DIR$/deeplab.py" />
         <option value="$PROJECT_DIR$/head/decouplehead.py" />
         <option value="$PROJECT_DIR$/voc_annotation.py" />
-        <option value="$PROJECT_DIR$/utils/callbacks.py" />
-        <option value="$PROJECT_DIR$/nets/efficient_vrnet.py" />
-        <option value="$PROJECT_DIR$/yolo.py" />
         <option value="$PROJECT_DIR$/utils/utils.py" />
+        <option value="$PROJECT_DIR$/utils_seg/dataloader.py" />
+        <option value="$PROJECT_DIR$/utils/multi-task-loss.py" />
+        <option value="$PROJECT_DIR$/utils_seg/utils_fit.py" />
         <option value="$PROJECT_DIR$/neck/coc_fpn_dual.py" />
+        <option value="$PROJECT_DIR$/nets/deeplabv3_training.py" />
+        <option value="$PROJECT_DIR$/backbone/attention_modules/shuffle_attention.py" />
+        <option value="$PROJECT_DIR$/backbone/vision/context_cluster.py" />
         <option value="$PROJECT_DIR$/backbone/fusion/vr_coc.py" />
-        <option value="$PROJECT_DIR$/train.py" />
-        <option value="$PROJECT_DIR$/utils/dataloader.py" />
-        <option value="$PROJECT_DIR$/utils_seg/callbacks.py" />
+        <option value="$PROJECT_DIR$/utils_seg/utils.py" />
+        <option value="$PROJECT_DIR$/utils/callbacks.py" />
+        <option value="$PROJECT_DIR$/yolo.py" />
+        <option value="$PROJECT_DIR$/predict_seg.py" />
+        <option value="$PROJECT_DIR$/deeplab.py" />
+        <option value="$PROJECT_DIR$/predict.py" />
+        <option value="$PROJECT_DIR$/nets/efficient_vrnet.py" />
         <option value="$PROJECT_DIR$/utils/utils_fit.py" />
+        <option value="$PROJECT_DIR$/utils_seg/utils_metrics.py" />
+        <option value="$PROJECT_DIR$/utils_seg/callbacks.py" />
+        <option value="$PROJECT_DIR$/utils/dataloader.py" />
+        <option value="$PROJECT_DIR$/train.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="315" />
-    <option name="y" value="87" />
-    <option name="width" value="1938" />
-    <option name="height" value="2097" />
+    <option name="x" value="423" />
+    <option name="y" value="624" />
+    <option name="width" value="1293" />
+    <option name="height" value="816" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -217,43 +227,37 @@
         <subPane>
           <expand>
             <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
               <item name="backbone" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
-              <item name="backbone" type="462c0819:PsiDirectoryNode" />
-              <item name="fusion" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
               <item name="head" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
               <item name="neck" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
               <item name="nets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="Efficient-VRNet-beta" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet-beta" type="462c0819:PsiDirectoryNode" />
               <item name="utils_seg" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -264,18 +268,18 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Mask-VRDet-beta" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../view-of-delft-dataset-main/view-of-delft-dataset-main" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Workspace\Efficient-VRNet-beta\Efficient-VRNet-beta\backbone" />
+      <recent name="D:\Workspace\Efficient-VRNet-beta\Efficient-VRNet-beta" />
+      <recent name="E:\Normal_Workspace_Collection\Efficient-VRNet-beta\Efficient-VRNet-beta" />
+      <recent name="D:\Workspace\Efficient-VRNet-main\Efficient-VRNet-main\nets" />
       <recent name="E:\Normal_Workspace_Collection\Efficient-VRNet\Efficient-VRNet" />
-      <recent name="E:\code_workspace\Efficient-VRNet\Efficient-VRNet\backbone\fusion" />
-      <recent name="E:\code_workspace\Efficient-VRNet\Efficient-VRNet\neck" />
-      <recent name="E:\code_workspace\Efficient-VRNet\Efficient-VRNet\backbone\radar" />
-      <recent name="E:\Normal_Workspace_Collection\Raw-Fusion\Raw-Fusion\backbone\radar" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -290,8 +294,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.train">
-    <configuration name="coc_fpn_dual" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.train (1)">
+    <configuration name="deeplab" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Efficient-VRNet" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -299,12 +303,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/neck" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/neck/coc_fpn_dual.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/deeplab.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -335,7 +339,51 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="predict" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Efficient-VRNet" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/predict.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="predict_seg" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Efficient-VRNet" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/predict_seg.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Efficient-VRNet" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -357,57 +405,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="voc_annotation" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Efficient-VRNet" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/voc_annotation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="vr_coc (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Efficient-VRNet" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backbone/fusion" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backbone/fusion/vr_coc.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+    <list>
+      <item itemvalue="Python.train (1)" />
+      <item itemvalue="Python.efficient_vrnet" />
+      <item itemvalue="Python.predict_seg" />
+      <item itemvalue="Python.predict" />
+      <item itemvalue="Python.deeplab" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.train" />
+        <item itemvalue="Python.train (1)" />
         <item itemvalue="Python.efficient_vrnet" />
-        <item itemvalue="Python.vr_coc (1)" />
-        <item itemvalue="Python.coc_fpn_dual" />
-        <item itemvalue="Python.voc_annotation" />
+        <item itemvalue="Python.predict_seg" />
+        <item itemvalue="Python.predict" />
+        <item itemvalue="Python.deeplab" />
       </list>
     </recent_temporary>
   </component>
@@ -442,6 +453,25 @@
       <workItem from="1675646718315" duration="7000" />
       <workItem from="1675668363043" duration="863000" />
       <workItem from="1675670375546" duration="1235000" />
+      <workItem from="1675761439551" duration="17888000" />
+      <workItem from="1676249763141" duration="593000" />
+      <workItem from="1676425832612" duration="936000" />
+      <workItem from="1676436659603" duration="9861000" />
+      <workItem from="1676528742470" duration="16195000" />
+      <workItem from="1676601024669" duration="20794000" />
+      <workItem from="1677290817661" duration="963000" />
+      <workItem from="1677462507445" duration="2462000" />
+      <workItem from="1677740546014" duration="7059000" />
+      <workItem from="1677812055784" duration="599000" />
+      <workItem from="1677821779516" duration="4813000" />
+      <workItem from="1677845323967" duration="287000" />
+      <workItem from="1677845623154" duration="14000" />
+      <workItem from="1677845759439" duration="10246000" />
+      <workItem from="1677935079686" duration="1126000" />
+      <workItem from="1677999923720" duration="2297000" />
+      <workItem from="1678002322904" duration="7007000" />
+      <workItem from="1678065806981" duration="3773000" />
+      <workItem from="1678071430825" duration="38693000" />
     </task>
     <task id="LOCAL-00001" summary="complete the basic structure of VRCoC">
       <created>1674203093310</created>
@@ -636,18 +666,51 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94975000" />
+    <option name="totallyTimeSpent" value="240581000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2575" height="1407" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20301947" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15454906" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.78039217" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39764705" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32941177" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Statistic" order="10" weight="0.32941177" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32941177" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="13" weight="0.32862744" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21162046" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.50509804" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.285558" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -664,7 +727,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -687,98 +750,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="complete the multi-task training framework" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_msg.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_part_seg_ssg.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_sem_seg.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_sem_seg_msg.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_part_seg.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_sem_seg.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_cls.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet_utils.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_cls_msg.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet2_utils.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/vision/mobilevit.py" />
-    <entry file="file://$PROJECT_DIR$/backbone/radar/pointnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2272">
-          <caret line="149" column="34" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/vision/context_cluster_withGAP.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/radar/model_utils.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://D:/Anaconda/Software/Lib/site-packages/timm/models/registry.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/radar/context_cluster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3984">
-          <caret line="261" column="37" selection-start-line="261" selection-start-column="37" selection-end-line="261" selection-end-column="37" />
-          <folding>
-            <element signature="e#38#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda/Software/Lib/site-packages/torch/nn/modules/conv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="410" column="8" selection-start-line="410" selection-start-column="8" selection-end-line="410" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neck/fpnt_detection.py" />
-    <entry file="file://D:/Anaconda/Software/Lib/site-packages/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="1050" selection-start-line="1050" selection-end-line="1050" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/attention_modules/eca.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nets/deeplabv3_training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1344">
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/get_miou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/performance.py" />
     <entry file="file://$PROJECT_DIR$/backbone/attention_modules/shuffle_attention.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1184">
-          <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+        <state relative-caret-position="66">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -787,34 +763,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/voc_annotation_seg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-192">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="1688" selection-start-line="1688" selection-end-line="1688" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda/Software/Lib/random.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/callbacks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2976">
-          <caret line="189" column="81" selection-start-line="189" selection-start-column="81" selection-end-line="189" selection-end-column="81" />
+        <state>
+          <caret selection-end-line="5" selection-end-column="21" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -831,90 +781,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/nets/deeplabv3_training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2007_val.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33702">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/fusion/context_cluster_withGAP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/fusion/context_cluster_down.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backbone/vision/context_cluster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deeplab.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1144">
-          <caret line="87" column="37" selection-start-line="87" selection-start-column="37" selection-end-line="87" selection-end-column="37" />
+        <state relative-caret-position="421">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="65" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#38#47#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/performance.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict_seg.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils_seg/utils_fit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-64">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2007_train.txt" />
-    <entry file="file://$PROJECT_DIR$/backbone/conv_utils/normal_conv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backbone/vr_coc2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="185" column="97" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="97" />
-          <folding>
-            <element signature="e#0#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neck/coc_fpn_dual.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nets/efficient_vrnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="24" column="65" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nets/yolo_training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3552">
-          <caret line="228" selection-start-line="228" selection-end-line="228" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/head/decouplehead.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
+        <state relative-caret-position="144">
           <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -922,89 +830,269 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/radar/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="8" column="54" lean-forward="true" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neck/coc_fpn_dual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_map.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_val_loss.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_map.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_05_21_07_25/epoch_map.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_05_21_07_25/epoch_loss.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_06_00_32_42/epoch_loss.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2007_train-1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/utils_fit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="929">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2007_train.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247200">
+          <caret line="15450" selection-start-line="15450" selection-end-line="15450" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_06_10_58_58/epoch_miou.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4640">
-          <caret line="306" column="50" selection-start-line="306" selection-start-column="50" selection-end-line="306" selection-end-column="50" />
+        <state relative-caret-position="-656">
+          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
           <folding>
             <element signature="e#38#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
+    <entry file="file://$PROJECT_DIR$/utils/utils_bbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2432">
-          <caret line="156" column="55" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils_seg/dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8832">
-          <caret line="564" selection-start-line="564" selection-end-line="564" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="81" column="11" selection-start-line="81" selection-start-column="11" selection-end-line="81" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yolo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1856">
-          <caret line="128" column="41" selection-start-line="128" selection-start-column="41" selection-end-line="128" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
+        <state relative-caret-position="-1104">
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2007_val.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$PROJECT_DIR$/utils/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="648" column="38" selection-start-line="648" selection-start-column="38" selection-end-line="648" selection-end-column="38" />
+        <state relative-caret-position="464">
+          <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
           <folding>
-            <element signature="e#99#114#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2603">
+          <caret line="172" column="29" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
+          <folding>
+            <element signature="e#227#238#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yolo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="402" column="49" selection-start-line="402" selection-start-column="49" selection-end-line="402" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict_seg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+          <folding>
+            <element signature="e#169#180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deeplab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_miou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nets/efficient_vrnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091276.65180.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091364.26373.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1665128316.34865.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/utils_fit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="200">
+          <caret line="202" selection-start-line="202" selection-end-line="202" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/multitaskloss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091274.85923.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.temp_miou_out/detection-results/1664091814.34181.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/utils_metrics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_loss.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_miou.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/loss_2023_03_07_13_19_50/epoch_loss.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_loss.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_seg/callbacks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="184" column="58" selection-start-line="184" selection-start-column="58" selection-end-line="184" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/callbacks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="189" column="80" selection-start-line="189" selection-start-column="80" selection-end-line="189" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_val_loss.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nets/yolo_training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="128" column="50" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+          <folding>
+            <element signature="e#99#114#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

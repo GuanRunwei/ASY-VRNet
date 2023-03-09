@@ -10,7 +10,7 @@ from utils_seg.utils_metrics import f_score
 
 
 
-def fit_one_epoch(model_train, model, loss_history, optimizer, epoch, epoch_step, epoch_step_val, gen, gen_val, Epoch, cuda, dice_loss, focal_loss, cls_weights, num_classes, \
+def fit_one_epoch(model_train, model, loss_history, eval_callback, optimizer, epoch, epoch_step, epoch_step_val, gen, gen_val, Epoch, cuda, dice_loss, focal_loss, cls_weights, num_classes, \
     fp16, scaler, save_period, save_dir, local_rank=0):
     total_loss      = 0
     total_f_score   = 0
@@ -25,20 +25,21 @@ def fit_one_epoch(model_train, model, loss_history, optimizer, epoch, epoch_step
     for iteration, batch in enumerate(gen):
         if iteration >= epoch_step: 
             break
-        imgs, pngs, labels = batch
+        imgs, targets, radars, pngs, labels = batch
 
         with torch.no_grad():
             weights = torch.from_numpy(cls_weights)
             if cuda:
                 imgs    = imgs.cuda(local_rank)
+                targets = [ann.cuda(local_rank) for ann in targets]
+                radars = radars.cuda(local_rank)
                 pngs    = pngs.cuda(local_rank)
                 labels  = labels.cuda(local_rank)
                 weights = weights.cuda(local_rank)
 
         optimizer.zero_grad()
-        optimizer.zero_grad()
         if not fp16:
-            _, outputs = model_train(imgs)
+            _, outputs = model_train(imgs, radars)
             if focal_loss:
                 loss = Focal_Loss(outputs, pngs, weights, num_classes = num_classes)
             else:
@@ -59,7 +60,7 @@ def fit_one_epoch(model_train, model, loss_history, optimizer, epoch, epoch_step
         else:
             from torch.cuda.amp import autocast
             with autocast():
-                _, outputs = model_train(imgs)
+                _, outputs = model_train(imgs, radars)
                 if focal_loss:
                     loss = Focal_Loss(outputs, pngs, weights, num_classes = num_classes)
                 else:
@@ -101,16 +102,18 @@ def fit_one_epoch(model_train, model, loss_history, optimizer, epoch, epoch_step
     for iteration, batch in enumerate(gen_val):
         if iteration >= epoch_step_val:
             break
-        imgs, pngs, labels = batch
+            imgs, targets, radars, pngs, labels = batch
         with torch.no_grad():
             weights = torch.from_numpy(cls_weights)
             if cuda:
                 imgs    = imgs.cuda(local_rank)
+                targets = [ann.cuda(local_rank) for ann in targets]
+                radars = radars.cuda(local_rank)
                 pngs    = pngs.cuda(local_rank)
                 labels  = labels.cuda(local_rank)
                 weights = weights.cuda(local_rank)
 
-            _, outputs     = model_train(imgs)
+            _, outputs     = model_train(imgs, radars)
             if focal_loss:
                 loss = Focal_Loss(outputs, pngs, weights, num_classes = num_classes)
             else:
@@ -137,6 +140,7 @@ def fit_one_epoch(model_train, model, loss_history, optimizer, epoch, epoch_step
         pbar.close()
         print('Finish Validation')
         loss_history.append_loss(epoch + 1, total_loss / epoch_step, val_loss / epoch_step_val)
+        eval_callback.on_epoch_end(epoch + 1, model_train)
         print('Epoch:'+ str(epoch + 1) + '/' + str(Epoch))
         print('Total Loss: %.3f || Val Loss: %.3f ' % (total_loss / epoch_step, val_loss / epoch_step_val))
         

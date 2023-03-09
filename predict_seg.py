@@ -8,7 +8,6 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from yolo import YOLO
 from deeplab import DeeplabV3
 
 if __name__ == "__main__":
@@ -24,7 +23,7 @@ if __name__ == "__main__":
     #   'dir_predict'       表示遍历文件夹进行检测并保存。默认遍历img文件夹，保存img_out文件夹，详情查看下方注释。
     #   'export_onnx'       表示将模型导出为onnx，需要pytorch1.7.1以上。
     #----------------------------------------------------------------------------------------------------------#
-    mode = "video"
+    mode = "predict"
     #-------------------------------------------------------------------------#
     #   count               指定了是否进行目标的像素点计数（即面积）与比例计算
     #   name_classes        区分的种类，和json_to_dataset里面的一样，用于打印种类和数量
@@ -32,7 +31,7 @@ if __name__ == "__main__":
     #   count、name_classes仅在mode='predict'时有效
     #-------------------------------------------------------------------------#
     count           = False
-    name_classes    = ["background","aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
+    name_classes    = [ "free-space", "pier", "vessel", "ship", "boat", "buoy", "sailor", "kayak"]
     # name_classes    = ["background","cat","dog"]
     #----------------------------------------------------------------------------------------------------------#
     #   video_path          用于指定视频的路径，当video_path=0时表示检测摄像头
@@ -88,11 +87,13 @@ if __name__ == "__main__":
             img = input('Input image filename:')
             try:
                 image = Image.open(img)
-            except:
+                image_id = img[-20:-4]
+            except Exception as e:
                 print('Open Error! Try again!')
+                print(e)
                 continue
             else:
-                r_image = deeplab.detect_image(image, count=count, name_classes=name_classes)
+                r_image = deeplab.detect_image(image, image_id, count=count, name_classes=name_classes)
                 r_image.show()
 
     elif mode == "video":
@@ -121,13 +122,13 @@ if __name__ == "__main__":
             frame = np.array(deeplab.detect_image(frame))
             # RGBtoBGR满足opencv显示格式
             frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
-            
+
             fps  = ( fps + (1./(time.time()-t1)) ) / 2
             print("fps= %.2f"%(fps))
             # frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             #
             # cv2.imshow("video",frame)
-            c= cv2.waitKey(1) & 0xff 
+            c= cv2.waitKey(1) & 0xff
             if video_save_path!="":
                 out.write(frame)
 
@@ -145,7 +146,7 @@ if __name__ == "__main__":
         img = Image.open(fps_image_path)
         tact_time = deeplab.get_FPS(img, test_interval)
         print(str(tact_time) + ' seconds, ' + str(1/tact_time) + 'FPS, @batch_size 1')
-        
+
     elif mode == "dir_predict":
         import os
         from tqdm import tqdm
@@ -161,6 +162,6 @@ if __name__ == "__main__":
                 r_image.save(os.path.join(dir_save_path, img_name))
     elif mode == "export_onnx":
         deeplab.convert_to_onnx(simplify, onnx_save_path)
-        
+
     else:
         raise AssertionError("Please specify the correct mode: 'predict', 'video', 'fps' or 'dir_predict'.")
