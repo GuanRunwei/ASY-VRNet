@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,10 +44,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="12" column="39" lean-forward="true" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+            <state relative-caret-position="32">
+              <caret line="2" column="40" lean-forward="true" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
               <folding>
-                <element signature="e#99#114#0" expanded="true" />
+                <element signature="e#141#156#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,6 +147,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="GuanRunwei &lt;864037205@qq.com&gt;" />
         <option value="Runwei Guan &lt;31555628+guanrunwei@users.noreply.github.com&gt;" />
         <option value="GuanRunwei &lt;thinkerai@foxmail.com&gt;" />
       </list>
@@ -438,7 +440,7 @@
       <workItem from="1678002322904" duration="7007000" />
       <workItem from="1678065806981" duration="3773000" />
       <workItem from="1678071430825" duration="38693000" />
-      <workItem from="1678342470977" duration="381000" />
+      <workItem from="1678342470977" duration="508000" />
     </task>
     <task id="LOCAL-00001" summary="complete the basic structure of VRCoC">
       <created>1674203093310</created>
@@ -650,11 +652,32 @@
       <option name="project" value="LOCAL" />
       <updated>1678342793760</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="modify the annotation of the code">
+      <created>1678342865824</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1678342865824</updated>
+    </task>
+    <task id="LOCAL-00032" summary="modify the annotation of the code">
+      <created>1678342913929</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1678342913929</updated>
+    </task>
+    <task id="LOCAL-00033" summary="modify the annotation of the code">
+      <created>1678342951836</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1678342951836</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240962000" />
+    <option name="totallyTimeSpent" value="241089000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -982,10 +1005,10 @@
     <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_07_13_19_50/epoch_val_loss.txt" />
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="39" lean-forward="true" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+        <state relative-caret-position="32">
+          <caret line="2" column="40" lean-forward="true" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
           <folding>
-            <element signature="e#99#114#0" expanded="true" />
+            <element signature="e#141#156#0" expanded="true" />
           </folding>
         </state>
       </provider>
