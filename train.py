@@ -60,10 +60,6 @@ if __name__ == "__main__":
     # ---------------------------------------------------------------------#
     classes_path = 'model_data/waterscenes.txt'
     # ----------------------------------------------------------------------------------------------------------------------------#
-    #   权值文件的下载请看README，可以通过网盘下载。模型的 预训练权重 对不同数据集是通用的，因为特征是通用的。
-    #   模型的 预训练权重 比较重要的部分是 主干特征提取网络的权值部分，用于进行特征提取。
-    #   预训练权重对于99%的情况都必须要用，不用的话主干部分的权值太过随机，特征提取效果不明显，网络训练的结果也不会好
-    #
     #   如果训练过程中存在中断训练的操作，可以将model_path设置成logs文件夹下的权值文件，将已经训练了一部分的权值再次载入。
     #   同时修改下方的 冻结阶段 或者 解冻阶段 的参数，来保证模型epoch的连续性。
     #
@@ -71,12 +67,6 @@ if __name__ == "__main__":
     #
     #   此处使用的是整个模型的权重，因此是在train.py进行加载的。
     #   如果想要让模型从0开始训练，则设置model_path = ''，下面的Freeze_Train = False，此时从0开始训练，且没有冻结主干的过程。
-    #
-    #   一般来讲，网络从0开始的训练效果会很差，因为权值太过随机，特征提取效果不明显，因此非常、非常、非常不建议大家从0开始训练！
-    #   从0开始训练有两个方案：
-    #   1、得益于Mosaic数据增强方法强大的数据增强能力，将UnFreeze_Epoch设置的较大（300及以上）、batch较大（16及以上）、数据较多（万以上）的情况下，
-    #      可以设置mosaic=True，直接随机初始化参数开始训练，但得到的效果仍然不如有预训练的情况。（像COCO这样的大数据集可以这样做）
-    #   2、了解imagenet数据集，首先训练分类模型，获得网络的主干部分权值，分类模型的 主干部分 和该模型通用，基于此进行训练。
     # ----------------------------------------------------------------------------------------------------------------------------#
     model_path = ''
     # ------------------------------------------------------#
@@ -84,31 +74,14 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     input_shape = [512, 512]
     # ------------------------------------------------------#
-    #   所使用的YoloX的版本。nano、tiny、s、m、l
+    #   所使用的Efficient-VRNet的版本。nano、tiny、s、m、l
     # ------------------------------------------------------#
     phi = 'tiny'
     # ------------------------------------------------------#
 
     # ------------------------------------------------------------------#
-    #   mosaic              马赛克数据增强。
-    #   mosaic_prob         每个step有多少概率使用mosaic数据增强，默认50%。
-    #
-    #   mixup               是否使用mixup数据增强，仅在mosaic=True时有效。
-    #                       只会对mosaic增强后的图片进行mixup的处理。
-    #   mixup_prob          有多少概率在mosaic后使用mixup数据增强，默认50%。
-    #                       总的mixup概率为mosaic_prob * mixup_prob。
-    #
-    #   special_aug_ratio   参考YoloX，由于Mosaic生成的训练图片，远远脱离自然图片的真实分布。
-    #                       当mosaic=True时，本代码会在special_aug_ratio范围内开启mosaic。
-    #                       默认为前70%个epoch，100个世代会开启70个世代。
-    #
-    #   余弦退火算法的参数放到下面的lr_decay_type中设置
+    #   数据增强：默认使用Albumentations的模拟恶劣天气增强
     # ------------------------------------------------------------------#
-    mosaic = False
-    mosaic_prob = 0.5
-    mixup = False
-    mixup_prob = 0.5
-    special_aug_ratio = 0.6
 
     # ----------------------------------------------------------------------------------------------------------------------------#
     #   训练分为两个阶段，分别是冻结阶段和解冻阶段。设置冻结阶段是为了满足机器性能不足的同学的训练需求。
@@ -325,7 +298,7 @@ if __name__ == "__main__":
             print("\n\033[1;33;44m温馨提示，head部分没有载入是正常现象，Backbone部分没有载入是错误的。\033[0m")
 
     # ----------------------#
-    #   获得损失函数
+    #   目标检测的损失函数
     # ----------------------#
     yolo_loss = YOLOLoss(num_classes, fp16)
     # ----------------------#
@@ -380,7 +353,7 @@ if __name__ == "__main__":
     ema = ModelEMA(model_train)
 
     # ---------------------------#
-    #   读取检测数据集对应的txt
+    #   读取数据集对应的txt
     # ---------------------------#
     with open(train_annotation_path, encoding='utf-8') as f:
         train_lines = f.readlines()
@@ -388,16 +361,6 @@ if __name__ == "__main__":
         val_lines = f.readlines()
     num_train = len(train_lines)
     num_val = len(val_lines)
-
-    # ---------------------------#
-    #   读取分割数据集对应的txt
-    # ---------------------------#
-    # with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/train.txt"), "r") as f:
-    #     train_lines_seg = f.readlines()
-    # with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/val.txt"), "r") as f:
-    #     val_lines_seg = f.readlines()
-    # num_train_seg = len(train_lines_seg)
-    # num_val_seg = len(val_lines_seg)
 
     if local_rank == 0:
         show_config(
@@ -510,25 +473,14 @@ if __name__ == "__main__":
                                   special_aug_ratio=0, radar_root=radar_file_path,
                                   num_classes_seg=num_classes_seg, seg_dataset_path=VOCdevkit_path)
 
-        # ---------------------------------------#
-        #   构建分割数据集加载器。
-        # ---------------------------------------#
-        # train_dataset_seg = DeeplabDataset(train_lines_seg, input_shape, num_classes_seg, True, VOCdevkit_path)
-        # val_dataset_seg = DeeplabDataset(val_lines_seg, input_shape, num_classes_seg, False, VOCdevkit_path)
-
-
         if distributed:
             train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, shuffle=True, )
-            # train_sampler_seg = torch.utils.data.distributed.DistributedSampler(train_dataset_seg, shuffle=True, )
             val_sampler = torch.utils.data.distributed.DistributedSampler(val_dataset, shuffle=False, )
-            # val_sampler_seg = torch.utils.data.distributed.DistributedSampler(val_dataset_seg, shuffle=False, )
             batch_size = batch_size // ngpus_per_node
             shuffle = False
         else:
             train_sampler = None
-            # train_sampler_seg = None
             val_sampler = None
-            # val_sampler_seg = None
             shuffle = True
 
         # ---------------------------------------#
@@ -540,15 +492,6 @@ if __name__ == "__main__":
         gen_val = DataLoader(val_dataset, shuffle=shuffle, batch_size=batch_size, num_workers=num_workers,
                              pin_memory=True,
                              drop_last=True, collate_fn=yolo_dataset_collate, sampler=val_sampler)
-
-        # ---------------------------------------#
-        #   构建分割Dataloader。
-        # ---------------------------------------#
-        # gen_seg = DataLoader(train_dataset_seg, shuffle = shuffle, batch_size = batch_size, num_workers = num_workers, pin_memory=True,
-        #                             drop_last = True, collate_fn = deeplab_dataset_collate, sampler=train_sampler_seg)
-        #
-        # gen_val_seg = DataLoader(val_dataset_seg, shuffle=shuffle, batch_size=batch_size, num_workers=num_workers,
-        #                      pin_memory=True, drop_last=True, collate_fn=deeplab_dataset_collate, sampler=val_sampler_seg)
 
         # ----------------------#
         #   记录eval的map曲线
@@ -617,60 +560,11 @@ if __name__ == "__main__":
                 train_sampler.set_epoch(epoch)
 
             set_optimizer_lr(optimizer, lr_scheduler_func, epoch)
-            # ------------------------------------------- cross training --------------------------------------- #
 
-            # =========== detection unfreeze backbone ========== #
-            # if train_index % 4 == 0 and train_index * 10 <= epoch < (train_index + 1) * 10:
             fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history_seg, eval_callback,
                           eval_callback_seg, optimizer, epoch, epoch_step, epoch_step_val, gen, gen_val, UnFreeze_Epoch,
                           Cuda, fp16, scaler, save_period, save_dir,
                           dice_loss, focal_loss, cls_weights, num_classes_seg, local_rank)
-
-            # ================================================== #
-
-            # # =========== segmentation freeze backbone ============ #
-            # if train_index % 4 == 1 and train_index * 10 <= epoch < (train_index + 1) * 10:
-            #     for param in model.backbone.backbone.parameters():
-            #         param.requires_grad = False
-            #     print("-----start semantic segmentation training (freeze backbone)-----")
-            #     fit_one_epoch_seg(model_train, model, loss_history_seg, optimizer, epoch,
-            #                       epoch_step_seg, epoch_step_val_seg, gen_seg, gen_val_seg, UnFreeze_Epoch, Cuda, dice_loss,
-            #                       focal_loss,
-            #                       cls_weights, num_classes_seg, fp16, scaler, save_period, save_dir_seg, local_rank)
-            #     print("-----end semantic segmentation training (freeze backbone)-----")
-            # # ====================================================== #
-            #
-            # # =========== segmentation unfreeze backbone ============ #
-            # if train_index % 4 == 2 and train_index * 10 <= epoch < (train_index + 1) * 10:
-            #     for param in model.backbone.backbone.parameters():
-            #         param.requires_grad = True
-            #     print("-----start semantic segmentation training (unfreeze backbone)-----")
-            #     fit_one_epoch_seg(model_train, model, loss_history_seg, optimizer, epoch,
-            #                         epoch_step_seg, epoch_step_val_seg, gen_seg, gen_val_seg, UnFreeze_Epoch, Cuda, dice_loss,
-            #                         focal_loss,
-            #                         cls_weights, num_classes_seg, fp16, scaler, save_period, save_dir_seg, local_rank)
-            #     print("-----end semantic segmentation training (unfreeze backbone)-----")
-            # # ====================================================== #
-            #
-            # # ========================= detection + segmentation ========================== #
-            # if train_index % 4 == 3 and train_index * 10 <= epoch < (train_index + 1) * 10:
-            #     print("-----start object detection training (cross training)-----")
-            #     fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, eval_callback, optimizer, epoch,
-            #                   epoch_step,
-            #                   epoch_step_val, gen, gen_val, UnFreeze_Epoch, Cuda, fp16, scaler, save_period, save_dir,
-            #                   local_rank)
-            #     print("-----end object detection training (cross training)-----")
-            #     print("-----start semantic segmentation training (cross training)-----")
-            #     fit_one_epoch_seg(model_train, model, loss_history_seg, optimizer, epoch,
-            #                       epoch_step_seg, epoch_step_val_seg, gen_seg, gen_val_seg, UnFreeze_Epoch, Cuda, dice_loss,
-            #                       focal_loss,
-            #                       cls_weights, num_classes_seg, fp16, scaler, save_period, save_dir_seg, local_rank)
-            #     print("-----end semantic segmentation training (cross training)-----")
-            # # ============================================================================== #
-            #
-            # if epoch / 10 > 0 and epoch % 10 == 0:
-            #     train_index += 1
-            # ---------------------------------------- end cross training ------------------------------------------- #
 
             if distributed:
                 dist.barrier()
