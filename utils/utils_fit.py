@@ -27,7 +27,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
     total_loss = 0
     val_total_loss = 0
 
-    if local_rank == 0:
+    if local_rank == 0 or local_rank == 1:
         print('Start Train')
         pbar = tqdm(total=epoch_step, desc=f'Epoch {epoch + 1}/{Epoch}', postfix=dict, mininterval=0.3)
     model_train.train()
@@ -121,7 +121,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
         total_loss += total_loss_det + total_loss_seg
         total_f_score += train_f_score.item()
 
-        if local_rank == 0:
+        if local_rank == 0 or local_rank == 1:
             pbar.set_postfix(**{'detection loss': total_loss_det / (iteration + 1),
                                 'segmentation loss': total_loss_seg / (iteration + 1),
                                 'total loss': total_loss / (iteration + 1),
@@ -129,7 +129,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
                                 'lr': get_lr(optimizer)})
             pbar.update(1)
 
-    if local_rank == 0:
+    if local_rank == 0 or local_rank == 1:
         pbar.close()
         print('Finish Train')
         print('Start Validation')
@@ -186,7 +186,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
         val_loss_seg += loss_value_seg.item()
         val_total_loss = val_loss_det + val_loss_seg
 
-        if local_rank == 0:
+        if local_rank == 0 or local_rank == 1:
             pbar.set_postfix(**{'detection val_loss': val_loss_det / (iteration + 1),
                                 'segmentation val_loss': val_loss_seg / (iteration + 1),
                                 'val loss': val_total_loss / (iteration + 1),
@@ -194,7 +194,7 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
                                 })
             pbar.update(1)
 
-    if local_rank == 0:
+    if local_rank == 0 or local_rank == 1:
         pbar.close()
         print('Finish Validation')
         loss_history.append_loss(epoch + 1, total_loss_det / epoch_step, val_loss_det / epoch_step_val)

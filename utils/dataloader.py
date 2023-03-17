@@ -1,5 +1,5 @@
 from random import sample, shuffle
-
+import re
 import cv2
 import numpy as np
 import torch
@@ -69,14 +69,18 @@ class YoloDataset(Dataset):
 
     def __getitem__(self, index):
         index = index % self.length
-        name = self.annotation_lines[index][72:88]
+
+        name = self.annotation_lines[index]
+        pattern_string = "\d{10}.\d{5}"
+        pattern = re.compile(pattern_string)  # 查找数字
+        name = pattern.findall(name)[-1]
 
         # ---------------------- 分割数据 ------------------- #
         # jpg = Image.open(os.path.join(os.path.join(self.seg_dataset_path, "VOC2007/JPEGImages"), name + ".jpg"))
         png = Image.open(os.path.join(os.path.join(self.seg_dataset_path, "VOC2007/SegmentationClass"), name + ".png"))
         # -------------------------------------------------- #
 
-        image, box, radar, png = self.get_random_data(self.annotation_lines[index], self.input_shape, png, random=self.train)
+        image, box, radar, png = self.get_random_data(self.annotation_lines[index], self.input_shape, png, name, random=self.train)
 
         image = np.transpose(preprocess_input_seg(np.array(image, dtype=np.float64)), [2, 0, 1])
         box = np.array(box, dtype=np.float64)
@@ -100,11 +104,11 @@ class YoloDataset(Dataset):
     def rand(self, a=0, b=1):
         return np.random.rand() * (b - a) + a
 
-    def get_random_data(self, annotation_line, input_shape, seg_label, jitter=.3, hue=.1, sat=0.7, val=0.4, random=False):
+    def get_random_data(self, annotation_line, input_shape, seg_label, id, jitter=.3, hue=.1, sat=0.7, val=0.4, random=False):
         # ------------------------------#
         #   雷达特征读取
         # ------------------------------#
-        radar_path = self.radar_root + '/' + annotation_line[72:88] + '.npz'
+        radar_path = self.radar_root + '/' + id + '.npz'
         radar_data = np.load(radar_path)['arr_0']
 
         line = annotation_line.split()

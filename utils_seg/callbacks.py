@@ -1,5 +1,5 @@
 import os
-
+import re
 import matplotlib
 import torch
 import torch.nn.functional as F
@@ -98,7 +98,10 @@ class EvalCallback():
         self.period = period
         self.radar_path = radar_path
 
-        self.image_ids = [image_id[72:88] for image_id in image_ids]
+        pattern_string = "\d{10}.\d{5}"
+        pattern = re.compile(pattern_string)  # 查找数字
+        self.image_ids = [pattern.findall(image_id)[-1] for image_id in image_ids]
+
         self.mious = [0]
         self.epoches = [0]
         if self.eval_flag:

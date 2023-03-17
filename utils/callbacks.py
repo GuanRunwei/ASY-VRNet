@@ -1,5 +1,5 @@
 import os
-
+import re
 import torch
 import matplotlib
 
@@ -187,7 +187,11 @@ class EvalCallback():
                 # ------------------------------#
                 #   读取雷达特征map
                 # ------------------------------#
-                radar_path = os.path.join(self.radar_path, annotation_line[72:88] + '.npz')
+                pattern_string = "\d{10}.\d{5}"
+                pattern = re.compile(pattern_string)  # 查找数字
+                name = pattern.findall(annotation_line)[-1]
+
+                radar_path = os.path.join(self.radar_path, name + '.npz')
                 radar_data = np.load(radar_path)['arr_0']
                 radar_data = torch.from_numpy(radar_data).type(torch.cuda.FloatTensor).unsqueeze(0)
 
