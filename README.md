@@ -24,7 +24,7 @@ Radar: Ocuii Imaging Radar
 > **object 1** (the first four numbers are the bounding box and the last is the category): 1131,430,1152,473,0   
 > **object 2**: 920,425,937,451,0   
 > Therefore, each line is like this: E:/Big_Datasets/water_surface/all-1114/all/VOCdevkit/VOC2007/JPEGImages/1664091257.87023.jpg 1131,430,1152,473,0 920,425,937,451,0 
-> 2. Organize the files in VOC format in one folder like this: 
+> 2. Organize the files in VOC format in one folder like this: \
 > VOCdevkit \
 > -VOC2007  \
 > -- Annotations -> xml annotations in VOC format (you need to put annotations in it)  \
@@ -33,7 +33,7 @@ Radar: Ocuii Imaging Radar
 > **enter** voc_annotation.py and follow the annotation to make your dataset
 
 
-> For semantic segmentation, make the folders in VOC format.
+> For semantic segmentation, make the folders in VOC format. \
 > VOCdevkit \
 > -VOC2007  \
 > -- ImageSets -> id (you do not need to do)  \
