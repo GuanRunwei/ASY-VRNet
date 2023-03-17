@@ -56,8 +56,12 @@ The only difference between them is the format.
 * Visualization
 
 > **predict.py** is to test the object detection  \
+> **yolo.py** is to define the model for object detection \
+
 > **predict_seg.py** is to test the semantic segmentation  \
-> enter the file see the details by annotations in the files
+> **deeplab.py** is to define the model for semantic segmentation \
+
+> enter these files see the details by annotations in the files
 
 If have any questions, put them in Issue ---
 
