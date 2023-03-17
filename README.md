@@ -10,7 +10,7 @@ Radar: Ocuii Imaging Radar
 * Create a conda environment and install dependencies
 > git clone https://github.com/GuanRunwei/Efficient-VRNet.git \
 > cd Efficient-VRNet   \
-> conda create -n pointnn python=3.7  \
+> conda create -n efficientvrnet python=3.7  \
 > conda activate efficientvrnet   \
 > pip install -r requirements.txt
 
