@@ -59,6 +59,6 @@ The only difference between them is the format.
 > **predict_seg.py** is to test the semantic segmentation  \
 > enter the file see the details by annotations in the files
 
-If have any questions, put them in Issue
+If have any questions, put them in Issue --
 
 
