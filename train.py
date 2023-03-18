@@ -23,7 +23,6 @@ from utils.utils_fit import fit_one_epoch
 from utils_seg.callbacks import LossHistory as LossHistory_seg
 
 
-
 if __name__ == "__main__":
     # ---------------------------------#
     #   Cuda    是否使用Cuda
