@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="modify the file read script">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="no">
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -172,9 +171,9 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="Runwei Guan &lt;31555628+guanrunwei@users.noreply.github.com&gt;" />
-        <option value="GuanRunwei &lt;864037205@qq.com&gt;" />
         <option value="GuanRunwei &lt;thinkerai@foxmail.com&gt;" />
+        <option value="GuanRunwei &lt;864037205@qq.com&gt;" />
+        <option value="Runwei Guan &lt;31555628+guanrunwei@users.noreply.github.com&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -486,7 +485,7 @@
       <workItem from="1678342470977" duration="1706000" />
       <workItem from="1679022246139" duration="1500000" />
       <workItem from="1679030227693" duration="6736000" />
-      <workItem from="1679096894491" duration="1099000" />
+      <workItem from="1679096894491" duration="1883000" />
     </task>
     <task id="LOCAL-00001" summary="complete the basic structure of VRCoC">
       <created>1674203093310</created>
@@ -796,11 +795,32 @@
       <option name="project" value="LOCAL" />
       <updated>1679098844714</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="no">
+      <created>1679098916396</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1679098916396</updated>
+    </task>
+    <task id="LOCAL-00046" summary="modify the file read script">
+      <created>1679098967803</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1679098967803</updated>
+    </task>
+    <task id="LOCAL-00047" summary="no">
+      <created>1679099128878</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1679099128878</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251622000" />
+    <option name="totallyTimeSpent" value="252406000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -884,7 +904,8 @@
     <MESSAGE value="modify the annotation of the code" />
     <MESSAGE value="Complete the readme.md and requirements.txt" />
     <MESSAGE value="modify the file read script" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify the file read script" />
+    <MESSAGE value="no" />
+    <option name="LAST_COMMIT_MESSAGE" value="no" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/voc_annotation_seg.py">
