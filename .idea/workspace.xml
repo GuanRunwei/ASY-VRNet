@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f486448-434f-4c17-ba9f-6bb00eff0c51" name="Default Changelist" comment="no">
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,13 +41,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="18" column="64" lean-forward="true" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
+            <state relative-caret-position="384">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="e#141#156#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4160">
+              <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
+              <folding>
+                <element signature="e#38#47#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,22 +78,10 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="432">
-                <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <first_editor relative-caret-position="448">
+                <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/dataloader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2704">
-              <caret line="181" column="41" selection-start-line="181" selection-start-column="31" selection-end-line="181" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -171,9 +171,10 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Runwei Guan &lt;31555628+guanrunwei@users.noreply.github.com&gt;" />
+        <option value="rUNWEI" />
         <option value="GuanRunwei &lt;thinkerai@foxmail.com&gt;" />
         <option value="GuanRunwei &lt;864037205@qq.com&gt;" />
-        <option value="Runwei Guan &lt;31555628+guanrunwei@users.noreply.github.com&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -258,6 +259,12 @@
               <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
               <item name="backbone" type="462c0819:PsiDirectoryNode" />
               <item name="attention_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Efficient-VRNet" type="462c0819:PsiDirectoryNode" />
+              <item name="backbone" type="462c0819:PsiDirectoryNode" />
+              <item name="fusion" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Efficient-VRNet" type="b2602c69:ProjectViewProjectNode" />
@@ -485,28 +492,7 @@
       <workItem from="1678342470977" duration="1706000" />
       <workItem from="1679022246139" duration="1500000" />
       <workItem from="1679030227693" duration="6736000" />
-      <workItem from="1679096894491" duration="1883000" />
-    </task>
-    <task id="LOCAL-00001" summary="complete the basic structure of VRCoC">
-      <created>1674203093310</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1674203093310</updated>
-    </task>
-    <task id="LOCAL-00002" summary="complete the basic structure of VRCoC2">
-      <created>1674220612954</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1674220612954</updated>
-    </task>
-    <task id="LOCAL-00003" summary="complete the basic structure of VRCoC2">
-      <created>1674220675926</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1674220675926</updated>
+      <workItem from="1679096894491" duration="3150000" />
     </task>
     <task id="LOCAL-00004" summary="complete the basic structure of VRCoC2">
       <created>1674220725827</created>
@@ -816,11 +802,46 @@
       <option name="project" value="LOCAL" />
       <updated>1679099128878</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="no">
+      <created>1679099696098</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1679099696098</updated>
+    </task>
+    <task id="LOCAL-00049" summary="no">
+      <created>1679099730963</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1679099730963</updated>
+    </task>
+    <task id="LOCAL-00050" summary="no">
+      <created>1679099804078</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1679099804078</updated>
+    </task>
+    <task id="LOCAL-00051" summary="no">
+      <created>1679099834115</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1679099834115</updated>
+    </task>
+    <task id="LOCAL-00052" summary="no">
+      <created>1679099870621</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1679099870621</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252406000" />
+    <option name="totallyTimeSpent" value="253673000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -988,16 +1009,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/logs_seg/loss_2023_03_06_10_58_58/epoch_miou.png" />
-    <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-656">
-          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
-          <folding>
-            <element signature="e#38#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/utils_bbox.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1104">
@@ -1180,8 +1191,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="432">
-            <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <first_editor relative-caret-position="448">
+            <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
           </first_editor>
           <second_editor />
         </state>
@@ -1196,10 +1207,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="18" column="64" lean-forward="true" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
+        <state relative-caret-position="384">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="e#141#156#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backbone/fusion/vr_coc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4160">
+          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
+          <folding>
+            <element signature="e#38#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
