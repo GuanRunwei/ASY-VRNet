@@ -132,12 +132,12 @@ def shuffle_channels(x, groups=2):
 
 class CoCFpnDual(nn.Module):
     def __init__(self, num_seg_class=9, depth=1.0, width=1.0, in_features=("dark2", "dark3", "dark4", "dark5"),
-                 in_channels=[64, 128, 320, 512], aspp_channel=1024):
+                 in_channels=[64, 128, 320, 512], aspp_channel=1024, img_width=512, img_height=512):
         super().__init__()
 
         Conv = CoC_Conv
 
-        self.backbone = coc_small(pretrained=False, width=width)
+        self.backbone = coc_small(pretrained=False, width=width, img_height=img_height, img_width=img_width)
         self.in_features = in_features
         self.num_seg_class = num_seg_class
         in_channels = [int(item*width) for item in in_channels]
