@@ -101,9 +101,8 @@ def fit_one_epoch(model_train, model, ema, yolo_loss, loss_history, loss_history
                 # ----------------------#
                 loss_det = yolo_loss(outputs, targets)
 
-                # mtl = MultiTaskLossWrapper(task_num=2)
-                # total_loss = mtl(loss_seg, loss_det)
-                total_loss = loss_det + 5 * loss_seg
+                mtl = MultiTaskLossWrapper(task_num=2)
+                total_loss = mtl(loss_seg, loss_det)
 
                 with torch.no_grad():
                     train_f_score = f_score(outputs_seg, seg_labels)
