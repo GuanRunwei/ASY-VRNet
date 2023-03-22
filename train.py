@@ -1,6 +1,6 @@
-# ----------------------------------------------#
-#       对数据集进行训练, created by Runwei Guan
-# ----------------------------------------------#
+# -------------------------------------#
+#       对数据集进行训练
+# -------------------------------------#
 import datetime
 import os
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
@@ -16,10 +16,14 @@ from nets.efficient_vrnet import EfficientVRNet
 from nets.yolo_training import (ModelEMA, YOLOLoss, get_lr_scheduler,
                                 set_optimizer_lr, weights_init)
 from utils.callbacks import LossHistory, EvalCallback
+from utils_seg.callbacks import LossHistory as LossHistory_seg
 from utils_seg.callbacks import EvalCallback as EvalCallback_seg
 from utils.dataloader import YoloDataset, yolo_dataset_collate
 from utils.utils import get_classes, show_config
 from utils.utils_fit import fit_one_epoch
+from utils_seg.utils import show_config as show_config_seg
+from utils_seg.dataloader import DeeplabDataset, deeplab_dataset_collate
+from utils_seg.utils_fit import fit_one_epoch as fit_one_epoch_seg
 from utils_seg.callbacks import LossHistory as LossHistory_seg
 
 
@@ -56,6 +60,11 @@ if __name__ == "__main__":
     # ---------------------------------------------------------------------#
     classes_path = 'model_data/waterscenes.txt'
     # ----------------------------------------------------------------------------------------------------------------------------#
+    #   权值文件的下载请看README，可以通过网盘下载。模型的 预训练权重 对不同数据集是通用的，因为特征是通用的。
+    #   模型的 预训练权重 比较重要的部分是 主干特征提取网络的权值部分，用于进行特征提取。
+    #   预训练权重对于99%的情况都必须要用，不用的话主干部分的权值太过随机，特征提取效果不
+    #   明显，网络训练的结果也不会好
+    #
     #   如果训练过程中存在中断训练的操作，可以将model_path设置成logs文件夹下的权值文件，将已经训练了一部分的权值再次载入。
     #   同时修改下方的 冻结阶段 或者 解冻阶段 的参数，来保证模型epoch的连续性。
     #
@@ -63,6 +72,12 @@ if __name__ == "__main__":
     #
     #   此处使用的是整个模型的权重，因此是在train.py进行加载的。
     #   如果想要让模型从0开始训练，则设置model_path = ''，下面的Freeze_Train = False，此时从0开始训练，且没有冻结主干的过程。
+    #
+    #   一般来讲，网络从0开始的训练效果会很差，因为权值太过随机，特征提取效果不明显，因此非常、非常、非常不建议大家从0开始训练！
+    #   从0开始训练有两个方案：
+    #   1、得益于Mosaic数据增强方法强大的数据增强能力，将UnFreeze_Epoch设置的较大（300及以上）、batch较大（16及以上）、数据较多（万以上）的情况下，
+    #      可以设置mosaic=True，直接随机初始化参数开始训练，但得到的效果仍然不如有预训练的情况。（像COCO这样的大数据集可以这样做）
+    #   2、了解imagenet数据集，首先训练分类模型，获得网络的主干部分权值，分类模型的 主干部分 和该模型通用，基于此进行训练。
     # ----------------------------------------------------------------------------------------------------------------------------#
     model_path = ''
     # ------------------------------------------------------#
@@ -70,14 +85,31 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     input_shape = [512, 512]
     # ------------------------------------------------------#
-    #   所使用的Efficient-VRNet的版本。nano、tiny、s、m、l
+    #   所使用的YoloX的版本。nano、tiny、s、m、l
     # ------------------------------------------------------#
     phi = 'nano'
     # ------------------------------------------------------#
 
     # ------------------------------------------------------------------#
-    #   数据增强：默认使用Albumentations的模拟恶劣天气增强
+    #   mosaic              马赛克数据增强。
+    #   mosaic_prob         每个step有多少概率使用mosaic数据增强，默认50%。
+    #
+    #   mixup               是否使用mixup数据增强，仅在mosaic=True时有效。
+    #                       只会对mosaic增强后的图片进行mixup的处理。
+    #   mixup_prob          有多少概率在mosaic后使用mixup数据增强，默认50%。
+    #                       总的mixup概率为mosaic_prob * mixup_prob。
+    #
+    #   special_aug_ratio   参考YoloX，由于Mosaic生成的训练图片，远远脱离自然图片的真实分布。
+    #                       当mosaic=True时，本代码会在special_aug_ratio范围内开启mosaic。
+    #                       默认为前70%个epoch，100个世代会开启70个世代。
+    #
+    #   余弦退火算法的参数放到下面的lr_decay_type中设置
     # ------------------------------------------------------------------#
+    mosaic = False
+    mosaic_prob = 0.5
+    mixup = False
+    mixup_prob = 0.5
+    special_aug_ratio = 0.6
 
     # ----------------------------------------------------------------------------------------------------------------------------#
     #   训练分为两个阶段，分别是冻结阶段和解冻阶段。设置冻结阶段是为了满足机器性能不足的同学的训练需求。
@@ -234,6 +266,9 @@ if __name__ == "__main__":
 
     # ======================================================================================= #
 
+
+
+
     # ------------------------------------------------------#
     #   设置用到的显卡
     # ------------------------------------------------------#
@@ -247,9 +282,9 @@ if __name__ == "__main__":
             print(f"[{os.getpid()}] (rank = {rank}, local_rank = {local_rank}) training...")
             print("Gpu Device Count : ", ngpus_per_node)
     else:
-        device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-        local_rank = 0
-        rank = 0
+        device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
+        local_rank = 1
+        rank = 1
 
     # ----------------------------------------------------#
     #   获取classes和anchor
@@ -259,7 +294,7 @@ if __name__ == "__main__":
     # ------------------------------------------------------#
     #   创建yolo模型
     # ------------------------------------------------------#
-    model = EfficientVRNet(num_classes=num_classes, num_seg_classes=num_classes_seg, phi=phi)
+    model = EfficientVRNet(num_classes=num_classes, num_seg_classes=num_classes_seg, phi=phi).cuda(local_rank)
     weights_init(model)
     if model_path != '':
         # ------------------------------------------------------#
@@ -285,27 +320,23 @@ if __name__ == "__main__":
         # ------------------------------------------------------#
         #   显示没有匹配上的Key
         # ------------------------------------------------------#
-        if local_rank == 0:
+        if local_rank == 0 or local_rank == 1:
             print("\nSuccessful Load Key:", str(load_key)[:500], "……\nSuccessful Load Key Num:", len(load_key))
             print("\nFail To Load Key:", str(no_load_key)[:500], "……\nFail To Load Key num:", len(no_load_key))
             print("\n\033[1;33;44m温馨提示，head部分没有载入是正常现象，Backbone部分没有载入是错误的。\033[0m")
 
     # ----------------------#
-    #   目标检测的损失函数
+    #   获得损失函数
     # ----------------------#
     yolo_loss = YOLOLoss(num_classes, fp16)
     # ----------------------#
     #   记录Loss
     # ----------------------#
-    if local_rank == 0:
-        time_str = datetime.datetime.strftime(datetime.datetime.now(), '%Y_%m_%d_%H_%M_%S')
-        log_dir = os.path.join(save_dir, "loss_" + str(time_str))
-        log_dir_seg = os.path.join(save_dir_seg, "loss_" + str(time_str))
-        loss_history = LossHistory(log_dir, model, input_shape=input_shape)
-        loss_history_seg = LossHistory_seg(log_dir_seg, model, input_shape=input_shape)
-    else:
-        loss_history = None
-        loss_history_seg = None
+    time_str = datetime.datetime.strftime(datetime.datetime.now(), '%Y_%m_%d_%H_%M_%S')
+    log_dir = os.path.join(save_dir, "loss_" + str(time_str))
+    log_dir_seg = os.path.join(save_dir_seg, "loss_" + str(time_str))
+    loss_history = LossHistory(log_dir, model, input_shape=input_shape)
+    loss_history_seg = LossHistory_seg(log_dir_seg, model, input_shape=input_shape)
 
     # ------------------------------------------------------------------#
     #   torch 1.2不支持amp，建议使用torch 1.7.1及以上正确使用fp16
@@ -338,7 +369,7 @@ if __name__ == "__main__":
         else:
             # model_train = torch.nn.DataParallel(model)
             cudnn.benchmark = True
-            model_train = model_train.cuda()
+            model_train = model_train.to(device)
 
     # ----------------------------#
     #   权值平滑
@@ -346,7 +377,7 @@ if __name__ == "__main__":
     ema = ModelEMA(model_train)
 
     # ---------------------------#
-    #   读取数据集对应的txt
+    #   读取检测数据集对应的txt
     # ---------------------------#
     with open(train_annotation_path, encoding='utf-8') as f:
         train_lines = f.readlines()
@@ -355,32 +386,42 @@ if __name__ == "__main__":
     num_train = len(train_lines)
     num_val = len(val_lines)
 
-    if local_rank == 0:
-        show_config(
-            classes_path=classes_path, model_path=model_path, input_shape=input_shape, \
-            Init_Epoch=Init_Epoch, Freeze_Epoch=Freeze_Epoch, UnFreeze_Epoch=UnFreeze_Epoch,
-            Freeze_batch_size=Freeze_batch_size, Unfreeze_batch_size=Unfreeze_batch_size, Freeze_Train=Freeze_Train, \
-            Init_lr=Init_lr, Min_lr=Min_lr, optimizer_type=optimizer_type, momentum=momentum,
-            lr_decay_type=lr_decay_type, \
-            save_period=save_period, save_dir=save_dir, num_workers=num_workers, num_train=num_train, num_val=num_val
-        )
-        # ---------------------------------------------------------#
-        #   总训练世代指的是遍历全部数据的总次数
-        #   总训练步长指的是梯度下降的总次数
-        #   每个训练世代包含若干训练步长，每个训练步长进行一次梯度下降。
-        #   此处仅建议最低训练世代，上不封顶，计算时只考虑了解冻部分
-        # ----------------------------------------------------------#
-        wanted_step = 5e4 if optimizer_type == "sgd" else 1.5e4
-        total_step = num_train // Unfreeze_batch_size * UnFreeze_Epoch
-        if total_step <= wanted_step:
-            if num_train // Unfreeze_batch_size == 0:
-                raise ValueError('数据集过小，无法进行训练，请扩充数据集。')
-            wanted_epoch = wanted_step // (num_train // Unfreeze_batch_size) + 1
-            print("\n\033[1;33;44m[Warning] 使用%s优化器时，建议将训练总步长设置到%d以上。\033[0m" % (optimizer_type, wanted_step))
-            print("\033[1;33;44m[Warning] 本次运行的总训练数据量为%d，Unfreeze_batch_size为%d，共训练%d个Epoch，计算出总训练步长为%d。\033[0m" % (
+    # ---------------------------#
+    #   读取分割数据集对应的txt
+    # ---------------------------#
+    # with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/train.txt"), "r") as f:
+    #     train_lines_seg = f.readlines()
+    # with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/val.txt"), "r") as f:
+    #     val_lines_seg = f.readlines()
+    # num_train_seg = len(train_lines_seg)
+    # num_val_seg = len(val_lines_seg)
+
+    show_config(
+        classes_path=classes_path, model_path=model_path, input_shape=input_shape, \
+        Init_Epoch=Init_Epoch, Freeze_Epoch=Freeze_Epoch, UnFreeze_Epoch=UnFreeze_Epoch,
+        Freeze_batch_size=Freeze_batch_size, Unfreeze_batch_size=Unfreeze_batch_size, Freeze_Train=Freeze_Train, \
+        Init_lr=Init_lr, Min_lr=Min_lr, optimizer_type=optimizer_type, momentum=momentum,
+        lr_decay_type=lr_decay_type, \
+        save_period=save_period, save_dir=save_dir, num_workers=num_workers, num_train=num_train, num_val=num_val
+    )
+    # ---------------------------------------------------------#
+    #   总训练世代指的是遍历全部数据的总次数
+    #   总训练步长指的是梯度下降的总次数
+    #   每个训练世代包含若干训练步长，每个训练步长进行一次梯度下降。
+    #   此处仅建议最低训练世代，上不封顶，计算时只考虑了解冻部分
+    # ----------------------------------------------------------#
+    wanted_step = 5e4 if optimizer_type == "sgd" else 1.5e4
+    total_step = num_train // Unfreeze_batch_size * UnFreeze_Epoch
+    if total_step <= wanted_step:
+        if num_train // Unfreeze_batch_size == 0:
+            raise ValueError('数据集过小，无法进行训练，请扩充数据集。')
+        wanted_epoch = wanted_step // (num_train // Unfreeze_batch_size) + 1
+        print("\n\033[1;33;44m[Warning] 使用%s优化器时，建议将训练总步长设置到%d以上。\033[0m" % (optimizer_type, wanted_step))
+        print("\033[1;33;44m[Warning] 本次运行的总训练数据量为%d，Unfreeze_batch_size为%d，共训练%d个Epoch，计算出总训练步长为%d。\033[0m" % (
             num_train, Unfreeze_batch_size, UnFreeze_Epoch, total_step))
-            print("\033[1;33;44m[Warning] 由于总训练步长为%d，小于建议总步长%d，建议设置总世代为%d。\033[0m" % (
+        print("\033[1;33;44m[Warning] 由于总训练步长为%d，小于建议总步长%d，建议设置总世代为%d。\033[0m" % (
             total_step, wanted_step, wanted_epoch))
+
 
     # ------------------------------------------------------#
     #   主干特征提取网络特征通用，冻结训练可以加快训练速度
@@ -466,14 +507,25 @@ if __name__ == "__main__":
                                   special_aug_ratio=0, radar_root=radar_file_path,
                                   num_classes_seg=num_classes_seg, seg_dataset_path=VOCdevkit_path)
 
+        # ---------------------------------------#
+        #   构建分割数据集加载器。
+        # ---------------------------------------#
+        # train_dataset_seg = DeeplabDataset(train_lines_seg, input_shape, num_classes_seg, True, VOCdevkit_path)
+        # val_dataset_seg = DeeplabDataset(val_lines_seg, input_shape, num_classes_seg, False, VOCdevkit_path)
+
+
         if distributed:
             train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, shuffle=True, )
+            # train_sampler_seg = torch.utils.data.distributed.DistributedSampler(train_dataset_seg, shuffle=True, )
             val_sampler = torch.utils.data.distributed.DistributedSampler(val_dataset, shuffle=False, )
+            # val_sampler_seg = torch.utils.data.distributed.DistributedSampler(val_dataset_seg, shuffle=False, )
             batch_size = batch_size // ngpus_per_node
             shuffle = False
         else:
             train_sampler = None
+            # train_sampler_seg = None
             val_sampler = None
+            # val_sampler_seg = None
             shuffle = True
 
         # ---------------------------------------#
@@ -486,17 +538,23 @@ if __name__ == "__main__":
                              pin_memory=True,
                              drop_last=True, collate_fn=yolo_dataset_collate, sampler=val_sampler)
 
+        # ---------------------------------------#
+        #   构建分割Dataloader。
+        # ---------------------------------------#
+        # gen_seg = DataLoader(train_dataset_seg, shuffle = shuffle, batch_size = batch_size, num_workers = num_workers, pin_memory=True,
+        #                             drop_last = True, collate_fn = deeplab_dataset_collate, sampler=train_sampler_seg)
+        #
+        # gen_val_seg = DataLoader(val_dataset_seg, shuffle=shuffle, batch_size=batch_size, num_workers=num_workers,
+        #                      pin_memory=True, drop_last=True, collate_fn=deeplab_dataset_collate, sampler=val_sampler_seg)
+
         # ----------------------#
         #   记录eval的map曲线
         # ----------------------#
-        if local_rank == 0:
-            eval_callback = EvalCallback(model, input_shape, class_names, num_classes, val_lines, log_dir, Cuda, \
-                                         eval_flag=eval_flag, period=eval_period, radar_path=radar_file_path)
-            eval_callback_seg = EvalCallback_seg(model, input_shape, num_classes_seg, val_lines, VOCdevkit_path,
-                                                 log_dir_seg, Cuda, eval_flag=eval_flag, period=eval_period,
-                                                 radar_path=radar_file_path)
-        else:
-            eval_callback = None
+        eval_callback = EvalCallback(model, input_shape, class_names, num_classes, val_lines, log_dir, Cuda, \
+                                     eval_flag=eval_flag, period=eval_period, radar_path=radar_file_path, local_rank=local_rank)
+        eval_callback_seg = EvalCallback_seg(model, input_shape, num_classes_seg, val_lines, VOCdevkit_path,
+                                             log_dir_seg, Cuda, eval_flag=eval_flag, period=eval_period,
+                                             radar_path=radar_file_path, local_rank=local_rank)
 
         # ---------------------------------------#
         #   开始模型训练123
@@ -559,9 +617,10 @@ if __name__ == "__main__":
                           Cuda, fp16, scaler, save_period, save_dir,
                           dice_loss, focal_loss, cls_weights, num_classes_seg, local_rank)
 
+
             if distributed:
                 dist.barrier()
 
-        if local_rank == 0:
+        if local_rank >= 1:
             loss_history.writer.close()
             loss_history_seg.writer.close()

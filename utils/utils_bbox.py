@@ -29,7 +29,7 @@ def yolo_correct_boxes(box_xy, box_wh, input_shape, image_shape, letterbox_image
     boxes *= np.concatenate([image_shape, image_shape], axis=-1)
     return boxes
 
-def decode_outputs(outputs, input_shape):
+def decode_outputs(outputs, input_shape, local_rank):
     grids   = []
     strides = []
     hw      = [x.shape[-2:] for x in outputs]
@@ -69,8 +69,8 @@ def decode_outputs(outputs, input_shape):
     #
     #   1, 8400, 2
     #---------------------------#
-    grids               = torch.cat(grids, dim=1).type(outputs.type())
-    strides             = torch.cat(strides, dim=1).type(outputs.type())
+    grids               = torch.cat(grids, dim=1).type(outputs.type()).cuda(local_rank)
+    strides             = torch.cat(strides, dim=1).type(outputs.type()).cuda(local_rank)
     #------------------------#
     #   根据网格点进行解码
     #------------------------#

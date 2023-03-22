@@ -68,6 +68,8 @@ class YOLOLoss(nn.Module):
         self.grids = [torch.zeros(1)] * len(strides)
         self.fp16 = fp16
 
+        self.log_vars = nn.Parameter(torch.zeros(3))
+
     def forward(self, inputs, labels=None):
         outputs = []
         x_shifts = []
@@ -165,6 +167,10 @@ class YOLOLoss(nn.Module):
                     expanded_strides, x_shifts, y_shifts,
                 )
                 torch.cuda.empty_cache()
+
+
+
+
                 num_fg += num_fg_img
                 cls_target = F.one_hot(gt_matched_classes.to(torch.int64),
                                        self.num_classes).float() * pred_ious_this_matching.unsqueeze(-1)
@@ -184,8 +190,19 @@ class YOLOLoss(nn.Module):
         loss_iou = (self.iou_loss(bbox_preds.view(-1, 4)[fg_masks], reg_targets)).sum()
         loss_obj = (self.bcewithlog_loss(obj_preds.view(-1, 1), obj_targets)).sum()
         loss_cls = (self.bcewithlog_loss(cls_preds.view(-1, self.num_classes)[fg_masks], cls_targets)).sum()
-        reg_weight = 5.0
-        loss = reg_weight * loss_iou + loss_obj + loss_cls
+        reg_weight = 1.0
+        loss = reg_weight * loss_iou + 2 * loss_obj + 2 * loss_cls
+
+        # precision_reg = torch.exp(-self.log_vars[0])
+        # loss_iou = precision_reg * loss_iou + self.log_vars[0]
+        #
+        # precision_obj = torch.exp(-self.log_vars[1])
+        # loss_obj = precision_obj * loss_obj + self.log_vars[1]
+        #
+        # precision_cls = torch.exp(-self.log_vars[2])
+        # loss_cls = precision_cls * loss_cls + self.log_vars[2]
+        #
+        # loss = loss_iou + loss_obj + loss_cls
 
         return loss / num_fg
 

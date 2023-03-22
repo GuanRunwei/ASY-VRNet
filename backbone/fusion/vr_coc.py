@@ -322,8 +322,7 @@ class RadarEnhanceByImage(nn.Module):
         self.initial = initial
         self.radar_in_channels = radar_in_channels
         self.image_in_channels = image_in_channels
-        if initial is False:
-            self.image_attn = ShuffleAttention(channel=self.image_in_channels, G=4)
+        self.image_attn = ShuffleAttention(channel=self.image_in_channels, G=4)
         self.channel_attn = eca_block(channel=self.radar_in_channels + self.image_in_channels)
         self.inverse_projection = BaseConv(in_channels=self.radar_in_channels + self.image_in_channels,
                                            out_channels=radar_in_channels, ksize=1, stride=1)
@@ -706,7 +705,7 @@ class VRCoC(nn.Module):
 
 
 @register_model
-def coc_tiny(pretrained=False, img_width=512, img_height=512, **kwargs):
+def coc_tiny(pretrained=False, **kwargs):
     layers = [3, 4, 5, 2]
     norm_layer=GroupNorm
     embed_dims = [32, 64, 196, 320]
@@ -725,14 +724,14 @@ def coc_tiny(pretrained=False, img_width=512, img_height=512, **kwargs):
         mlp_ratios=mlp_ratios, downsamples=downsamples,
         down_patch_size = down_patch_size, down_pad=down_pad,
         proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim, img_w=img_width, img_h=img_height,
+        heads=heads, head_dim=head_dim,
         **kwargs)
     model.default_cfg = default_cfgs['model_small']
     return model
 
 
 @register_model
-def coc_tiny2(pretrained=False, img_width=512, img_height=512, **kwargs):
+def coc_tiny2(pretrained=False, **kwargs):
     layers = [3, 4, 5, 2]
     norm_layer=GroupNorm
     embed_dims = [32, 64, 196, 320]
@@ -751,14 +750,14 @@ def coc_tiny2(pretrained=False, img_width=512, img_height=512, **kwargs):
         mlp_ratios=mlp_ratios, downsamples=downsamples,
         down_patch_size = down_patch_size, down_pad=down_pad,
         proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim, img_w=img_width, img_h=img_height,
+        heads=heads, head_dim=head_dim,
         **kwargs)
     model.default_cfg = default_cfgs['model_small']
     return model
 
 
 @register_model
-def coc_small(pretrained=False, width=1.0, img_width=512, img_height=512, **kwargs):
+def coc_small(pretrained=False, width=1.0, **kwargs):
     layers = [2, 2, 6, 2]
     norm_layer=GroupNorm
     embed_dims = [int(64*width), int(128*width), int(320*width), int(512*width)]
@@ -777,14 +776,14 @@ def coc_small(pretrained=False, width=1.0, img_width=512, img_height=512, **kwar
         mlp_ratios=mlp_ratios, downsamples=downsamples,
         down_patch_size = down_patch_size, down_pad=down_pad,
         proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim, img_w=img_width, img_h=img_height,
+        heads=heads, head_dim=head_dim,
         **kwargs)
     model.default_cfg = default_cfgs['model_small']
     return model
 
 
 @register_model
-def coc_medium(pretrained=False, width=1.0, img_width=512, img_height=512, **kwargs):
+def coc_medium(pretrained=False, width=1.0, **kwargs):
     layers = [4, 4, 12, 4]
     norm_layer=GroupNorm
     embed_dims = [int(64*width), int(128*width), int(320*width), int(512*width)]
@@ -803,7 +802,7 @@ def coc_medium(pretrained=False, width=1.0, img_width=512, img_height=512, **kwa
         mlp_ratios=mlp_ratios, downsamples=downsamples,
         down_patch_size = down_patch_size, down_pad=down_pad,
         proposal_w=proposal_w, proposal_h=proposal_h, fold_w=fold_w, fold_h=fold_h,
-        heads=heads, head_dim=head_dim, img_w=img_width, img_h=img_height,
+        heads=heads, head_dim=head_dim,
         **kwargs)
     model.default_cfg = default_cfgs['model_small']
     return model

@@ -81,7 +81,7 @@ class LossHistory():
 
 
 class EvalCallback():
-    def __init__(self, net, input_shape, class_names, num_classes, val_lines, log_dir, cuda, radar_path, \
+    def __init__(self, net, input_shape, class_names, num_classes, val_lines, log_dir, cuda, local_rank, radar_path, \
                  map_out_path=".temp_map_out", max_boxes=100, confidence=0.05, nms_iou=0.5, letterbox_image=True,
                  MINOVERLAP=0.5, eval_flag=True, period=1):
         super(EvalCallback, self).__init__()
@@ -93,6 +93,7 @@ class EvalCallback():
         self.val_lines = val_lines
         self.log_dir = log_dir
         self.cuda = cuda
+        self.local_rank = local_rank
         self.map_out_path = map_out_path
         self.max_boxes = max_boxes
         self.confidence = confidence
@@ -131,12 +132,12 @@ class EvalCallback():
         with torch.no_grad():
             images = torch.from_numpy(image_data)
             if self.cuda:
-                images = images.cuda()
+                images = images.cuda(self.local_rank)
             # ---------------------------------------------------------#
             #   将图像输入网络当中进行预测！
             # ---------------------------------------------------------#
             outputs, _ = self.net(images, radar_data)
-            outputs = decode_outputs(outputs, self.input_shape)
+            outputs = decode_outputs(outputs, self.input_shape, self.local_rank)
             # ---------------------------------------------------------#
             #   将预测框进行堆叠，然后进行非极大抑制
             # ---------------------------------------------------------#
@@ -193,7 +194,7 @@ class EvalCallback():
 
                 radar_path = os.path.join(self.radar_path, name + '.npz')
                 radar_data = np.load(radar_path)['arr_0']
-                radar_data = torch.from_numpy(radar_data).type(torch.cuda.FloatTensor).unsqueeze(0)
+                radar_data = torch.from_numpy(radar_data).type(torch.FloatTensor).unsqueeze(0).cuda(self.local_rank)
 
                 image_id = os.path.basename(line[0]).split('.')[0]
                 # ------------------------------#

@@ -82,7 +82,7 @@ class LossHistory():
 
 
 class EvalCallback():
-    def __init__(self, net, input_shape, num_classes, image_ids, dataset_path, log_dir, cuda, radar_path, \
+    def __init__(self, net, input_shape, num_classes, image_ids, dataset_path, log_dir, cuda, local_rank, radar_path, \
                  miou_out_path=".temp_miou_out", eval_flag=True, period=1):
         super(EvalCallback, self).__init__()
 
@@ -93,6 +93,7 @@ class EvalCallback():
         self.dataset_path = dataset_path
         self.log_dir = log_dir
         self.cuda = cuda
+        self.local_rank = local_rank
         self.miou_out_path = miou_out_path
         self.eval_flag = eval_flag
         self.period = period
@@ -130,8 +131,8 @@ class EvalCallback():
         with torch.no_grad():
             images = torch.from_numpy(image_data)
             if self.cuda:
-                images = images.cuda()
-                radar_data = radar_data.cuda()
+                images = images.cuda(self.local_rank)
+                radar_data = radar_data.cuda(self.local_rank)
 
             # ---------------------------------------------------#
             #   图片传入网络进行预测
@@ -174,7 +175,7 @@ class EvalCallback():
                 # ------------------------------#
                 radar_path = os.path.join(self.radar_path, image_id + '.npz')
                 radar_data = np.load(radar_path)['arr_0']
-                radar_data = torch.from_numpy(radar_data).type(torch.cuda.FloatTensor).unsqueeze(0)
+                radar_data = torch.from_numpy(radar_data).type(torch.FloatTensor).unsqueeze(0).cuda(self.local_rank)
 
                 # -------------------------------#
                 #   从文件中读取图像

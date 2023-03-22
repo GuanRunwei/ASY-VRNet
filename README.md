@@ -10,7 +10,7 @@ Radar: Ocuii Imaging Radar
 * Create a conda environment and install dependencies
 > git clone https://github.com/GuanRunwei/Efficient-VRNet.git \
 > cd Efficient-VRNet   \
-> conda create -n pointnn python=3.7  \
+> conda create -n efficientvrnet python=3.7  \
 > conda activate efficientvrnet   \
 > pip install -r requirements.txt
 
@@ -43,7 +43,7 @@ Radar: Ocuii Imaging Radar
 
 > For radar files, you need to make the radar map with the spatial size of images for object detection. 
 We need four features: range, velocity, elevation and power, so firstly project 3D point clouds into 2D image plane,
-then make a numpy matrix with 4Ã—512Ã—512, each channel means one feature. Then, save the numpy matrix in npz format.
+then make a numpy matrix with 4¡Á512¡Á512, each channel means one feature. Then, save the numpy matrix in npz format.
 
 > ***Attention:*** The names of images for object detection,segmentation, and radar must be the same!
 The only difference between them is the format.
@@ -65,4 +65,4 @@ The only difference between them is the format.
 
 If have any questions, put them in Issue ---
 
-
+# Efficient-VRNet
