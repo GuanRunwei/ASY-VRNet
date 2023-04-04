@@ -190,8 +190,8 @@ class YOLOLoss(nn.Module):
         loss_iou = (self.iou_loss(bbox_preds.view(-1, 4)[fg_masks], reg_targets)).sum()
         loss_obj = (self.bcewithlog_loss(obj_preds.view(-1, 1), obj_targets)).sum()
         loss_cls = (self.bcewithlog_loss(cls_preds.view(-1, self.num_classes)[fg_masks], cls_targets)).sum()
-        reg_weight = 5.0
-        loss = reg_weight * loss_iou + loss_obj + loss_cls
+        reg_weight = 1.0
+        loss = reg_weight * loss_iou + 2 * loss_obj + 2 * loss_cls
 
         # precision_reg = torch.exp(-self.log_vars[0])
         # loss_iou = precision_reg * loss_iou + self.log_vars[0]

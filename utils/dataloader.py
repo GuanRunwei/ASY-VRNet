@@ -148,19 +148,19 @@ class YoloDataset(Dataset):
         # ---------------------------------#
         #   自然天气数据增强
         # ---------------------------------#
-        if random:
-            weather_random_number = rd.randint(0, 100)
-
-            new_image = np.array(new_image, np.float32)
-            if 0 <= weather_random_number < 15:
-                new_image = transform_rain(image=new_image)
-                new_image = new_image['image']
-            if 15 <= weather_random_number < 30:
-                new_image = transform_flare(image=new_image)
-                new_image = new_image['image']
-            if 30 <= weather_random_number < 65:
-                new_image = transform_fog(image=new_image)
-                new_image = new_image['image']
+        # if random:
+        #     weather_random_number = rd.randint(0, 100)
+        #
+        #     new_image = np.array(new_image, np.float32)
+        #     if 0 <= weather_random_number < 15:
+        #         new_image = transform_rain(image=new_image)
+        #         new_image = new_image['image']
+        #     if 15 <= weather_random_number < 30:
+        #         new_image = transform_flare(image=new_image)
+        #         new_image = new_image['image']
+        #     if 30 <= weather_random_number < 65:
+        #         new_image = transform_fog(image=new_image)
+        #         new_image = new_image['image']
 
         # ---------------------------------#
         #   对真实框进行调整
