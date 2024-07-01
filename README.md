@@ -1,4 +1,4 @@
-# Efficient-VRNet: An Exquisite Fusion Network for Riverway Panoptic Perception based on Asymmetric Fair Fusion of Vision and 4D mmWave Radar
+# ASY-VRNet: Waterway Panoptic Driving Perception Model based on Asymmetric Fair Fusion of Vision and 4D mmWave Radar
 
 # Device:
 Camera: Sony IMX-317
